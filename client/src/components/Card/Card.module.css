@@ -1,0 +1,57 @@
+.cardContainer{
+  max-width: 1200px;
+  height: 430px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 5%;
+
+}
+
+.card {
+  width: 330px;
+  height: 445px;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin: 15px;
+  text-align: center;
+  transition: all 0.25s;
+  color: rgb(21, 57, 135);
+
+
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.card_image {
+  width: 330px;
+  height: 220px;
+  border-radius: 8%;
+}
+
+.añadir {
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.añadir:hover {
+  background-color: #cecece;
+}
+
+.text{
+  text-align: center;
+  font-size: 28px;
+  color: rgb(21, 57, 135);
+  text-decoration: none!important;
+  font-family: 'Nunito';
+  margin-bottom: 15px
+
+}
+
+.button{
+  background-color:#e77200!important;
+}

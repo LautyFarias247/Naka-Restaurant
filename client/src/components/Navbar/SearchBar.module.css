@@ -1,0 +1,18 @@
+.search{
+    background-color: white; /* Green */
+    border: none;
+    color: black;
+    text-align: center;
+    font-size: 13.3333px;
+    margin-left: 5px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    width: 56px;
+    height: 21px;
+}
+.search:hover{
+    background-color: #f2f205bb; /* Green */
+    color: white;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px black;
+}

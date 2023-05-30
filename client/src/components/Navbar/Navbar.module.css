@@ -1,0 +1,114 @@
+
+.create {
+  margin-left: 100%;
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.create:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 2px black;
+  background-color: #6464126c; /* Green */
+  color: black;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px black;
+}
+
+.userPicture {
+  width: 3rem;
+  height: 80%;
+  border-radius: 50%;
+}
+
+.userName {
+  color: black;
+}
+
+.Navbar {
+  margin-bottom: 0.3%;
+  background-color: white !important;
+  height: 14% !important;
+}
+
+.titleNav {
+  font-family: "Satisfy", cursive;
+  color: black;
+  font-size: 25px;
+  padding: 15px 15px 15px 15px;
+  justify-content: space-between;
+}
+.cart {
+  transform: scale(1.9);
+  margin-left: -18%;
+}
+
+.login {
+  transform: scale(1.9);
+  margin-right: 45px;
+  margin-top: 0px;
+}
+
+.buttonLogo {
+  max-height: 80%;
+  width: 90%;
+  border-radius: 12%;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 8%;
+}
+.aNav {
+  color: #0a0000;
+  text-decoration: inherit;
+  background: rgb(255, 252, 252);
+  padding: 15px;
+  margin: 2px;
+  border-bottom: 5px solid;
+  border-bottom-color: #1643cb;
+}
+.aNav:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background: rgb(106, 173, 250);
+  border-bottom-color: rgb(16, 65, 181);
+}
+.userContainer {
+  color: black;
+  padding: 0px 10px 0px 5px;
+  border-right: 1px solid;
+  border-right-color: #1643cb;
+}
+.cartContainer {
+  padding: 8px 15px 0px 25px;
+}
+.navBg {
+  border-top: 5px solid rgb(7, 115, 193);
+  margin: 0px;
+  background: white;
+  color: black;
+  font-family: "Nunito";
+}
+.navBg .titleNav {
+  margin: 0px;
+  padding: 0px;
+}
+.navBg .itemsNav {
+  margin: 0px 8px 0px 8px;
+  padding: 5px 50px 5px 50px;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+}
+.itemsNav:hover {
+  background-color: white;
+  border-bottom: 4px solid rgb(7, 115, 193);
+}
+#responsive-navbar-nav .meauto {
+  background-color: red;
+}

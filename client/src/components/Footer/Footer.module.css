@@ -1,0 +1,19 @@
+.titulos{
+    color:#5d573c;
+    font-size: 20px;   
+    font-weight: bold;
+    padding-bottom: 22px;
+}
+
+.descrip_footer{
+    color:#5d573c;
+}
+
+.reseñas_foot{
+    color:#5d573c;
+}
+
+.reseñas_foot_City{
+    color:#5d573c;
+    text-indent: 2px;
+}

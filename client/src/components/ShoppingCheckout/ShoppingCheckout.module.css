@@ -1,0 +1,28 @@
+.checkoutContainer {
+    display: flex;
+}
+
+.title{
+    font-family: 'Nunito';
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: normal;
+    /* color: rgb(7, 7, 7) */
+}
+
+.stock{
+    margin-left: 25%;
+    width: 50%;
+    text-align: center;
+    border-bottom: 0.1rem;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.221);
+}
+
+.buttonPay{
+    background-color: #3483fa;
+    border-color: transparent;
+    width: 50%;
+    border-radius: 0.2rem;
+    color: #fff;
+}

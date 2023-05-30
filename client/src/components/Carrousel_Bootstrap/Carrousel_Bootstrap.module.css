@@ -1,0 +1,8 @@
+
+    .plato_description{
+        font-size: 50px;
+        -webkit-text-stroke: 3px black;
+        -webkit-text-fill-color:white;
+        text-transform: uppercase;
+      }
+    

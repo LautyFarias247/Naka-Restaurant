@@ -1,0 +1,21 @@
+.Carrousel {
+  margin: auto;
+}
+.body {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  /* background: #f4b406; */
+}
+
+.registro{
+  background-color: white;
+  border: none;
+}
+
+.registro:hover{
+  color: red;
+}
+
+.derecha{
+  background-color: white;
+  color: black;
+}

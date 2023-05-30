@@ -1,0 +1,18 @@
+.item {
+    display: flex;
+}
+
+.image {
+    width: 6rem;
+    height: 6rem;
+    border-style: solid;
+    border-radius: 15%;
+}
+
+.title{
+    font-family: 'Nunito';
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: normal;
+    color: rgb(11, 8, 23);
+}

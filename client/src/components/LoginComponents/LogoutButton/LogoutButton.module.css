@@ -1,0 +1,9 @@
+.logout {
+  border: none;
+  text-decoration: none;
+  background-color: white;
+  padding: 5px 45px 5px 45px;
+}
+.logout:hover {
+  background-color: rgb(243, 241, 241);
+}

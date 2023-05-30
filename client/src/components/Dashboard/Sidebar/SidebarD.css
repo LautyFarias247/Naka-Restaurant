@@ -1,0 +1,67 @@
+.bodySidebar {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .containerSidebar {
+    display: flex;
+  }
+  .mainSidebar {
+    width: 50%;
+    padding: 20px;
+    background: rgb(0, 0, 0);
+    color: white;
+  }
+  .sidebarSidebar {
+    background: rgb(255, 255, 255);
+    color: rgb(7, 0, 0);
+    height: 100vh;
+    width: 100%;
+    transition: all 0.5s;
+    /* padding-left: 15px; */
+  }
+  .top_section {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+  .logo {
+    font-size: 30px;
+    width: 50%;
+  }
+  .bars {
+    display: flex;
+    font-size: 25px;
+    margin-left: 60px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  .bar:hover {
+    background: green;
+    color: red;
+  }
+  .link {
+    display: flex;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    gap: 15px;
+    text-decoration: none;
+  }
+  .link:hover {
+    background: #dfefff;
+    color: rgb(0, 0, 0);
+    transition: all 0.5s;
+    border-radius: 10px 0px 0px 10px;
+  }
+  .active {
+    background: #3a8bde;
+    color: rgb(255, 255, 255);
+    border-radius: 10px 0px 0px 10px;
+    transition: all 0.29s;
+  }
+  
+  .icon,
+  .link_text {
+    font-size: 20px;
+  }

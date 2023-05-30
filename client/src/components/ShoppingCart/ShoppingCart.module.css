@@ -1,0 +1,32 @@
+.cartContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 100%;
+    overflow: hidden;
+    padding-top: 2%;
+}
+
+.itemContainer {
+    width: 50%;
+}
+
+.checkout {
+    width: 30%;
+    
+}
+
+.containerReturn{
+    margin-top: 10%;
+    min-height: 80vh;
+}
+
+.buttonReturn{
+    background-color: #13251f75;
+    border-color: transparent;
+    width: 50%;
+    border-radius: 0.2rem;
+    color: #fff;
+    margin-top: 10%;
+}
