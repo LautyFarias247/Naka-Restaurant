@@ -1,5 +1,4 @@
 import style from "./User.module.css";
-import { Carrousel } from "../Carrousel/Carrousel";
 import LoginButton from "../LoginComponents/LoginButton/LoginButton";
 // import google from "../images/google.png";
 import React from "react";
@@ -173,7 +172,6 @@ const User = () => {
         <div class="row align-items-stretch">
           <div class="col food  d-none d-lg-block col-md-6 col-lg-6 col-xl-6 rounded">
             {/* <img src={food} width="600" alt=""></img> */}
-            <Carrousel images={images} className={style.Carrousel} />
           </div>
           <div class="col  p-5 rounded-end">
             <div class="text-end">

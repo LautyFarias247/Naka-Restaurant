@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Nav from "./layout/Navbar/Navbar";
-import Home from './views/Home/Home'
+import Home from "./views/Home/Home";
 import Detail from "./components/Detail/Detail";
 import CreateDishesForm from "./components/CreateDishesForm/CreateDishesForm";
 import Menu from "./views/Menu/Menu";
@@ -9,7 +9,7 @@ import User from "./components/User/User";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./components/LoginComponents/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
-import LoginPage from "./components/LoginComponents/LoginPage/LoginPage";
+import LoginPage from "./views/LoginPage/LoginPage";
 import { useEffect } from "react";
 import Dashboard from "./components/Dashboard/Dashboard";
 import UserTable from "./components/Dashboard/UserTable/UserTable";
@@ -70,18 +70,14 @@ function App() {
     }
   }, [isAuthenticated, user, dispatch]);
 
-
   const location = useLocation();
   return (
-    <div
-      className="App"
-    >
+    <div className="App">
       {location.pathname !== "/dashboard" &&
         location.pathname !== "/dashboard/users" &&
         location.pathname !== "/dashboard/foods" &&
         location.pathname !== "/dashboard/sales" &&
-        location.pathname !== "/dashboard/foods/edit/:id"
-      }
+        location.pathname !== "/dashboard/foods/edit/:id"}
 
       {!location.pathname.includes("dashboard") && <Nav />}
 

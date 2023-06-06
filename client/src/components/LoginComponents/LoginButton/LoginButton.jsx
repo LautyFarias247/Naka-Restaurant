@@ -1,21 +1,24 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from "react";
-import style from "./LoginButton.module.css";
+import React from 'react';
+import style from './LoginButton.module.css'
+import { useAuth0 } from '@auth0/auth0-react';
+import {ReactComponent as Google} from '../../../images/7123025_logo_google_g_icon.svg'
+import {ReactComponent as Facebook} from '../../../images/iconmonstr-facebook-6.svg'
 
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
-  useEffect(() => {
-    console.log(loginWithRedirect);
-  }, [])
+
   return (
-    <div className={style.ContainerLog}>
-      {/*  <button onClick={loginWithRedirect} className={style.Login}>
-        Google
-      </button> */}
-      <div>
-        <a onClick={loginWithRedirect} >Google</a>
-      </div>
-    </div>
+		<div className={style.container}>
+			<button className={style.botonGoogle} onClick={() => loginWithRedirect({ connection: 'google-oauth2' })}>
+				Ingresar con Google
+				<Google width={"48px"} height={"48px"}/>
+			</button>
+			{/* <button className={style.botonGoogle} onClick={() => loginWithRedirect({ connection: 'google-oauth2' })}>
+				Ingresar con facebook
+				<Facebook width={"48px"} height={"48px"} color='blue'/>
+
+			</button> */}
+		</div>
   );
 };
 
