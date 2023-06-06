@@ -1,0 +1,14 @@
+.footer{
+	background-color: rgb(0, 0, 0);
+	margin-bottom: 0px;
+	background-image: linear-gradient(to bottom, #000000, #1a1a1a);
+	padding-top: 20px;
+}
+
+.hr{
+	margin-bottom: 0px;
+}
+
+.p{
+	color:#b38d6e;
+}

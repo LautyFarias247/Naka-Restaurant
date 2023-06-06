@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCategories, saveCarrito } from "../../redux/actions/actions";
-import Footer from "../../components/Footer/Footer";
-import SearchBar from "../../components/Navbar/SearchBar";
+import Footer from "../../layout/Footer/Footer";
+import SearchBar from "../../layout/Navbar/SearchBar";
 
 const Menu = () => {
   const dispatch = useDispatch();

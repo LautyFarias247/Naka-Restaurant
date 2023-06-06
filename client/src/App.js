@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Nav from "./components/Navbar/Navbar";
+import Nav from "./layout/Navbar/Navbar";
 import Home from './views/Home/Home'
 import Detail from "./components/Detail/Detail";
 import CreateDishesForm from "./components/CreateDishesForm/CreateDishesForm";
@@ -29,6 +29,7 @@ import {
 } from "./redux/actions/actions";
 import queryString from "query-string";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
+import Footer from "./layout/Footer/Footer";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -99,7 +100,7 @@ function App() {
         <Route path="/dashboard/foods/edit/:id" element={<FoodUpdate />} />
         <Route path="/dashboard/foods/create" element={<CreateDishesForm />} />
       </Routes>
-      
+      {!location.pathname.includes("dashboard") && <Footer />}
     </div>
   );
 }

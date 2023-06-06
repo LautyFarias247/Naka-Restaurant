@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+	height: 100%;
+	display: block;
+	
 }
 
 .App-logo {
@@ -47,3 +50,4 @@
   z-index: 10;
   top: 43px !important;
 }
+
