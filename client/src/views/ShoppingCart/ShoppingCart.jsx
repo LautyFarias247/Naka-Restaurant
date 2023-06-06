@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import style from "./ShoppingCart.module.css"
-import ShoppingItem from '../ShoppingItem/ShoppingItem'
-import ShoppingCheckout from '../ShoppingCheckout/ShoppingCheckout'
-import ShoppingDeleteButton from '../ShoppingDeleteButton.jsx/ShoppingDeleteButton'
+import ShoppingItem from '../../components/ShoppingItem/ShoppingItem'
+import ShoppingCheckout from '../../components/ShoppingCheckout/ShoppingCheckout'
+import ShoppingDeleteButton from '../../components/ShoppingDeleteButton.jsx/ShoppingDeleteButton'
 import { Link } from 'react-router-dom'
 import { saveCarrito } from '../../redux/actions/actions'
 
@@ -21,8 +21,6 @@ export const ShoppingCart = () => {
 
   useEffect(() => {
     handleSaveCarrito(cart)
-    console.log("pasoxuseeffect");
-    console.log(totalPrice);
   }, [totalPrice])
 
   const handleSaveCarrito = (cart) => {

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PieChart, Pie, Tooltip, Legend, Cell } from 'recharts';
 import { getCategories } from '../../../redux/actions/actions';
-import style from './GraficoTorta.module.css'
 // const data = [
 //   { name: 'Manzanas', value: 400 },
 //   { name: 'Naranjas', value: 300 },

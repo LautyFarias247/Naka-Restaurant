@@ -18,7 +18,7 @@ import style from "./Navbar.module.css";
 import SearchBar from "./SearchBar";
 import { AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai"
 import { useState } from "react";
-import El_Bodegon_de_Tony from "../images/El_Bodegon_de_Tony.png"
+// import El_Bodegon_de_Tony from "../images/El_Bodegon_de_Tony.png"
 
 import { Container, Form, Nav, NavDropdown, Navbar, Offcanvas } from "react-bootstrap";
 
@@ -120,8 +120,8 @@ export default function PrimarySearchAppBar() {
     <>
       <Navbar className={style.navBg} collapseOnSelect expand="lg">
         <Container className={style.navContainer}>
-          <Navbar.Brand href="#home"><Link to="/"><button className={style.buttonLogo}><img src={El_Bodegon_de_Tony} alt="Logo" className={style.logo} /></button></Link>
-          </Navbar.Brand>
+          {/* <Navbar.Brand href="#home"><Link to="/"><button className={style.buttonLogo}><img src={El_Bodegon_de_Tony} alt="Logo" className={style.logo} /></button></Link> */}
+          {/* </Navbar.Brand> */}
           <Navbar.Brand href="#home"><Link to="/"><button className={style.buttonLogo}><h2 className={style.titleNav}>El Bodegón de Tony</h2></button></Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -129,7 +129,6 @@ export default function PrimarySearchAppBar() {
             <Nav className="me-auto">
               <Nav.Link className={style.itemsNav} as={Link} to="/">Inicio</Nav.Link>
               <Nav.Link className={style.itemsNav} as={Link} to="/menu">Menu</Nav.Link>
-              <Nav.Link className={style.itemsNav} as={Link} to="/nosotros">Nosotros</Nav.Link>
               {userLogged.role ? <Link to="/dashboard" style={{ textDecoration: 'none' }}>
                 <Nav.Link className={style.itemsNav} as={Link} to="/dashboard">Dashboard</Nav.Link>
               </Link> : ""}

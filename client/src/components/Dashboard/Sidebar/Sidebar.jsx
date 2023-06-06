@@ -1,23 +1,15 @@
 import './SidebarD.css'
 import {
   FaTh,
-  FaRegChartBar,
-  FaCommentAlt,
-  FaShoppingBag,
-  FaBars,
   FaMitten,
   FaUser,
-  FaLeaf,
   FaShoppingBasket,
-  FaRegListAlt,
   FaHome,
 } from "react-icons/fa";
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
-  const admin = useSelector(state =>state.user)
   const menuItem = [
     {
       path: "/dashboard",
@@ -47,8 +39,6 @@ const Sidebar = () => {
 
   ]
 
-  const [isOpen, setIsOpen] = useState(true);
-  // const toggle = () => setIsOpen(!isOpen)
   return (
     <div className="bodySidebar">
       <div className="containerSidebar">
@@ -56,7 +46,7 @@ const Sidebar = () => {
           <div className="top_section">
             <h1 style={{ display: "block", fontSize: "30px"}} className="log">{"Bienvenido!"}</h1>
             <div style={{ marginLeft: isOpen ? "20px" : "-6px" }} className="bars">
-              {/* <FaBars onClick={toggle} /> */}
+        
             </div>
           </div>
           <div>
@@ -75,7 +65,6 @@ const Sidebar = () => {
             }
           </div>
         </div>
-        {/* // <main className="mainSidebar">{children} </main>  */}
       </div>
     </div>
   );

@@ -4,8 +4,8 @@ import { Carrousel } from "../../Carrousel/Carrousel";
 import { Link, useNavigate, } from "react-router-dom";
 
 
-import facebook from "../../images/facebook.png";
-import google from "../../images/google.png";
+// import facebook from "../../images/facebook.png";
+// import google from "../../images/google.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { postLogin } from "../../../redux/actions/actions";
@@ -206,7 +206,7 @@ const LoginPage = () => {
                   <button class="btn btn-outline-primary w-100 my-1">
                     <div class="row align-items-center">
                       <div class="col-2 d-none d-md-block">
-                        <img src={facebook} width="32" alt=""></img>
+                        {/* <img src={facebook} width="32" alt=""></img> */}
                       </div>
                       <div class="col-12 col-md-10 text-center">Facebook</div>
                     </div>
@@ -216,7 +216,7 @@ const LoginPage = () => {
                   <button class="btn btn-outline-danger w-100 my-1">
                     <div class="row align-items-center">
                       <div class="col-2 d-none d-md-block">
-                        <img src={google} width="32" alt=""></img>
+                        {/* <img src={google} width="32" alt=""></img> */}
                       </div>
                       <div class="col-12 col-md-10 text-center">
                         <LoginButton />

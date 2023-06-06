@@ -1,19 +1,18 @@
-import CategoryFltr from "../CategoryFltr/CategoryFltr";
-import Cards from "../Cards/Cards";
-import Pagination from "../Pagination/Pagination";
-import Orderings from "../Orderings/Orderings";
+import CategoryFltr from "../../components/CategoryFltr/CategoryFltr";
+import Cards from "../../components/Cards/Cards";
+import Pagination from "../../components/Pagination/Pagination";
+import Orderings from "../../components/Orderings/Orderings";
 import style from "./Menu.module.css";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCategories, saveCarrito } from "../../redux/actions/actions";
-import Footer from "../Footer/Footer";
-import SearchBar from "../Navbar/SearchBar";
+import Footer from "../../components/Footer/Footer";
+import SearchBar from "../../components/Navbar/SearchBar";
 
 const Menu = () => {
   const dispatch = useDispatch();
   const allDishes = useSelector((state) => state.allDishes);
-  const categories = useSelector((state) => state.categories);
   const cart = useSelector((state) => state.cart);
   const userLogged = useSelector((state) => state.user);
   const dishesPerPage = 9;

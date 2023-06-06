@@ -1,7 +1,7 @@
 import style from "./User.module.css";
 import { Carrousel } from "../Carrousel/Carrousel";
 import LoginButton from "../LoginComponents/LoginButton/LoginButton";
-import google from "../images/google.png";
+// import google from "../images/google.png";
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -267,7 +267,7 @@ const User = () => {
                 <div class="row align-items-center">
                   <br />
                   <div class="col-1 d-none d-md-block">
-                    <img src={google} width="32" alt=""></img>
+                    {/* <img src={google} width="32" alt=""></img> */}
                   </div>
                   <div class="col-6 col-md-10 text-center">
                     <LoginButton />

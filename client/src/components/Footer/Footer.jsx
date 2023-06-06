@@ -1,8 +1,8 @@
-import facebook from "../images/facebook.png";
-import google from "../images/google.png";
-//import Git from "../images/Git.png";
-import Twitter from "../images/Twitter.png"
-import Instagram from "../images/Instagram.png";
+// import facebook from "../../images/facebook.png";
+// import google from "../../images/google.png";
+// //import Git from "../images/Git.png";
+// import Twitter from "../../images/Twitter.png"
+// import Instagram from "../../images/Instagram.png";
 import style from "./Footer.module.css";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -25,7 +25,7 @@ const Footer = () => {
             <div className={style.socialmedia}>
               <a href="#" class="me-4 link-secondary">
                 <i class="fab fa-facebook-f">
-                  <img src={facebook} alt="facebook" width="30px" />
+                  {/* <img src={facebook} alt="facebook" width="30px" /> */}
                 </i>
               </a>
               <a href="#" class="me-4 link-secondary">
@@ -33,12 +33,12 @@ const Footer = () => {
               </a>
               <a href="#" class="me-4 link-secondary">
                 <i class="fab fa-google">
-                  <img src={google} alt="" width="25px" />
+                  {/* <img src={google} alt="" width="25px" /> */}
                 </i>
               </a>
               <a href="#" class="me-4 link-secondary">
                 <i class="fab fa-instagram">
-                  <img src={Instagram} alt="facebook" width="27px" />
+                  {/* <img src={Instagram} alt="facebook" width="27px" /> */}
                 </i>
               </a>
               <a href="#" class="me-4 link-secondary">
@@ -46,7 +46,7 @@ const Footer = () => {
               </a>
               <a href="#" class="me-4 link-secondary">
                 <i class="fab fa-github">
-                  <img src={Twitter} alt="facebook" width="27px" />
+                  {/* <img src={Twitter} alt="facebook" width="27px" />} */}
                 </i>
               </a>
             </div>

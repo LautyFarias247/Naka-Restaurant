@@ -4,9 +4,11 @@ import { banUser, unbanUser } from "../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
 import style from '../Table.module.css'
 const UserItem = ({id, name,email,pedidos,isActive, sub}) => {
-    const [status, setStatus] = useState(null);
+    
+		const [status, setStatus] = useState(null);
     const dispatch = useDispatch()
-    useEffect(()=>{
+    
+		useEffect(()=>{
         isActive ? setStatus(true) : setStatus(false);
         console.log(status);
     },[])
@@ -28,7 +30,6 @@ const UserItem = ({id, name,email,pedidos,isActive, sub}) => {
 
     return (
         <tr style={{width:"80%"}}>
-            {/* <td>{id}</td> */}
             <td>{name}</td>
             <td>{email}</td>
             <td>{pedidos?.length}</td>

@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDishes, getAllOrders, getAllUsers, getAuth0Users } from "../../redux/actions/actions";
-import UserItem from "./UserItem/UserItem";
-import UserList from "./UserList/UserList";
-import { Container, Row, Col, Card, CardGroup, Table} from 'react-bootstrap';
+import { Container, Row, Col, Card, Table} from 'react-bootstrap';
 import style from './Dashboard.module.css'
 import Sidebar from "./Sidebar/Sidebar";
-import GraficoLinea from "./GraficoLinea/GraficoLinea";
-import GraficoBarras from "./GraficoBarras/GraficoBarras";
 import GraficoTorta from "./GraficoTorta/GraficoTorta";
 import { Link } from "react-router-dom";
 import TablaPedidosActivos from "./TablaPedidosActivos/TablaPedidosActivos";
@@ -17,10 +13,9 @@ import { all } from "axios";
 const Dashboard = () => {
     const users = useSelector(state => state.adminData.users)
     const auth0Users = useSelector(state => state.adminData.auth0Users)
-    const [allUsers, setAllUsers] = useState([])
-    const [cantidadUsuarios, setCantidadUsuarios] = useState(0)
     const pedidos = useSelector(state => state.adminData.orders)
     const productos = useSelector(state => state.allDishes)
+		
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getAuth0Users())

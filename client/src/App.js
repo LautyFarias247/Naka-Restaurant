@@ -1,18 +1,16 @@
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Nav from "./components/Navbar/Navbar";
-import Home from "./components/Home/Home";
+import Home from './views/Home/Home'
 import Detail from "./components/Detail/Detail";
 import CreateDishesForm from "./components/CreateDishesForm/CreateDishesForm";
-import Menu from "./components/Menu/Menu";
-// /* Importación del componente LoginPage desde el archivo LoginPage.js. */
+import Menu from "./views/Menu/Menu";
 import User from "./components/User/User";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./components/LoginComponents/Profile/Profile";
-import { ShoppingCart } from "./components/ShoppingCart/ShoppingCart";
+import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./components/LoginComponents/LoginPage/LoginPage";
-import { useEffect, useState } from "react";
-import Switch from "react-switch";
+import { useEffect } from "react";
 import Dashboard from "./components/Dashboard/Dashboard";
 import UserTable from "./components/Dashboard/UserTable/UserTable";
 import FoodTable from "./components/Dashboard/FoodTable/FoodTable";
@@ -29,9 +27,7 @@ import {
   compraExitosa,
   getMyOrders,
 } from "./redux/actions/actions";
-import Nosotros from "./components/Nosotros/Nosotros";
 import queryString from "query-string";
-import ProtectRouter from "./components/ProtectRouter/ProtectRouter";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
 
 function App() {
@@ -73,54 +69,19 @@ function App() {
     }
   }, [isAuthenticated, user, dispatch]);
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const handleModeChange = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  const handleSwitchChange = (checked) => {
-    setIsDarkMode(checked);
-  };
 
   const location = useLocation();
   return (
     <div
       className="App"
-      style={{
-        backgroundColor: isDarkMode ? "#000001" : "#f9f6f4",
-        color: isDarkMode ? "#fffbf4" : "#000001",
-        
-      }}
     >
       {location.pathname !== "/dashboard" &&
         location.pathname !== "/dashboard/users" &&
         location.pathname !== "/dashboard/foods" &&
         location.pathname !== "/dashboard/sales" &&
-        location.pathname !== "/dashboard/foods/edit/:id"  &&
-        (
-          <Switch
-            onChange={handleSwitchChange}
-            checked={isDarkMode}
-            onColor="#007bff"
-            offColor="#bbb"
-            checkedIcon={false}
-            uncheckedIcon={false}
-            height={20}
-            width={40}
-            onHandleColor="#fff"
-            offHandleColor="#fff"
-            onHandleStyle={{ boxShadow: "none" }}
-            offHandleStyle={{ boxShadow: "none" }}
-            activeBoxShadow="0px 0px 1px 2px rgba(0, 0, 0, 0.2)"
-            aria-label="Switch to toggle between light and dark mode"
-            onLabel="Dark"
-            offLabel="Light"
-          />
-        )}
+        location.pathname !== "/dashboard/foods/edit/:id"
+      }
 
-      {/* <button onClick={handleModeChange}>
-        {isDarkMode ? 'Desactivar modo oscuro' : 'Activar modo oscuro'}
-      </button> */}
       {!location.pathname.includes("dashboard") && <Nav />}
 
       <Routes>
@@ -137,7 +98,6 @@ function App() {
         <Route path="/dashboard/sales" element={<VentasTable />} />
         <Route path="/dashboard/foods/edit/:id" element={<FoodUpdate />} />
         <Route path="/dashboard/foods/create" element={<CreateDishesForm />} />
-        <Route path="/nosotros" element={<Nosotros />} />
       </Routes>
       
     </div>
