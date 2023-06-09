@@ -9,15 +9,10 @@ const LoginButton = () => {
 
   return (
 		<div className={style.container}>
-			<button className={style.botonGoogle} onClick={() => loginWithRedirect({ connection: 'google-oauth2' })}>
-				Ingresar con Google
+			<button className={style.botonGoogle} onClick={() => loginWithRedirect({ screen_hint: 'login', connection: 'google-connection-name' })}>
+				Continuar con Google
 				<Google width={"48px"} height={"48px"}/>
 			</button>
-			{/* <button className={style.botonGoogle} onClick={() => loginWithRedirect({ connection: 'google-oauth2' })}>
-				Ingresar con facebook
-				<Facebook width={"48px"} height={"48px"} color='blue'/>
-
-			</button> */}
 		</div>
   );
 };

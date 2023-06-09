@@ -1,22 +1,35 @@
-import React from 'react'
-import style from './LoginForm.module.css'
-import LoginButton from '../LoginComponents/LoginButton/LoginButton'
+import React, { useState } from "react";
+import style from "./LoginForm.module.css";
+import LoginButton from "../LoginComponents/LoginButton/LoginButton";
 
 const LoginForm = () => {
-	return (
-		<section className={style.container}>
-			<h2 className={style.titulo}>Iniciar sesión</h2>
-			<form className={style.form} action="">
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-			
-				<input type="text" className={style.input} placeholder='email'/>
-				<input type="text" className={style.input} placeholder='contraseña'/>
+  return (
+    <section className={style.container}>
+      <h2 className={style.titulo}>Iniciar sesión</h2>
+      <form className={style.form} action="">
+        <input
+          type="text"
+          className={style.input}
+          value={email}
+          placeholder="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          className={style.input}
+          value={password}
+          placeholder="contraseña"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+				<button className={style.boton}>Ingresar</button>
+      </form>
+        <h3 className={style.h3}>O</h3>
+        <LoginButton />
+    </section>
+  );
+};
 
-				<h3 className={style.h3}>O</h3>
-				<LoginButton/>
-			</form>
-		</section>
-	)
-}
-
-export default LoginForm
+export default LoginForm;

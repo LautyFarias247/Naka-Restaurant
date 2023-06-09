@@ -21,17 +21,17 @@ const UserScheme = new mongoose.Schema(
             type: String,
             required: true,
         },
-        role: {
+        admin: {
             type: Boolean,
             default: false,
         },
-        is_active: {
+        isActive: {
             type: Boolean,
             default: true
         },
         cart: {
-            type: ObjectId,
-            ref: 'cart'
+            type: Array,
+            default: []
         },
         orders: [{ type: ObjectId, ref: 'order' }]
 

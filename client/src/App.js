@@ -30,6 +30,7 @@ import {
 import queryString from "query-string";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
 import Footer from "./layout/Footer/Footer";
+import RegisterPage from "./views/RegisterPage/RegisterPage";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -85,7 +86,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/menu" element={<Menu />} />
-        <Route path="account/login" element={<LoginPage />} />
+        <Route path="account/login" element={<LoginPage />}/>
+        <Route path="account/register" element={<RegisterPage />}/>
         <Route path="account" element={<Profile />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/user" element={<User />} />

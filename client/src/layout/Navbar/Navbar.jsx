@@ -21,7 +21,7 @@ const Navbar = () => {
         <Link to="account/login">
           <li className={style.li}>Iniciar sesion</li>
         </Link>
-        <Link>
+        <Link to="account/register">
           <li className={style.li}>Regitrarse</li>
         </Link>
       </ul>

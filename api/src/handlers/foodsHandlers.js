@@ -3,13 +3,6 @@ const {getFoodByName} = require('../controllers/foodsControllers')
 const { uploadImage, deleteImage } = require('../libs/cloudinary');
 const fs = require('fs-extra')
 
-const pruebaAuth0 = async (req, res) => {
-	try {
-		console.log(req.body);
-	} catch (error) {
-		console.log(error);
-	}
-}
 
 const getFoods = async (req, res) => {
     try {
@@ -96,5 +89,5 @@ module.exports = {
     createFood,
     updateFood,
     deleteFood,
-		pruebaAuth0
+		
 }

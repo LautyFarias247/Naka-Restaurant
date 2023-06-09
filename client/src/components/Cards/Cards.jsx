@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { saveCarrito } from "../../redux/actions/actions"
 import { useEffect } from "react"
-const Cards = ({ slicedDishes }) => {
+const Cards = ({ dishes }) => {
   const cart = useSelector(state => state.cart)
   const userLogged = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const Cards = ({ slicedDishes }) => {
   return (
     <div className={style.Cards}>
 
-      {slicedDishes.map(dish => {
+      {dishes.map(dish => {
         return <Card
           key={dish._id}
           id={dish._id}

@@ -1,7 +1,5 @@
-const { createUser, allUsers, searchUsers, userById, updateById } = require('../controllers/userControllers');
-const { encrypt, compare } = require('../helpers/handleEncrypt');
+const {saveUser, allUsers, searchUsers, userById, updateById } = require('../controllers/userControllers');
 const User = require('../models/User');
-const Cart = require('../models/Cart')
 const {sendMail} = require('../libs/nodemailer')
 
 const getUsers = async (req, res) => {
@@ -57,28 +55,45 @@ const compareLogin = async (req, res) => {
     }
 }
 
-const createUsers = async (req, res) => {
-    const { name, phone, email, password } = req.body;
+// const createUsers = async (req, res) => {
+//     const { name, phone, email, password } = req.body;
  
-    try {
-        const passHash = await encrypt(password)
-        const newUser = await createUser(name, phone, email, passHash);
+//     try {
+//         const passHash = await encrypt(password)
+//         const newUser = await createUser(name, phone, email, passHash);
 
-        const newCart =  new Cart({items: [], owner: newUser._id})
-        const savedCart = await newCart.save()
+//         const newCart =  new Cart({items: [], owner: newUser._id})
+//         const savedCart = await newCart.save()
 
-        newUser.cart = savedCart._id
-        await newUser.save()
+//         newUser.cart = savedCart._id
+//         await newUser.save()
 
-        if(newUser.name){
-           await sendMail(email,name)
-           console.log("SE MANDO EL MAIL");
-        }
-        res.status(200).json(newUser);
-    } catch (error) {
-        res.status(400).json(error.message)
-    }
-}
+//         if(newUser.name){
+//            await sendMail(email,name)
+//            console.log("SE MANDO EL MAIL");
+//         }
+//         res.status(200).json(newUser);
+//     } catch (error) {
+//         res.status(400).json(error.message)
+//     }
+// }
+
+const registerUser = async (req, res) => {
+	const {username, email, password} = req.body
+	try {
+
+		const savedUser = await saveUser(username, email, password)
+		
+		return res.status(200).json(savedUser)
+		
+	} catch (error) {
+		if(error.message.includes("dup key")){
+			return res.status(400).json("El nombre de usuario o email ya está registrado ")
+		}
+		console.log(error.message);
+	}
+} 
+
 const updateUserById = async (req, res) => {
     const { id } = req.params;
     const { name, phone, email, password, role, state } = req.body;
@@ -94,7 +109,7 @@ const updateUserById = async (req, res) => {
 
 module.exports = {
     getUsers,
-    createUsers,
+    registerUser,
     getUserById,
     updateUserById,
     compareLogin

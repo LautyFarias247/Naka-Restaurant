@@ -1,57 +1,19 @@
-.cardContainer{
-  max-width: 1200px;
-  height: 430px;
+.container{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 5%;
-
+	width: 30%;
 }
 
-.card {
-  width: 330px;
-  height: 445px;
-  border-radius: 8px;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  margin: 15px;
-  text-align: center;
-  transition: all 0.25s;
-  color: rgb(21, 57, 135);
-
-
+.imgContainer {
+  min-width: 200px; /* Establece el ancho deseado para el contenedor */
+  min-height: 200px; /* Establece la altura deseada para el contenedor */
+	max-width: 200px;
+	max-height: 200px;
+  position: relative; /* Asegura que el contenedor sea el contexto de posición para la imagen */
 }
-
-.card:hover {
-  transform: scale(1.1);
-}
-
-.card_image {
-  width: 330px;
-  height: 220px;
-  border-radius: 8%;
-}
-
-.añadir {
-  border-radius: 3px;
-  cursor: pointer;
-  padding: 5px 10px;
-}
-
-.añadir:hover {
-  background-color: #cecece;
-}
-
-.text{
-  text-align: center;
-  font-size: 28px;
-  color: rgb(21, 57, 135);
-  text-decoration: none!important;
-  font-family: 'Nunito';
-  margin-bottom: 15px
-
-}
-
-.button{
-  background-color:#e77200!important;
+.image {
+  width: 100%; /* Hace que la imagen ocupe todo el ancho del contenedor */
+  height: 100%; /* Hace que la imagen ocupe todo el alto del contenedor */
+  object-fit: cover; /* Ajusta la imagen para que cubra completamente el contenedor sin deformarse */
+  top: 0; /* Alinea la imagen en la parte superior del contenedor */
+  left: 0; /* Alinea la imagen en la parte izquierda del contenedor */
 }

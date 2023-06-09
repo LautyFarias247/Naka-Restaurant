@@ -1,18 +1,25 @@
 const { mongoose } = require('mongoose');
-const { compare } = require('../helpers/handleEncrypt');
+const bcrypt = require('bcrypt')
 const User = require('../models/User');
 
 
-const createUser = async (name, phone, email, passHash) => {
-    console.log(name, phone, email, passHash)
-    const newUser = new User({
-        name: name,
-        phone: phone,
-        email: email,
-        password: passHash
-    })
-    
-    return await newUser.save();
+const {compare, hash} = bcrypt
+
+
+const saveUser = async (username, email, password) => {
+    console.log(username, email, password)
+		try {
+			const hashedPass = await hash(password, 5)
+	
+			const newUser = new User({username, email, password: hashedPass})
+			
+			await newUser.save()
+			return newUser
+			
+		} catch (error) {
+			console.log(error.message);
+			throw Error(error.message)
+		}
 }
 const allUsers = async () => {
     const allBDD = await User.find({});
@@ -32,4 +39,4 @@ const updateById = async (id, user) => {
     return updateUser;
 }
 
-module.exports = { createUser, allUsers, searchUsers, userById, updateById }
+module.exports = { saveUser, allUsers, searchUsers, userById, updateById }
