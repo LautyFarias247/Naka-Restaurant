@@ -3,7 +3,7 @@ import style from "./Menu.module.css";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getCategories, saveCarrito } from "../../redux/actions/actions";
+import { getCategories } from "../../redux/actions/actions";
 import SearchBar from "../../layout/Navbar/SearchBar";
 
 const Menu = () => {
@@ -20,21 +20,11 @@ const Menu = () => {
   useEffect(() => {
     dispatch(getCategories());
   }, []);
-  useEffect(() => {
-    handleSaveCarrito(cart);
-    console.log("pasoxuseeffect");
-    console.log(totalPrice);
-  }, [totalPrice]);
 
-  const handleSaveCarrito = (cart) => {
-    console.log("holaaa");
-    console.log(cart);
-    dispatch(saveCarrito({ cart, id: userLogged.sub || userLogged._id }));
-  };
   return (
     <main className={style.main}>
-			<h1>NAKA</h1>
-			<h2>Entre 45' y 60' | compra mínima $5000</h2>
+			<h1 className={style.naka}>NAKA</h1>
+			<h2 className={style.subtitulo}>Entre 45' y 60' | compra mínima $5000</h2>
 			<div>
 				<span>Rolls</span>
 				<span>Nigiris</span>

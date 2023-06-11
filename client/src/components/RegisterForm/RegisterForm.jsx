@@ -22,7 +22,7 @@ const RegisterForm = () => {
 			return setErrors("Las contraseñas no coinciden")
 		}
 		try {
-			// const response = await dispatch(registerUser({username, email, password, repeatPassword}))
+			await dispatch(registerUser({username, email, password, repeatPassword}))
 			Swal.fire({
 				title: "Cuenta creada exitosamente",
 				icon: 'success',
@@ -36,7 +36,6 @@ const RegisterForm = () => {
 				}
 			});
 		} catch (error) {
-			console.log({page: error.message});
 			return setErrors(error.message)
 		}
 		

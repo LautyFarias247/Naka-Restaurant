@@ -5,13 +5,11 @@ import ShoppingItem from '../../components/ShoppingItem/ShoppingItem'
 import ShoppingCheckout from '../../components/ShoppingCheckout/ShoppingCheckout'
 import ShoppingDeleteButton from '../../components/ShoppingDeleteButton.jsx/ShoppingDeleteButton'
 import { Link } from 'react-router-dom'
-import { saveCarrito } from '../../redux/actions/actions'
 
 export const ShoppingCart = () => {
   const dispatch = useDispatch()
-  const userLogged = useSelector(state => state.user )
   const cart = useSelector(state => state.cart)
-  const carrito = useSelector(state => state.cart)
+
   const [aux, setAux] = useState("")
 
   let totalPrice = 0
@@ -19,35 +17,24 @@ export const ShoppingCart = () => {
     totalPrice += item.price * item.quantity
   });
 
-  useEffect(() => {
-    handleSaveCarrito(cart)
-  }, [totalPrice])
-
-  const handleSaveCarrito = (cart) => {
-    dispatch(saveCarrito({ cart, id: userLogged.sub || userLogged._id }))
-  }
-  useEffect(()=>{
-    console.log(carrito);
-  },[carrito])
-
-  if(cart[0]){
+  if(cart.length > 0){
     return (
       <div style={{height: "90%"}}>
 
     <div className={style.cartContainer}>
       <div>
-        {carrito.map( item => {
+        {cart.map( item => {
           return <ShoppingItem
-          key={item._id}
-          _id={item._id}  
-          name={item.name}
-          price={item.price}
+          key={item?._id}
+          _id={item?._id}  
+          name={item?.name}
+          price={item?.price}
           description={item.description}
-          image={item.image?.url? item.image?.url : item.image }
-          category={item.category}
-          quantity={item.quantity}
+          image={item?.image?.url? item.image?.url : item.image }
+          category={item?.category}
+          quantity={item?.quantity}
           item={item}
-          stock={item.stock}
+          stock={item?.stock}
           aux={aux}
           setAux={setAux}
           />

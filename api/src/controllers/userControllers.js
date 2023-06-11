@@ -12,7 +12,7 @@ const saveUser = async (username, email, password) => {
 			const hashedPass = await hash(password, 5)
 	
 			const newUser = new User({username, email, password: hashedPass})
-			
+			console.log(newUser);
 			await newUser.save()
 			return newUser
 			
@@ -30,13 +30,10 @@ const searchUsers = async (name) => {
     const filterUser = await User.find()
     return filterUser.filter(user => user.name.toLowerCase().includes(name.toLowerCase()));
 }
-const userById = async (id) => {
-    const filterById = await User.find({ _id: id })
-    return filterById;
-}
+
 const updateById = async (id, user) => {
     const updateUser = await User.updateOne({ _id: id }, { $set: user })
     return updateUser;
 }
 
-module.exports = { saveUser, allUsers, searchUsers, userById, updateById }
+module.exports = { saveUser, allUsers, searchUsers, updateById }

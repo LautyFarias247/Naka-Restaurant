@@ -6,29 +6,30 @@ const UserScheme = new mongoose.Schema(
         id: {
             type: Number
         },
-        name: {
+        username: {
             type: String
         },
-        phone: {
-            type: String,
-        },
         email: {
-            type: String,
-            unique: true,
-            required: true
+					type: String,
+					unique: true,
+					required: true
         },
         password: {
-            type: String,
-            required: true,
+					type: String,
+					required: true,
         },
         admin: {
-            type: Boolean,
-            default: false,
+					type: Boolean,
+					default: false,
         },
         isActive: {
-            type: Boolean,
-            default: true
+					type: Boolean,
+					default: true
         },
+				addresses: {
+					type: Array,
+					default: []
+				},
         cart: {
             type: Array,
             default: []

@@ -22,7 +22,7 @@ const CategoryFltr = ({setCurrentPage}) => {
 
     const handleClick = (event) => {
         if( actualCategory === event.target.value ){
-            console.log(event.target.value);
+            // console.log(event.target.value);
             dispatch(setCategory('all'))
             dispatch(setFltedDishes('all'))
             setCurrentPage(1)
@@ -30,9 +30,9 @@ const CategoryFltr = ({setCurrentPage}) => {
         }else{
             dispatch(setCategory(event.target.value))
             dispatch(setFltedDishes((event.target.value)))
-            console.log(categories);
-            console.log(actualCategory);
-            console.log("pasa x aca");
+            // console.log(categories);
+            // console.log(actualCategory);
+            // console.log("pasa x aca");
             setCurrentPage(1)
             setCat(event.target.value)
         }

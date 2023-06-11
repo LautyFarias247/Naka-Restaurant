@@ -4,3 +4,17 @@
 	margin-bottom: 0px;
 	background-image: linear-gradient(to bottom, #000000, #1a1a1a);
 }
+
+.naka{
+	font-family:"TheSeason";
+	color: #BF8D39;
+	font-size: 59px;
+	margin-left: 20px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.subtitulo{
+	font-size: 20px;
+	color: #999999;
+}

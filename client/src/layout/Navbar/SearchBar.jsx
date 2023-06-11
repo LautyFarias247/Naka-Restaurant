@@ -11,7 +11,6 @@ const SearchBar = () => {
   
   const handleInputChange = (event) =>{
     event.preventDefault()
-    console.log("funciona");
     setFoods(event.target.value)
 
 }

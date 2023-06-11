@@ -22,11 +22,11 @@ const CreateDishesForm = () => {
             category: ""
         }}
         onChange={(values) =>{
-            console.log(values);
+            // console.log(values);
         }}
         onSubmit={async (values, actions) => {
             await dispatch(createDish(values))
-            console.log(values);
+            // console.log(values);
             // window.alert("Plato creado correctamente");
             Swal.fire({
                 position: 'top-end',
@@ -77,7 +77,7 @@ const CreateDishesForm = () => {
                 <input type="file" accept=".png,.jpeg,.jpg" name="file" onChange={
                     (e)=>{
                         setFieldValue("image", e.target.files[0])
-                        console.log(e.target.files);
+                        // console.log(e.target.files);
                     }
                         }/>
         

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { banUser, unbanUser } from "../../../redux/actions/actions";
 import { useDispatch } from "react-redux";
 import style from '../Table.module.css'
 const UserItem = ({id, name,email,pedidos,isActive, sub}) => {
@@ -10,22 +9,22 @@ const UserItem = ({id, name,email,pedidos,isActive, sub}) => {
     
 		useEffect(()=>{
         isActive ? setStatus(true) : setStatus(false);
-        console.log(status);
+        // console.log(status);
     },[])
 
     useEffect(()=>{
-        console.log(status);
+        // console.log(status);
     },[status])
 
     const handleClick = () => {
-        const _id = sub || id
-        if (!status) {
-          dispatch(unbanUser(_id));
-          setStatus(true);
-        } else {
-          dispatch(banUser(_id));
-          setStatus(false);
-        }
+        // const _id = sub || id
+        // if (!status) {
+        //   dispatch(unbanUser(_id));
+        //   setStatus(true);
+        // } else {
+        //   dispatch(banUser(_id));
+        //   setStatus(false);
+        // }
     }
 
     return (

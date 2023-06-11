@@ -11,11 +11,11 @@ const Profile = () => {
     return (
         userLogged.email ?
         <div>
-            {console.log(user)}
+            {/* {console.log(user)} */}
             <h2>{user.name}</h2>
             <img src={user.picture} alt="" />
             <p>{user.email}</p>
-            {console.log(user)}
+            {/* {console.log(user)} */}
             {/* <p>Mis direcciones:</p> */}
             {/* <p>Mis pedidos: {JSON.stringify(orders)}</p> */}
         </div>

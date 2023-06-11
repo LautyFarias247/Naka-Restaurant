@@ -16,16 +16,12 @@ import UserTable from "./components/Dashboard/UserTable/UserTable";
 import FoodTable from "./components/Dashboard/FoodTable/FoodTable";
 import FoodUpdate from "./components/Dashboard/FoodUpdate/FoodUpdate";
 import { useDispatch, useSelector } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
 import {
-  createAuth0User,
   getAllDishes,
-  getAuth0User,
-  setStoragedUser,
   removeAllProducts,
-  saveCarrito,
   compraExitosa,
   getMyOrders,
+	setStoragedUser,
 } from "./redux/actions/actions";
 import queryString from "query-string";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
@@ -33,7 +29,6 @@ import Footer from "./layout/Footer/Footer";
 import RegisterPage from "./views/RegisterPage/RegisterPage";
 
 function App() {
-  const { user, isAuthenticated } = useAuth0();
   const userLogged = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
@@ -48,29 +43,18 @@ function App() {
       const vacio = [];
       dispatch(compraExitosa({ id: _id, sub, email, cart, name }));
       dispatch(removeAllProducts());
-      dispatch(saveCarrito({ vacio, id: sub || _id }));
     }
   }, [userLogged]);
 
   useEffect(() => {
     dispatch(getAllDishes());
-    const localUser = localStorage.getItem("user");
-    const parsedUser = JSON.parse(localUser);
-    if (localUser) {
-      console.log(parsedUser);
-      dispatch(setStoragedUser(parsedUser));
-    }
+    const localStorageUser = localStorage.getItem("user");
+    const parsedUser = JSON.parse(localStorageUser);
+    if (localStorageUser) {
+			dispatch(setStoragedUser(parsedUser))
+		}
   }, []);
-
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      dispatch(createAuth0User(user));
-      setTimeout(() => {
-        dispatch(getAuth0User(user));
-      }, 1000);
-    }
-  }, [isAuthenticated, user, dispatch]);
-
+	
   const location = useLocation();
   return (
     <div className="App">

@@ -1,19 +1,57 @@
 .container{
   display: flex;
-	width: 30%;
+	flex-direction: row;
+	width: 500px;
+	border: 1px solid #BF8D39;
+	border-radius: 20px;
+	padding: 18px;
+	text-align: left;
+	align-items: stretch;
+	justify-content: space-between;
+}
+.dataContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.shoppingContainer {
+	display: flex;
+	align-items: center;
+}
+
+.titulo {
+	color: whitesmoke;
 }
 
 .imgContainer {
-  min-width: 200px; /* Establece el ancho deseado para el contenedor */
-  min-height: 200px; /* Establece la altura deseada para el contenedor */
-	max-width: 200px;
-	max-height: 200px;
-  position: relative; /* Asegura que el contenedor sea el contexto de posición para la imagen */
+  min-width: 150px; /* Establece el ancho deseado para el contenedor */
+  min-height: 150px; /* Establece la altura deseada para el contenedor */
+	max-width: 150px;
+	max-height: 150px;
+  position: relative; /* Asegura que el contenedor sea el contexto de posición para la imagen */;
+
 }
 .image {
   width: 100%; /* Hace que la imagen ocupe todo el ancho del contenedor */
   height: 100%; /* Hace que la imagen ocupe todo el alto del contenedor */
-  object-fit: cover; /* Ajusta la imagen para que cubra completamente el contenedor sin deformarse */
+  object-fit: cover;
   top: 0; /* Alinea la imagen en la parte superior del contenedor */
   left: 0; /* Alinea la imagen en la parte izquierda del contenedor */
+	border-radius: 30px;
+}
+
+
+.description{
+	margin-top: 10px;
+	color: rgba(253, 253, 253, 0.651);
+	height: 48px;
+	width: 250px;
+	font-weight: 100
+}
+
+.price {
+	font-size: 18px;
+	margin: 0;
+	font-weight: 500;
+	color: whitesmoke;
 }

@@ -75,3 +75,7 @@
 .h3::after{
 	right: -220px;
 }
+
+.error{
+	color: rgb(255, 55, 55)
+}

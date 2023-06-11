@@ -1,29 +1,15 @@
 import style from "./Cards.module.css"
 import Card from "../Card/Card"
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { saveCarrito } from "../../redux/actions/actions"
-import { useEffect } from "react"
+import { useSelector } from "react-redux"
+
 const Cards = ({ dishes }) => {
   const cart = useSelector(state => state.cart)
-  const userLogged = useSelector(state => state.user)
-  const dispatch = useDispatch()
   const [aux, setAux] = useState(0)
   let totalPrice = 0
   cart.forEach(item => {
     totalPrice += item.price * item.quantity
   });
-
-  useEffect(() => {
-    handleSaveCarrito(cart)
-    console.log("pasoxuseeffect");
-    console.log(totalPrice);
-  }, [totalPrice])
-
-  const handleSaveCarrito = (cart) => {
-    console.log("holaaa")
-    dispatch(saveCarrito({ cart, id: userLogged.sub || userLogged._id }))
-  }
 
 
   return (

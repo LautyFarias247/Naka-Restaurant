@@ -1,116 +1,72 @@
-const {saveUser, allUsers, searchUsers, userById, updateById } = require('../controllers/userControllers');
-const User = require('../models/User');
-const {sendMail} = require('../libs/nodemailer')
+const {
+  saveUser,
+  allUsers,
+  searchUsers,
+  updateById,
+} = require("../controllers/userControllers");
+const User = require("../models/User");
+const { sendMail } = require("../libs/nodemailer");
+const bcrypt = require("bcrypt");
+
+const { compare } = bcrypt;
 
 const getUsers = async (req, res) => {
-    const { name } = req.query;
-    try {
-        const result = name ? await searchUsers(name) : await allUsers();
-        res.status(200).json(result)
-    } catch (error) {
-        res.status(400).json(error.message)
-    }
-}
-const getUserById = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const result = await userById(id);
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(400).json(error.message)
-    }
-}
-const compareLogin = async (req, res) => {
-    const { email, password } = req.body
-    try {
-        const user = await User.findOne({ email })
-        if (user) {
-            const checkPassword = await compare(password, user.password)
-            if (checkPassword) {
-                res.status(200).json({
-                    message: 'valid email correct password',
-                    user
-                })
-            } else {
-                res.status(409).json({
-                    error: 'Invalid password',
-                    status: 409,
-                    statusText: 'Invalid password'
-                })
-            }
-        } else {
-            res.status(410).json({
-                error: "Invalid email",
-                status: 410,
-                statusText: 'Invalid email'
-            })
-        }
+  const { name } = req.query;
+  try {
+    const result = name ? await searchUsers(name) : await allUsers();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
 
-    } catch (error) {
-        res.status(400).json({
-            error: 'error 404',
-            status: "",
-            statusText: ''
-        })
-    }
-}
-
-// const createUsers = async (req, res) => {
-//     const { name, phone, email, password } = req.body;
- 
-//     try {
-//         const passHash = await encrypt(password)
-//         const newUser = await createUser(name, phone, email, passHash);
-
-//         const newCart =  new Cart({items: [], owner: newUser._id})
-//         const savedCart = await newCart.save()
-
-//         newUser.cart = savedCart._id
-//         await newUser.save()
-
-//         if(newUser.name){
-//            await sendMail(email,name)
-//            console.log("SE MANDO EL MAIL");
-//         }
-//         res.status(200).json(newUser);
-//     } catch (error) {
-//         res.status(400).json(error.message)
-//     }
-// }
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+	try {
+		const user = await User.findOne({ email });
+		const comparison = await compare(password, user.password);
+		if (comparison) {
+			return res.status(200).json(user);
+		} else {
+			return res.status(403).json("email o contraseña incorrectos")
+		}
+	} catch (error) {
+		return res.status(400).json(error.message);
+	}
+};
 
 const registerUser = async (req, res) => {
-	const {username, email, password} = req.body
-	try {
+  const { username, email, password } = req.body;
+  try {
+    const savedUser = await saveUser(username, email, password);
 
-		const savedUser = await saveUser(username, email, password)
-		
-		return res.status(200).json(savedUser)
-		
-	} catch (error) {
-		if(error.message.includes("dup key")){
-			return res.status(400).json("El nombre de usuario o email ya está registrado ")
-		}
-		console.log(error.message);
-	}
-} 
+    return res.status(200).json(savedUser);
+  } catch (error) {
+    if (error.message.includes("dup key")) {
+      return res
+        .status(400)
+        .json("El nombre de usuario o email ya está registrado ");
+    }
+    console.log(error.message);
+  }
+};
 
 const updateUserById = async (req, res) => {
-    const { id } = req.params;
-    const { name, phone, email, password, role, state } = req.body;
-    const updateUser = { name, phone, email, password, role, state };
-    try {
-        const result = await updateById(id, updateUser);
+  const { id } = req.params;
+  const { name, phone, email, password, role, state } = req.body;
+  const updateUser = { name, phone, email, password, role, state };
+  try {
+    const result = await updateById(id, updateUser);
 
-        res.status(200).json(result)
-    } catch (error) {
-        res.status(400).json(error.message)
-    }
-}
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
 
 module.exports = {
-    getUsers,
-    registerUser,
-    getUserById,
-    updateUserById,
-    compareLogin
-}
+  getUsers,
+  loginUser,
+  registerUser,
+  updateUserById,
+};

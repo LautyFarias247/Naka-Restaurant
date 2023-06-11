@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllDishes, getAllOrders, getAllUsers, getAuth0Users } from "../../redux/actions/actions";
+import { getAllDishes, getAllOrders, getAllUsers } from "../../redux/actions/actions";
 import { Container, Row, Col, Card, Table} from 'react-bootstrap';
 import style from './Dashboard.module.css'
 import Sidebar from "./Sidebar/Sidebar";
@@ -18,11 +18,10 @@ const Dashboard = () => {
 		
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(getAuth0Users())
         dispatch(getAllUsers())
         dispatch(getAllDishes())
         dispatch(getAllOrders())
-        console.log("traigousuarios");
+        // console.log("traigousuarios");
       },[])
 
   return (

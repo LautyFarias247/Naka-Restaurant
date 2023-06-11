@@ -31,11 +31,11 @@ const FoodUpdate = () => {
             stock: 0
         }}
         onChange={(values) =>{
-            console.log(values);
+            // console.log(values);
         }}
         onSubmit={(values, actions) => {
             console.log(values);
-            dispatch(updateDish(values))
+            // dispatch(updateDish(values))
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',

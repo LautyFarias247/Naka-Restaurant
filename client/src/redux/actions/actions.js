@@ -10,15 +10,15 @@ export const SET_CATEGORY = "SET_CATEGORY";
 export const SET_ORDERINGS = "SET_ORDERINGS";
 export const CREATE_DISH = "CREATE_DISH";
 export const CREATE_PAYMENT = "CREATE_PAYMENT";
-// Auth0
-export const CREATE_NEW_AUTH0_USER = "CREATE_NEW_AUTH0_USER";
-export const GET_AUTH0_USER_BY_ID = "GET_AUTH0_USER_BY_ID";
-export const GET_AUTH0_USERS = "GET_AUTH0_USERS";
-export const BAN_USER = "BAN_USER";
-export const UNBAN_USER = "UNBAN_USER";
-// Registrar usuario
+
+// Login / logout / register .42
+export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
-//
+export const SET_GOOGLE_USER = "SET_GOOGLE_USER";
+export const SET_STORAGED_USER = "SET_STORAGED_USER";
+export const REMOVE_SESSION = "REMOVE_SESSION";
+// cart .
+export const ADD_FIRST_PRODUCT = "ADD_FIRST_PRODUCT";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_ALL_PRODUCTS = "REMOVE_ALL_PRODUCTS";
@@ -27,91 +27,93 @@ export const UPLOAD_PRODUCTS = "UPLOAD_PRODUCTS";
 export const ADD_TOTAL_PRICE = "ADD_TOTAL_PRICE";
 export const REDUCE_TOTAL_PRICE = "REDUCE_TOTAL_PRICE";
 export const REMOVE_MANY_PRODUCTS = "REMOVE_MANY_PRODUCTS";
-// CARRITO
-export const GET_CARRITO = "GET_CARRITO";
-export const SAVE_CARRITO = "SAVE_CARRITO";
-export const SET_LOCAL_CARRITO = "SET_LOCAL_CARRITO";
-export const CREATE_USER = "CREATE_USER";
 //DASHBOARD
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 
 //login
 export const USER_LOGIN_DATA = "USER_LOGIN_DATA";
-export const SET_STORAGED_USER = "SET_STORAGED_USER";
 export const COMPRA_EXITOSA = "COMPRA_EXITOSA";
 export const GET_MY_ORDERS = "GET_MY_ORDERS";
 
+// export const setGoogleUser = async () => {
+// 	const res = await axios.get("http://localhost:3001/users")
+// }
+
+export const loginUser = (credentials) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/users/login`,
+        credentials
+      );
+      dispatch({
+        type: LOGIN_USER,
+        payload: { user: response.data, cart: response.data.cart },
+      });
+    } catch (error) {
+      throw new Error(error.response.data);
+    }
+  };
+};
+
 export const registerUser = (userData) => {
-	return async function () {
-		try {
-			console.log(userData);
-			const res = await axios.post("http://localhost:3001/users/register", userData)
-			return res
-		} catch (error) {
-			throw new Error(error.response.data)
-		}
-	}
-}
+  return async function (dispatch) {
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/users/register",
+        userData
+      );
+      return res;
+    } catch (error) {
+      throw new Error(error.response.data);
+    }
+  };
+};
+
+export const removeSession = () => {
+  return async function (dispatch) {
+    dispatch({
+      type: REMOVE_SESSION,
+      payload: { user: {}, cart: [] },
+    });
+  };
+};
 
 export const compraExitosa = (data) => {
   return async function (dispatch) {
     try {
-      console.log(data);
       const res = await axios.post("http://localhost:3001/notificar", data);
-      // console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
 export const setStoragedUser = (user) => {
   return async function (dispatch) {
-    try {
-      console.log(user);
-      const carrito = await axios.get(
-        `http://localhost:3001/cart/${user.cart}`
-      );
-      console.log(carrito.data.items);
-
-      dispatch({
-        type: SET_STORAGED_USER,
-        payload: { user, cart: carrito.data.items },
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch({
+      type: SET_STORAGED_USER,
+      payload: { user, cart: user.cart },
+    });
   };
 };
 
-export const postLogin = (payload) => {
-  console.log(payload);
-  return async function (dispatch) {
-    try {
-      // let result = await axios.post("http://localhost:3001/users/login", payload)
-      console.log(payload);
-      let result = await axios.post(
-        "http://localhost:3001/users/login",
-        payload
-      );
+export const addFirstProduct = (item) => {
+	return async function (dispatch) {
+		dispatch({
+			type: ADD_FIRST_PRODUCT,
+			payload: {product: item}
+		})
+	}
+}
 
-      const carritoId = result.data.user.cart;
-      const carrito = await axios.get(
-        `http://localhost:3001/cart/${carritoId}`
-      );
-
-      dispatch({
-        type: USER_LOGIN_DATA,
-        payload: { user: result.data.user, cart: carrito.data.items },
-      });
-      return result.data;
-    } catch (error) {
-      console.log(error.response.data.error);
-      return error.response.data.error;
-    }
-  };
-};
+export const addProduct = (item) => {
+	return async function (dispatch) {
+		dispatch({
+			type: ADD_PRODUCT,
+			payload: {product: item}
+		})
+	}
+}
 
 export function getAllDishes() {
   return async (dispatch) => {
@@ -136,7 +138,6 @@ export const getDishesById = (id) => {
 
 export const getDishesByName = (payload) => {
   return async function (dispatch) {
-    console.log("funciona");
     const foodsByName = await axios.get(
       `http://localhost:3001/foods?name=${payload}`
     );
@@ -160,45 +161,12 @@ export const createDish = (payload) => {
         },
       });
     };
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const createUser = (payload) => {
-  try {
-    return async function () {
-      // await axios.post("http://localhost:3001/users", payload)
-      // , {
-      await axios.post("http://localhost:3001/users", payload);
-      //   headers: {
-      //     "Content-Type": "multipart/form-data"
-      //   }
-      // })
-    };
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const saveCarrito = (payload) => {
-  return async function (dispatch) {
-    console.log({ payload: payload });
-    try {
-      //funciona desde local host
-      // await axios.put(`http://localhost:3001/cart/${payload.id}`, payload.cart)
-      await axios.put(`http://localhost:3001/cart/${payload.id}`, payload.cart);
-      console.log("funciona");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  } catch (error) {}
 };
 
 export const createPayment = (payload) => {
   try {
     return async function () {
-      console.log(payload);
       await axios
         .post("http://localhost:3001/payment", payload)
         // await axios.post('http://localhost:3001/payment', payload)
@@ -248,85 +216,6 @@ export function setOrderings(order) {
   };
 }
 
-export function getAuth0Users() {
-  return async (dispatch) => {
-    const auth0Users = await axios.get(`http://localhost:3001/auth0Users`);
-    return dispatch({ type: GET_AUTH0_USERS, payload: auth0Users.data });
-  };
-}
-
-export function getAuth0User(user) {
-  return async (dispatch) => {
-    try {
-      console.log(user.sub);
-      const auth0User = await axios.get(
-        `http://localhost:3001/auth0Users/${user.sub}`
-      );
-      // const auth0User = await axios.get(`http://localhost:3001/auth0Users/${user.sub}`)
-      console.log(auth0User.data[0]);
-      const auth0UserParsed = auth0User.data[0];
-
-      const carrito = await axios.get(
-        `http://localhost:3001/cart/${auth0UserParsed.cart}`
-      );
-
-      return dispatch({
-        type: GET_AUTH0_USER_BY_ID,
-        payload: { user: auth0UserParsed, cart: carrito.data.items },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-export function createAuth0User(user) {
-  return async (dispatch) => {
-    try {
-      const { name, nickname, email, sub } = user;
-      const newAuth0User = { name, nickname, email, sub };
-      const newUser = await axios.post(
-        `http://localhost:3001/auth0Users`,
-        newAuth0User
-      );
-      // const newUser = await axios.post(`http://localhost:3001/auth0Users`, newAuth0User)
-      console.log({ NUEVOUSUARIO: newUser.data });
-    } catch (error) {
-      console.log({ errorCreacion: error.message });
-    }
-  };
-}
-
-export const banUser = (id) => {
-  return async (dispatch) => {
-    console.log(id);
-    const bannedUser = await axios.put(
-      `http://localhost:3001/auth0Users/ban/${id}`
-    );
-    console.log(bannedUser);
-  };
-};
-
-export const unbanUser = (id) => {
-  return async (dispatch) => {
-    console.log(id);
-    const unbannedUser = await axios.put(
-      `http://localhost:3001/auth0Users/unban/${id}`
-    );
-    console.log(unbannedUser);
-  };
-};
-
-export function setLocalCarrito(carrito) {
-  return async (dispatch) => {
-    return dispatch({ type: SET_LOCAL_CARRITO, payload: carrito });
-  };
-}
-
-export function addProduct(product) {
-  return async (dispatch) => {
-    return dispatch({ type: ADD_PRODUCT, payload: product });
-  };
-}
 
 export function removeProduct(product) {
   return async (dispatch) => {
@@ -335,7 +224,6 @@ export function removeProduct(product) {
 }
 
 export function removeManyProducts(product) {
-  console.log(product);
   return async (dispatch) => {
     return dispatch({ type: REMOVE_MANY_PRODUCTS, payload: product });
   };
@@ -374,8 +262,6 @@ export function getMyOrders(id) {
   return async (dispatch) => {
     try {
       const myOrders = await axios.get(`http://localhost:3001/order/${id}`);
-
-      console.log({ MISORDENES: myOrders.data });
       return dispatch({ type: GET_MY_ORDERS, payload: myOrders.data });
     } catch (error) {
       console.log(error);

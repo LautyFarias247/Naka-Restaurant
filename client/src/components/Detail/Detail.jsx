@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDishesById, saveCarrito } from "../../redux/actions/actions";
+import { getDishesById } from "../../redux/actions/actions";
 import HandlerShoppingItems from "../HandlerShoppingItems/HandlerShoppingItems";
 
 const Detail = () => {
   const { id } = useParams();
   const detailFood = useSelector(state => state.detail)
   const cart = useSelector(state => state.cart)
-  const userLogged = useSelector(state => state.user)
+	
   const dispatch = useDispatch()
   const [aux, setAux] = useState("")
   useEffect(() => {
@@ -23,19 +23,6 @@ const Detail = () => {
   cart.forEach(item => {
     totalPrice += item.price * item.quantity
   });
-
-  useEffect(() => {
-    handleSaveCarrito(cart)
-    console.log("pasoxuseeffect");
-    console.log(totalPrice);
-  }, [totalPrice])
-
-  const handleSaveCarrito = (cart) => {
-    console.log("holaaa")
-    console.log(cart)
-    console.log(userLogged.sub);
-    dispatch(saveCarrito({ cart, id: userLogged.sub || userLogged._id}))
-  }
   return (
     <div className={style.detail}>
       {detailFood && (

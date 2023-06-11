@@ -36,7 +36,7 @@ const GraficoTorta = ({pedidos}) => {
         for (const categoria in ventasPorCategoriaAux) {
           ventasPorCategoria.push({ name: categoria, value: ventasPorCategoriaAux[categoria] });
         }
-        console.log(ventasPorCategoria);
+        // console.log(ventasPorCategoria);
         setData(ventasPorCategoria)
     },[pedidos])
   return (

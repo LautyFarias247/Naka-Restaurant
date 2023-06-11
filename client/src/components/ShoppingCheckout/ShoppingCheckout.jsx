@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import Swal from "sweetalert2"
-import { saveCarrito } from '../../redux/actions/actions';
 import style from './ShoppingCheckout.module.css'
 
 const ShoppingCheckout = () => {
@@ -16,19 +15,6 @@ const ShoppingCheckout = () => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
     const userLogged = useSelector(state => state.user)
-
-    useEffect(()=>{
-        handleSaveCarrito(cart)
-        console.log("pasoxuseeffect");
-        console.log(totalPrice);
-      },[totalPrice])
-      
-      const handleSaveCarrito = (cart) => {
-                console.log(cart)
-                dispatch(saveCarrito({cart, id: userLogged.sub || userLogged._id}))
-           
-            }
-
     return (
 
         <div className={style.title}>

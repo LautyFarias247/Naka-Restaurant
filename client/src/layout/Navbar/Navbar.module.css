@@ -29,15 +29,21 @@
   right: 0;
 	margin-right: 30px;
 }
-.li {
+.welcome {
+	text-decoration: none;
+	color: whitesmoke;
+	display: inline-block;
+}
+.list {
 	color: aliceblue;
   position: relative;
   display: inline-block;
   transition: color 0.3s ease;
 	cursor: pointer;
 	margin-right: 20px;
+	text-decoration: none;
 }
-li::after {
+.list::after {
   content: '';
   position: absolute;
   left: 0;
@@ -47,9 +53,9 @@ li::after {
   background-color: transparent;
   transition: background-color 0.3s ease;
 }
-li:hover {
+.list:hover {
   color: #BF8D39;
 }
-li:hover::after {
+.list:hover::after {
   background-color: #BF8D39;
 }
