@@ -51,22 +51,24 @@ const registerUser = async (req, res) => {
   }
 };
 
-const updateUserById = async (req, res) => {
-  const { id } = req.params;
-  const { name, phone, email, password, role, state } = req.body;
-  const updateUser = { name, phone, email, password, role, state };
-  try {
-    const result = await updateById(id, updateUser);
+const updateUserCart = async (req, res) => {
+	const {_id} = req.params	
+	const {cart} = req.body
+	console.log(_id);
+	console.log(cart);
 
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(400).json(error.message);
-  }
-};
+	try {
+		const updatedUser = await User.findByIdAndUpdate(_id, {cart}, {new: true})
+		console.log();	
+		return res.status(200).json(updatedUser)
+	} catch (error) {
+		
+	}
+}
 
 module.exports = {
   getUsers,
   loginUser,
   registerUser,
-  updateUserById,
+  updateUserCart,
 };
