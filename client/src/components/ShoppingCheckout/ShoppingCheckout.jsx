@@ -8,15 +8,35 @@ import style from "./ShoppingCheckout.module.css";
 
 const ShoppingCheckout = () => {
   const cart = useSelector((state) => state.cart);
+	const user = useSelector((state) => state.user);
 
   let totalPrice = 0;
 
   cart.forEach((item) => {
     totalPrice += item.price * item.quantity;
   });
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const userLogged = useSelector((state) => state.user);
+	const handlePayment = () => {
+		if(totalPrice < 5000){
+			return Swal.fire({
+				title: 'Atención',
+				text: 'El monto de la compra debe superar los $5000',
+				icon: 'info',
+				confirmButtonText: 'Aceptar',
+				iconColor: "#BF8D39",
+			})
+		}
+		if(!user.isActive){
+			return Swal.fire({
+				title: 'Lo sentimos...',
+				text: 'Tu cuenta se encuentra inhabilitada para realizar pedidos',
+				icon: 'error',
+				confirmButtonText: 'Aceptar',
+				iconColor: "#BF8D39",
+			})
+		}
+	}
 
   return (
     <div className={style.container}>
@@ -48,45 +68,7 @@ const ShoppingCheckout = () => {
       </div>
       <button
         className={style.botonPagar}
-        onClick={async () => {
-          if (user) {
-            const status = user.is_active || user.isActive;
-            console.log(status);
-            if (!status) {
-              return Swal.fire({
-                title:
-                  "<strong>Tu cuenta esta inhabilitada para realizar pedidos</strong>",
-                icon: "warning",
-                showCloseButton: true,
-                focusConfirm: false,
-                confirmButtonText: '<Link to="/account/login">Aceptar</Link>',
-                // '<a href="//sweetalert2.github.io">links</a> ' +
-                // 'and other HTML tags'
-              });
-            }
-          }
-          if (user.name) {
-            dispatch(
-              createPayment({
-                cart,
-                email: userLogged.email,
-                id: userLogged.sub || userLogged._id,
-              })
-            );
-          } else {
-            return Swal.fire({
-              title:
-                "<strong>Debes loguearte para confirmar el pedido</strong>",
-              icon: "info",
-              html: "Inicia sesion o registrate",
-              showCloseButton: true,
-              focusConfirm: false,
-              confirmButtonText: '<Link to="/account/login">Aceptar</Link>',
-              // '<a href="//sweetalert2.github.io">links</a> ' +
-              // 'and other HTML tags'
-            });
-          }
-        }}
+        onClick={handlePayment}
       >
         Pagar
       </button>

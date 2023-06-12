@@ -28,7 +28,7 @@ const RegisterForm = () => {
 				icon: 'success',
 				showCancelButton: false,
 				confirmButtonText: 'Iniciar sesión',
-				background: "#000000"
+				iconColor: "#BF8D39"
 			}).then((result) => {
 				if (result.isConfirmed) {
 					// Redireccionar a la página deseada

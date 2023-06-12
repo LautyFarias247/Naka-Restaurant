@@ -23,12 +23,30 @@ const HandlerShoppingItems = ({ product, refresh, setRefresh }) => {
   const dispatch = useDispatch();
 
   const handleAddFirstProduct = async () => {
+		if(!user.isActive){
+			return Swal.fire({
+				title: 'Lo sentimos...',
+				text: 'Tu cuenta se encuentra inhabilitada para realizar pedidos',
+				icon: 'error',
+				confirmButtonText: 'Aceptar',
+				iconColor: "#BF8D39",
+			})
+		}
     await dispatch(addFirstProduct({ product }));
     setAux(aux + 1);
 		setRefresh(refresh +1)
   };
 
   const handleAddProduct = () => {
+		if(!user.isActive){
+			return Swal.fire({
+				title: 'Lo sentimos...',
+				text: 'Tu cuenta se encuentra inhabilitada para realizar pedidos',
+				icon: 'error',
+				confirmButtonText: 'Aceptar',
+				iconColor: "#BF8D39",
+			})
+		}
     dispatch(addProduct(product));
     dispatch(saveCart({ userId: user._id, cart }));
     setAux(aux + 1);
