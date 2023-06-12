@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./components/LoginComponents/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./views/LoginPage/LoginPage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Dashboard from "./components/Dashboard/Dashboard";
 import UserTable from "./components/Dashboard/UserTable/UserTable";
 import FoodTable from "./components/Dashboard/FoodTable/FoodTable";
@@ -33,7 +33,8 @@ function App() {
 
   const cart = useSelector((state) => state.cart);
 	const user = useSelector((state)=> state.user)
-  const dispatch = useDispatch();
+  const [modalCarrito, setModalCarrito] = useState(false)
+	const dispatch = useDispatch();
 	
 	useEffect(() => {
 		dispatch(getAllDishes());
@@ -65,13 +66,14 @@ function App() {
   const location = useLocation();
   return (
     <div className="App">
+			
       {location.pathname !== "/dashboard" &&
         location.pathname !== "/dashboard/users" &&
         location.pathname !== "/dashboard/foods" &&
         location.pathname !== "/dashboard/sales" &&
         location.pathname !== "/dashboard/foods/edit/:id"}
 
-      {!location.pathname.includes("dashboard") && <Nav />}
+      {!location.pathname.includes("dashboard") && <Nav/>}
 
       <Routes>
         <Route path="/" element={<Home />} />

@@ -2,35 +2,24 @@ import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 import HandlerShoppingItems from "../HandlerShoppingItems/HandlerShoppingItems";
 import Model from "../Detail/ModelDetail/modelDetail";
+import { useState } from "react";
 
-const Card = ({
-  image,
-  name,
-  id,
-  price,
-  rating,
-  _quantity,
-  stock,
-  aux,
-  setAux,
-  item,
-  description,
-}) => {
-	
+const Card = ({ image, name, price, item, description }) => {
+  const [refresh, setRefresh] = useState(0);
   return (
     <div className={style.container}>
       <div className={style.dataContainer}>
         <h5 className={style.titulo}>{name}</h5>
-          <p className={style.description}>
-            {description.length > 60
-              ? description.substring(0, 60) + "..."
-              : description}
-          </p>
+        <p className={style.description}>{description}</p>
         <div className={style.shoppingContainer}>
           <p className={style.price}>
             $ {price.toLocaleString("en-US").replace(",", ".")},00
           </p>
-          <HandlerShoppingItems setAux={setAux} product={item} />
+          <HandlerShoppingItems
+            refresh={refresh}
+            setRefresh={setRefresh}
+            product={item}
+          />
         </div>
       </div>
 

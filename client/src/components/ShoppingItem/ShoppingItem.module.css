@@ -1,18 +1,54 @@
-.item {
-    display: flex;
+.container{
+	height: 100px;
+	width: 750px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid #bf8e3938;
+	border-radius: 20px;
+	background-color: none	;
+	padding: 10px;
+	margin-bottom: 30px;
 }
 
 .image {
-    width: 6rem;
-    height: 6rem;
-    border-style: solid;
-    border-radius: 15%;
+	height: 80px;
+	width: 80px;
 }
 
-.title{
-    font-family: 'Nunito';
-    font-size: 16px;
-    text-align: center;
-    letter-spacing: normal;
-    color: rgb(11, 8, 23);
+.name {
+	font-weight: 600;
+	color: whitesmoke;
 }
+
+.data {
+	font-size: 12px;
+	line-height: 1;
+	color: rgba(253, 253, 253, 0.651);
+}
+
+.info{
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	width: 300px;
+	height: 80px;
+	justify-content: space-around;
+}
+
+.priceInfo{
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+.price{
+	color: whitesmoke;
+	font-size: 18px;
+}
+
+.subtotal{
+	color:rgba(245, 245, 245, 0.473);
+	font-size: 15px
+}
+

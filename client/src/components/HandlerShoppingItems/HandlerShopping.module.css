@@ -2,13 +2,41 @@
 	background-color: rgba(255, 255, 255, 0);
 	border: none;
 	color: whitesmoke;
-	margin-left: 30px;
 	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
 	padding: 5px 10px;
+	
 }
 
 .botonAgregar:hover {
   box-shadow: 0 0 0 1px #BF8D39;
   background-color: #00000000;
   color: #fff;
+}
+
+.container {
+	border: 1px solid #BF8D39;
+	height: 34px;
+	display: flex;
+	background: rgba(156, 156, 156, 0);
+	align-items: center;
+	color: whitesmoke
+}
+
+.handleButton {
+	background-color: rgba(123, 123, 123, 0);
+	border: none;
+	width: 32px;
+	height: 32px;
+	transition: background-color 0.3s;
+	color: whitesmoke
+}
+
+.handleButton:hover {
+	
+	background-color: rgba(156, 156, 156, 0.438);;
+}
+
+.quantity {
+	width: 32px;
+	text-align: center;
 }

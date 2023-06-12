@@ -1,32 +1,35 @@
-.cartContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    height: 100%;
-    overflow: hidden;
-    padding-top: 2%;
+.empty {
+	min-height: 100vh;
+	background-color: black;
+	padding-top: 50px;
 }
 
-.itemContainer {
-    width: 50%;
+.emptyTitle {
+	color: #BF8D39;
 }
 
-.checkout {
-    width: 30%;
-    
+.emptyButton {
+	background-color: rgba(255, 255, 255, 0);
+	border: none;
+	color: whitesmoke;
+	margin-left: 30px;
+	margin-top: 30px;
+	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
+	padding: 5px 10px;
+	font-size: 22px;
+	
 }
 
-.containerReturn{
-    margin-top: 10%;
-    min-height: 80vh;
+.emptyButton:hover {
+  box-shadow: 0 0 0 1px #BF8D39;
+  background-color: rgba(90, 90, 90, 0.452);
+  color: white;
+	
 }
-
-.buttonReturn{
-    background-color: #13251f75;
-    border-color: transparent;
-    width: 50%;
-    border-radius: 0.2rem;
-    color: #fff;
-    margin-top: 10%;
+.container {
+	min-height: 100vh;
+	background-color: black;
+	padding: 50px 100px;
+	display: flex;
+	justify-content: space-between;
 }

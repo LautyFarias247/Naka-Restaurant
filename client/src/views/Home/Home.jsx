@@ -15,7 +15,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <div className={style.pContainer}>
+      {/* <div className={style.pContainer}>
         <p className={style.p}>
           Naka, -Buenos Aires, 2008-, es el emblema del proyecto gastronómico
           dirigido por Hikaru Nakamura y Shigeru Miyamoto, cuya finalidad es
@@ -32,7 +32,7 @@ const Home = () => {
       <div className={style.imagesContainer}>
         <img src={sushi1} alt="Plato de sushi" className={style.homeImage} />
         <img src={sushi2} alt="Plato de sushi" className={style.homeImage} />
-      </div>
+      </div> */}
     </main>
   );
 };

@@ -1,28 +1,57 @@
-.checkoutContainer {
-    display: flex;
+.container{
+	color: whitesmoke;
+	border: 1px solid #bf8e3938;
+	border-radius: 5px;
+	width: 350px;
+	height:fit-content;
+	padding: 30px;
 }
-
 .title{
-    font-family: 'Nunito';
-    font-size: 16px;
-    text-align: center;
-    letter-spacing: normal;
-    /* color: rgb(7, 7, 7) */
+	font-size: 25px;
+	font-weight: 400;
+}
+.separador{
+	width: 90%;
+	display: block;
+  height: 1px;
+  border: none;
+  background-color: #BF8D39;
+  margin: 20px auto;
+}
+.itemContainer {
+	margin-bottom: 20px;
+}
+.subtotal{
+	display: flex;
+	justify-content: space-between;
+	
+	padding: 0 0px;
 }
 
-.stock{
-    margin-left: 25%;
-    width: 50%;
-    text-align: center;
-    border-bottom: 0.1rem;
-    border-bottom-style: solid;
-    border-bottom-color: rgba(0, 0, 0, 0.221);
+.totalData{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
-.buttonPay{
-    background-color: #3483fa;
-    border-color: transparent;
-    width: 50%;
-    border-radius: 0.2rem;
-    color: #fff;
+.total{
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.botonPagar {
+	background-color: rgba(255, 255, 255, 0);
+	border: 1px solid #bf8e3938;
+	color: whitesmoke;
+	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
+	padding: 5px 10px;
+	width: 85%;
+	
+}
+
+.botonPagar:hover {
+	/* border: 1px solid ; */
+  box-shadow: 0 0 0 1px #BF8D39;
+  background-color: #00000000;
+  color: #fff;
 }

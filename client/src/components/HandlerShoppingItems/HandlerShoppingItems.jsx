@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 import style from "./HandlerShopping.module.css";
 import { useEffect } from "react";
 
-const HandlerShoppingItems = ({ product }) => {
+const HandlerShoppingItems = ({ product, refresh, setRefresh }) => {
   const [aux, setAux] = useState(1);
 
   const cart = useSelector((state) => state.cart);
@@ -25,68 +25,47 @@ const HandlerShoppingItems = ({ product }) => {
   const handleAddFirstProduct = async () => {
     await dispatch(addFirstProduct({ product }));
     setAux(aux + 1);
+		setRefresh(refresh +1)
   };
 
   const handleAddProduct = () => {
     dispatch(addProduct(product));
     dispatch(saveCart({ userId: user._id, cart }));
     setAux(aux + 1);
+		setRefresh(refresh +1)
   };
 
   const handleRemoveProduct = () => {
     dispatch(removeProduct(product));
     dispatch(saveCart({ userId: user._id, cart }));
     setAux(aux + 1);
+		setRefresh(refresh +1)
   };
 
   const handleRemoveManyProducts = () => {
     dispatch(removeManyProducts(product));
     dispatch(saveCart({ userId: user._id, cart }));
     setAux(aux + 1);
+		setRefresh(refresh +1)
   };
 
   if (item?.quantity) {
     return (
-      <div>
-        <button
-          onClick={handleRemoveProduct}
-          style={{
-            backgroundColor: "aliceblue",
-            margin: "7px",
-            height: "27px",
-            width: "27px",
-            border: "none",
-          }}
-        >
+      <div className={style.container}>
+        <button onClick={handleRemoveProduct} className={style.handleButton}>
           -
         </button>
-        <span>{item?.quantity ? item.quantity : 0}</span>
-        <button
-          onClick={handleAddProduct}
-          style={{
-            backgroundColor: "aliceblue",
-            margin: "7px",
-            height: "27px",
-            width: "27px",
-            border: "none",
-          }}
-        >
+        <span className={style.quantity}>{item.quantity}</span>
+        <button onClick={handleAddProduct} className={style.handleButton}>
           +
         </button>
-        {item?.quantity && (
-          <button
-					onClick={handleRemoveManyProducts}
-            style={{
-              backgroundColor: "aliceblue",
-              border: "none",
-              fontWeight: "bold",
-              height: "32px",
-              width: "32px",
-            }}
-          >
-            x
-          </button>
-        )}
+
+        <button
+          onClick={handleRemoveManyProducts}
+          className={style.handleButton}
+        >
+          x
+        </button>
       </div>
     );
   } else {
