@@ -90,10 +90,18 @@ export const compraExitosa = (data) => {
 
 export const setStoragedUser = (user) => {
   return async function (dispatch) {
-    dispatch({
-      type: SET_STORAGED_USER,
-      payload: { user, cart: user.cart },
-    });
+		try {
+			const response = await axios.get(`http://localhost:3001/users/${user._id}`)
+			console.log(response);
+
+			dispatch({
+				type: SET_STORAGED_USER,
+				payload: { user: response.data, cart: response.data.cart },
+			});
+
+		} catch (error) {
+			console.log(error);	
+		}
   };
 };
 

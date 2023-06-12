@@ -20,6 +20,16 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+	const {_id} = req.params 
+	try {
+		const user = await User.findById(_id)
+		res.status(200).json(user)
+	} catch (error) {
+		res.status(400).json(error)
+	}
+}
+
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 	try {
@@ -67,6 +77,7 @@ const updateUserCart = async (req, res) => {
 
 module.exports = {
   getUsers,
+	getUserById,
   loginUser,
   registerUser,
   updateUserCart,
