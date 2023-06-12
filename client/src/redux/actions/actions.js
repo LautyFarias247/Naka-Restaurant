@@ -130,6 +130,26 @@ export const addProduct = (item) => {
 	}
 }
 
+export const removeProduct = (item) => {
+	return async function (dispatch) {
+		dispatch({
+			type: REMOVE_PRODUCT,
+			payload: {product: item}
+		})
+	}
+}
+
+export function removeManyProducts(product) {
+	return async (dispatch) => {
+		return dispatch({ type: REMOVE_MANY_PRODUCTS, payload: product });
+	};
+}
+
+export function removeAllProducts(product) {
+	return async (dispatch) => {
+		return dispatch({ type: REMOVE_ALL_PRODUCTS, payload: product });
+	};
+}
 export function getAllDishes() {
   return async (dispatch) => {
     try {
@@ -231,24 +251,6 @@ export function setOrderings(order) {
   };
 }
 
-
-export function removeProduct(product) {
-  return async (dispatch) => {
-    return dispatch({ type: REMOVE_PRODUCT, payload: product });
-  };
-}
-
-export function removeManyProducts(product) {
-  return async (dispatch) => {
-    return dispatch({ type: REMOVE_MANY_PRODUCTS, payload: product });
-  };
-}
-
-export function removeAllProducts(product) {
-  return async (dispatch) => {
-    return dispatch({ type: REMOVE_ALL_PRODUCTS, payload: product });
-  };
-}
 
 export function addTotalPrice(product) {
   return async (dispatch) => {

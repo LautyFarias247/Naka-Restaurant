@@ -29,14 +29,21 @@ const HandlerShoppingItems = ({ product }) => {
 
 	const handleAddProduct = () => {
 		dispatch(addProduct(product))
+		dispatch(saveCart({userId: user._id, cart}))
 		setAux(aux + 1);
-    console.log({funciona: product});
+	}
+
+	const handleRemoveProduct = () => {
+		dispatch(removeProduct(product))
+		dispatch(saveCart({userId: user._id, cart}))
+		setAux(aux + 1);
 	}
 
   if (item?.quantity) {
     return (
       <div>
         <button
+				onClick={handleRemoveProduct}
           style={{
             backgroundColor: "aliceblue",
             margin: "7px",
@@ -45,7 +52,7 @@ const HandlerShoppingItems = ({ product }) => {
             border: "none",
           }}
         >
-          &#9660;
+          -
         </button>
         <span>{item?.quantity ? item.quantity : 0}</span>
         <button

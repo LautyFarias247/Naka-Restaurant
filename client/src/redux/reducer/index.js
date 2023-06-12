@@ -82,8 +82,26 @@ const reducer = (state = initialState, { type, payload }) => {
 			const index = state.cart.findIndex(product => product._id === item._id)
 			const cart = state.cart
 			cart[index].quantity += 1
-			
 			return {...state, cart}
+		
+		case REMOVE_PRODUCT:
+			const removedItem = payload.product
+			const removedIndex = state.cart.findIndex(product => product._id === removedItem._id)
+		
+			if(state.cart[removedIndex].quantity > 1) {
+				console.log(state.cart[removedIndex].quantity);
+
+				const newCart = state.cart
+				newCart[removedIndex].quantity -= 1
+				return {...state, cart: newCart}
+			}
+			else{
+				console.log("queda1solo");
+				const newCart = state.cart.filter(item => item._id !== removedItem._id)
+				return {...state, cart: newCart}
+			}
+
+
 		case GET_DISHES_BY_NAME:
       return {
         ...state,
