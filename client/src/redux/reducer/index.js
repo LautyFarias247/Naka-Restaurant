@@ -20,7 +20,7 @@ import {
   GET_ALL_ORDERS,
   SET_STORAGED_USER,
   REMOVE_SESSION,
-	ADD_FIRST_PRODUCT,
+  ADD_FIRST_PRODUCT,
 } from "../actions/actions";
 
 const initialState = {
@@ -71,38 +71,44 @@ const reducer = (state = initialState, { type, payload }) => {
         user: payload.user,
         cart: payload.cart,
       };
-		//CARRITO
-		case ADD_FIRST_PRODUCT:
-			const firstItem = payload.product
-			firstItem.quantity = 1
-			return {...state, cart: [...state.cart, firstItem]}
-    
-		case ADD_PRODUCT:
-			const item = payload.product
-			const index = state.cart.findIndex(product => product._id === item._id)
-			const cart = state.cart
-			cart[index].quantity += 1
-			return {...state, cart}
-		
-		case REMOVE_PRODUCT:
-			const removedItem = payload.product
-			const removedIndex = state.cart.findIndex(product => product._id === removedItem._id)
-		
-			if(state.cart[removedIndex].quantity > 1) {
-				console.log(state.cart[removedIndex].quantity);
+    //CARRITO
+    case ADD_FIRST_PRODUCT:
+      const firstItem = payload.product;
+      firstItem.quantity = 1;
+      return { ...state, cart: [...state.cart, firstItem] };
 
-				const newCart = state.cart
-				newCart[removedIndex].quantity -= 1
-				return {...state, cart: newCart}
-			}
-			else{
-				console.log("queda1solo");
-				const newCart = state.cart.filter(item => item._id !== removedItem._id)
-				return {...state, cart: newCart}
-			}
+    case ADD_PRODUCT:
+      const item = payload.product;
+      const index = state.cart.findIndex((product) => product._id === item._id);
+      const cart = state.cart;
+      cart[index].quantity += 1;
+      return { ...state, cart };
 
+    case REMOVE_PRODUCT:
+      const removedItem = payload.product;
+      const removedIndex = state.cart.findIndex(
+        (product) => product._id === removedItem._id
+      );
 
-		case GET_DISHES_BY_NAME:
+      if (state.cart[removedIndex].quantity > 1) {
+        const newCart = state.cart;
+        newCart[removedIndex].quantity -= 1;
+        return { ...state, cart: newCart };
+      } else {
+        const newCart = state.cart.filter(
+          (item) => item._id !== removedItem._id
+        );
+        return { ...state, cart: newCart };
+      }
+
+    case REMOVE_MANY_PRODUCTS:
+			const removedItems = payload.product
+			const remainingItems = state.cart.filter(
+				(item) => item._id !== removedItems._id
+			);
+			return { ...state, cart: remainingItems };
+
+    case GET_DISHES_BY_NAME:
       return {
         ...state,
         allDishes: payload,
@@ -183,7 +189,6 @@ const reducer = (state = initialState, { type, payload }) => {
         });
       }
       return { ...state, allDishes: orderedDishes };
-
 
     case REMOVE_PRODUCT:
       const removeProductIndex = state.cart.findIndex(

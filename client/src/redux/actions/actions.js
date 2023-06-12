@@ -121,27 +121,27 @@ export const addFirstProduct = ({product}) => {
 		} 	
 }
 
-export const addProduct = (item) => {
+export const addProduct = (product) => {
 	return async function (dispatch) {
 		dispatch({
 			type: ADD_PRODUCT,
-			payload: {product: item}
+			payload: {product}
 		})
 	}
 }
 
-export const removeProduct = (item) => {
+export const removeProduct = (product) => {
 	return async function (dispatch) {
 		dispatch({
 			type: REMOVE_PRODUCT,
-			payload: {product: item}
+			payload: {product}
 		})
 	}
 }
 
 export function removeManyProducts(product) {
 	return async (dispatch) => {
-		return dispatch({ type: REMOVE_MANY_PRODUCTS, payload: product });
+		return dispatch({ type: REMOVE_MANY_PRODUCTS, payload: {product} });
 	};
 }
 
