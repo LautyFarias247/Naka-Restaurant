@@ -97,13 +97,20 @@ export const setStoragedUser = (user) => {
   };
 };
 
-export const addFirstProduct = (item) => {
-	return async function (dispatch) {
-		dispatch({
-			type: ADD_FIRST_PRODUCT,
-			payload: {product: item}
-		})
+export const saveCart = ({userId, cart}) => {
+	return async function () {
+		const response = await axios.put(`http://localhost:3001/users/cart/${userId}`, {cart})
+		console.log(response);
 	}
+}
+
+export const addFirstProduct = ({product}) => {
+	return async function (dispatch) {
+			dispatch({
+				type: ADD_FIRST_PRODUCT,
+				payload: {product}
+			})
+		} 	
 }
 
 export const addProduct = (item) => {

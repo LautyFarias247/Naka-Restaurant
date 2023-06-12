@@ -22,6 +22,7 @@ import {
   compraExitosa,
   getMyOrders,
 	setStoragedUser,
+	saveCart,
 } from "./redux/actions/actions";
 import queryString from "query-string";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
@@ -29,31 +30,37 @@ import Footer from "./layout/Footer/Footer";
 import RegisterPage from "./views/RegisterPage/RegisterPage";
 
 function App() {
-  const userLogged = useSelector((state) => state.user);
+
   const cart = useSelector((state) => state.cart);
-
+	const user = useSelector((state)=> state.user)
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const queries = queryString.parse(location.search);
-    const status = queries.status;
-    const { _id, email, sub, name } = userLogged;
-    dispatch(getMyOrders(_id));
-    if (userLogged.email && status === "approved") {
-      const vacio = [];
-      dispatch(compraExitosa({ id: _id, sub, email, cart, name }));
-      dispatch(removeAllProducts());
-    }
-  }, [userLogged]);
-
-  useEffect(() => {
-    dispatch(getAllDishes());
-    const localStorageUser = localStorage.getItem("user");
-    const parsedUser = JSON.parse(localStorageUser);
-    if (localStorageUser) {
+	
+	useEffect(() => {
+		dispatch(getAllDishes());
+		const localStorageUser = localStorage.getItem("user");
+		const parsedUser = JSON.parse(localStorageUser);
+		if (localStorageUser) {
 			dispatch(setStoragedUser(parsedUser))
 		}
-  }, []);
+	}, []);
+
+	useEffect(()=>{
+		console.log(cart);
+		dispatch(saveCart({cart, userId: user._id}))
+	},[cart])
+
+  // useEffect(() => {
+  //   const queries = queryString.parse(location.search);
+  //   const status = queries.status;
+  //   const { _id, email, sub, name } = userLogged;
+  //   dispatch(getMyOrders(_id));
+  //   if (userLogged.email && status === "approved") {
+  //     const vacio = [];
+  //     dispatch(compraExitosa({ id: _id, sub, email, cart, name }));
+  //     dispatch(removeAllProducts());
+  //   }
+  // }, [user]);
+
 	
   const location = useLocation();
   return (

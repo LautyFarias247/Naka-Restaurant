@@ -59,10 +59,9 @@ const updateUserCart = async (req, res) => {
 
 	try {
 		const updatedUser = await User.findByIdAndUpdate(_id, {cart}, {new: true})
-		console.log();	
 		return res.status(200).json(updatedUser)
 	} catch (error) {
-		
+		console.log(error.message);
 	}
 }
 

@@ -7,19 +7,23 @@ import {
   addProduct,
   removeProduct,
   removeManyProducts,
+	saveCart,
 } from "../../redux/actions/actions";
 import Swal from "sweetalert2";
 import style from "./HandlerShopping.module.css";
+import { useEffect } from "react";
 
 const HandlerShoppingItems = ({ product }) => {
   const [aux, setAux] = useState(1);
 
   const cart = useSelector((state) => state.cart);
+	const user = useSelector((state) => state.user)
+
   const item = cart.find((item) => item._id === product._id);
   const dispatch = useDispatch();
 
-  const handleAddFirstProduct = () => {
-    dispatch(addFirstProduct(product));
+  const handleAddFirstProduct = async () => {
+    await dispatch(addFirstProduct({product}));
     setAux(aux + 1);
   };
 
