@@ -5,7 +5,7 @@ import Home from "./views/Home/Home";
 import Detail from "./components/Detail/Detail";
 import CreateDishesForm from "./components/CreateDishesForm/CreateDishesForm";
 import Menu from "./views/Menu/Menu";
-import Profile from "./components/LoginComponents/Profile/Profile";
+import Profile from "./views/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./views/LoginPage/LoginPage";
 import { useEffect } from "react";
@@ -43,7 +43,7 @@ function App() {
 		
 		const urlParams = new URLSearchParams(window.location.search);
     const queryParam = urlParams.get('collection_status');
-    console.log(queryParam);
+    
 		switch (queryParam) {
 			case "approved":
 				 	Swal.fire({
@@ -61,7 +61,6 @@ function App() {
 	}, []);
 
 	useEffect(()=>{
-		console.log(cart);
 		dispatch(saveCart({cart, userId: user._id}))
 	},[cart])
 
@@ -79,7 +78,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="account/login" element={<LoginPage />}/>
         <Route path="account/register" element={<RegisterPage />}/>
-        <Route path="account" element={<Profile />} />
+        <Route path="myaccount" element={<Profile />} />
         <Route path="/cart" element={<ShoppingCart />} />
   
         <Route path="/dashboard" element={<Dashboard />} />

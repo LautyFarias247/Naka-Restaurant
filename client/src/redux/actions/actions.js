@@ -1,6 +1,6 @@
 import axios from "axios";
 //Platos
-export const GET_ALLDISHES = "GET_ALLDISHES";
+export const GET_ALL_DISHES = "GET_ALLDISHES";
 export const GET_DISH_BY_ID = "GET_DISH_BY_ID";
 export const GET_DISHES_BY_NAME = "GET_DISHES_BY_NAME";
 export const GET_CATEGORIES = "GET_CATEGORIES";
@@ -164,7 +164,7 @@ export function getAllDishes() {
 		try {
 			const response = await axios(`http://localhost:3001/foods`);
       return dispatch({
-				type: GET_ALLDISHES,
+				type: GET_ALL_DISHES,
         payload: response.data,
       });
     } catch (error) {

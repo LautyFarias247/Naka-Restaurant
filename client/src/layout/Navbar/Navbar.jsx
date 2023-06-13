@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { removeSession } from "../../redux/actions/actions";
 
-const Navbar = ({setModalCarrito}) => {
+const Navbar = () => {
   const user = useSelector((state) => state.user);
 	const dispatch = useDispatch()
 
@@ -32,7 +32,7 @@ const Navbar = ({setModalCarrito}) => {
       {user.username ? (
         <ul className={style.login}>
           <li className={style.welcome}>
-            Bienvenido! <Link className={style.list}>{user.username}</Link>
+            Bienvenido! <Link to="myaccount" className={style.list}>{user.username}</Link>
           </li>
           <Link to="/cart" >
             <li className={style.list}>Carrito</li>

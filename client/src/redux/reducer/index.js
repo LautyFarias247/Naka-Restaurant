@@ -1,5 +1,5 @@
 import {
-  GET_ALLDISHES,
+  GET_ALL_DISHES,
   GET_CATEGORIES,
   SET_ORDERINGS,
   GET_DISHES_BY_NAME,
@@ -23,26 +23,25 @@ import {
 const initialState = {
   allDishes: [],
   displayedDishes: [],
+	loadingDishes: true,
   detail: {},
   categories: [],
   actualCategories: [],
   cart: [],
   orders: [],
-  totalPrice: 0,
   user: {},
   adminData: {},
 };
 
 const reducer = (state = initialState, { type, payload }) => {
-  const allDishes = state.auxAllDishes;
-  const totalPrice = state.totalPrice;
 
   switch (type) {
-    case GET_ALLDISHES:
+    case GET_ALL_DISHES:
       return {
         ...state,
         allDishes: payload,
         auxAllDishes: payload,
+				loadingDishes: false
       };
 
     case GET_MY_ORDERS:
@@ -136,7 +135,7 @@ const reducer = (state = initialState, { type, payload }) => {
 			const allDishes = state.allDishes
 
 			const categoryFilters = state.actualCategories
-			
+			console.log({allDishes});
 			console.log({categoryFilters});
 			
 			const displayedDishes = allDishes.filter((dish) =>
@@ -182,37 +181,15 @@ const reducer = (state = initialState, { type, payload }) => {
           return 0;
         });
       }
-      if (payload === "Ascendent rating") {
-        orderedDishes = state.allDishes.sort((a, b) => {
-          if (a.rating > b.rating) {
-            return 1;
-          }
-          if (b.rating > a.rating) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-      if (payload === "Descendent rating") {
-        orderedDishes = state.allDishes.sort((a, b) => {
-          if (a.rating < b.rating) {
-            return 1;
-          }
-          if (b.rating < a.rating) {
-            return -1;
-          }
-          return 0;
-        });
-      }
       return { ...state, allDishes: orderedDishes };
 
     case REMOVE_ALL_PRODUCTS:
-      return { ...state, cart: [], totalPrice: 0 };
+      return { ...state, cart: []};
 
     case REMOVE_MANY_PRODUCTS:
-      const reduce_price = payload.price * payload.quantity;
+  
       const newCart = state.cart.filter((item) => item._id !== payload._id);
-      return { ...state, cart: newCart, totalPrice: totalPrice - reduce_price };
+      return { ...state, cart: newCart};
 
     case GET_ALL_USERS:
       return { ...state, adminData: { ...state.adminData, users: payload } };
