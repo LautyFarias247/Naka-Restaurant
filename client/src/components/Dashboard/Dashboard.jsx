@@ -7,12 +7,11 @@ import Sidebar from "./Sidebar/Sidebar";
 import GraficoTorta from "./GraficoTorta/GraficoTorta";
 import { Link } from "react-router-dom";
 import TablaPedidosActivos from "./TablaPedidosActivos/TablaPedidosActivos";
-import { all } from "axios";
+
 
 
 const Dashboard = () => {
     const users = useSelector(state => state.adminData.users)
-    const auth0Users = useSelector(state => state.adminData.auth0Users)
     const pedidos = useSelector(state => state.adminData.orders)
     const productos = useSelector(state => state.allDishes)
 		
@@ -57,7 +56,7 @@ const Dashboard = () => {
               <Card>
                 <Card.Body>
                   <Card.Title>Ver usuarios </Card.Title>
-                  <Card.Text>{users?.length + auth0Users?.length}</Card.Text>
+                  <Card.Text>{users?.length}</Card.Text>
                 </Card.Body>
               </Card>
               </Link>

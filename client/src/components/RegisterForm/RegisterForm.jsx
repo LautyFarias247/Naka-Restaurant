@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import style from './RegisterForm.module.css'
-import LoginButton from '../LoginComponents/LoginButton/LoginButton'
+import GoogleLogin from 'react-google-login'
+import {gapi} from 'gapi-script'
 import { useDispatch } from 'react-redux'
 import { registerUser } from '../../redux/actions/actions'
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+
 
 const RegisterForm = () => {
 	const dispatch = useDispatch()
@@ -15,7 +18,22 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
 	const [repeatPassword, setRepeatPassword] = useState("")
 	const [errors, setErrors] = useState(null)
+	const clientID = "930486100118-lfea2s1su033rmu1bbn63k5kndthooot.apps.googleusercontent.com"
+	const onSuccess = (response) => {
+		// dispatch(setGoogleUser())
+	}
+  const onFailure = (response) => {
 
+	}
+	useEffect(()=>{
+		const start = () => {
+			gapi.auth2.init({
+				clientId: clientID,
+			})
+		}
+		gapi.load("client:auth2", start)
+	},[])
+	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if(password !== repeatPassword) {
@@ -84,7 +102,11 @@ const RegisterForm = () => {
 				<button type="submit" className={style.boton}>Crear cuenta</button>
       </form>
         <h3 className={style.h3}>O</h3>
-        <LoginButton />
+        <GoogleLogin clientId={clientID}
+					onSuccess={onSuccess}
+					onFailure={onFailure}
+					cookiePolicy={"single_host_policy"}
+				/>
     </section>
 	)
 }

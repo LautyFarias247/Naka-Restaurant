@@ -1,16 +1,16 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Nav from "./layout/Navbar/Navbar";
 import Home from "./views/Home/Home";
 import Detail from "./components/Detail/Detail";
 import CreateDishesForm from "./components/CreateDishesForm/CreateDishesForm";
 import Menu from "./views/Menu/Menu";
-import User from "./components/User/User";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./components/LoginComponents/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./views/LoginPage/LoginPage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Dashboard from "./components/Dashboard/Dashboard";
 import UserTable from "./components/Dashboard/UserTable/UserTable";
 import FoodTable from "./components/Dashboard/FoodTable/FoodTable";
@@ -18,30 +18,45 @@ import FoodUpdate from "./components/Dashboard/FoodUpdate/FoodUpdate";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllDishes,
-  removeAllProducts,
-  compraExitosa,
-  getMyOrders,
 	setStoragedUser,
 	saveCart,
 } from "./redux/actions/actions";
-import queryString from "query-string";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
 import Footer from "./layout/Footer/Footer";
 import RegisterPage from "./views/RegisterPage/RegisterPage";
+import Swal from "sweetalert2";
 
 function App() {
 
   const cart = useSelector((state) => state.cart);
 	const user = useSelector((state)=> state.user)
-  const [modalCarrito, setModalCarrito] = useState(false)
 	const dispatch = useDispatch();
-	
+	const navigate = useNavigate
 	useEffect(() => {
 		dispatch(getAllDishes());
 		const localStorageUser = localStorage.getItem("user");
 		const parsedUser = JSON.parse(localStorageUser);
 		if (localStorageUser) {
 			dispatch(setStoragedUser(parsedUser))
+		}
+		
+		const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('collection_status');
+    console.log(queryParam);
+		switch (queryParam) {
+			case "approved":
+				return Swal.fire({
+					title: 'Pago exitoso',
+					text: 'Puedes seguir los detalles del pedido desde tu cuenta',
+					icon: 'success',
+					confirmButtonText: 'Ver pedidos',
+					iconColor: "#BF8D39",
+				}).then((result) => {
+					if (result.isConfirmed) {
+						// Redireccionar a la página deseada
+						navigate("/account/orders")
+					}
+				})
 		}
 	}, []);
 
@@ -50,17 +65,6 @@ function App() {
 		dispatch(saveCart({cart, userId: user._id}))
 	},[cart])
 
-  // useEffect(() => {
-  //   const queries = queryString.parse(location.search);
-  //   const status = queries.status;
-  //   const { _id, email, sub, name } = userLogged;
-  //   dispatch(getMyOrders(_id));
-  //   if (userLogged.email && status === "approved") {
-  //     const vacio = [];
-  //     dispatch(compraExitosa({ id: _id, sub, email, cart, name }));
-  //     dispatch(removeAllProducts());
-  //   }
-  // }, [user]);
 
 	
   const location = useLocation();
@@ -83,7 +87,7 @@ function App() {
         <Route path="account/register" element={<RegisterPage />}/>
         <Route path="account" element={<Profile />} />
         <Route path="/cart" element={<ShoppingCart />} />
-        <Route path="/user" element={<User />} />
+  
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/users" element={<UserTable />} />
         <Route path="/dashboard/foods" element={<FoodTable />} />
