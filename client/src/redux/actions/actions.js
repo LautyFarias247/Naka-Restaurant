@@ -5,8 +5,11 @@ export const GET_DISH_BY_ID = "GET_DISH_BY_ID";
 export const GET_DISHES_BY_NAME = "GET_DISHES_BY_NAME";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const SET_PAGINATION = "SET_PAGINATION";
-export const SET_FLTEDDISHES = "SET_FLTEDDISHES";
-export const SET_CATEGORY = "SET_CATEGORY";
+//Filtros
+export const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER"
+export const REMOVE_CATEGORY_FILTER = "REMOVE_CATEGORY_FILTER"
+export const SET_DISPLAYED_DISHES = "SET_DISPLAYED_DISHES"
+
 export const SET_ORDERINGS = "SET_ORDERINGS";
 export const CREATE_DISH = "CREATE_DISH";
 export const CREATE_PAYMENT = "CREATE_PAYMENT";
@@ -22,11 +25,8 @@ export const ADD_FIRST_PRODUCT = "ADD_FIRST_PRODUCT";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_ALL_PRODUCTS = "REMOVE_ALL_PRODUCTS";
-export const UPLOAD_PRODUCTS = "UPLOAD_PRODUCTS";
-
-export const ADD_TOTAL_PRICE = "ADD_TOTAL_PRICE";
-export const REDUCE_TOTAL_PRICE = "REDUCE_TOTAL_PRICE";
 export const REMOVE_MANY_PRODUCTS = "REMOVE_MANY_PRODUCTS";
+
 //DASHBOARD
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
@@ -212,32 +212,39 @@ export const createDish = (payload) => {
 export function getCategories() {
   return async (dispatch) => {
     try {
-      const categories = await axios.get(`http://localhost:3001/categories`);
-      const parsedCategories = categories.data.map((category) => category.name);
-      return dispatch({ type: GET_CATEGORIES, payload: parsedCategories });
+      const response = await axios.get(`http://localhost:3001/categories`);
+      const categories = response.data.map((category) => category);
+      return dispatch({ type: GET_CATEGORIES, payload: categories });
     } catch (error) {
       throw Error(error);
     }
   };
 }
 
-export function setCategory(category) {
-  return async (dispatch) => {
-    return dispatch({ type: SET_CATEGORY, payload: category });
-  };
+export const setCategoryFilter = (name) => {
+	return async (dispatch) => {
+		dispatch({
+			type: SET_CATEGORY_FILTER,
+			payload: {name}
+		})
+	}
+}
+export const removeCategoryFilter = (name) => {
+	return async (dispatch) => {
+		dispatch({
+			type: REMOVE_CATEGORY_FILTER,
+			payload: {name}
+		})
+	}
 }
 
-export function setFltedDishes(category) {
-  return async (dispatch) => {
-    try {
-      return dispatch({
-        type: SET_FLTEDDISHES,
-        payload: category,
-      });
-    } catch (error) {
-      throw Error(error);
-    }
-  };
+export const setDisplayedDishes = () => {
+	return async(dispatch) => {
+		dispatch({
+			type: SET_DISPLAYED_DISHES,
+			payload: null
+		})
+	}
 }
 
 export function setOrderings(order) {
@@ -247,17 +254,6 @@ export function setOrderings(order) {
 }
 
 
-export function addTotalPrice(product) {
-  return async (dispatch) => {
-    return dispatch({ type: ADD_TOTAL_PRICE, payload: product });
-  };
-}
-
-export function reduceTotalPrice(product) {
-  return async (dispatch) => {
-    return dispatch({ type: REDUCE_TOTAL_PRICE, payload: product });
-  };
-}
 
 export function getAllUsers() {
   return async (dispatch) => {

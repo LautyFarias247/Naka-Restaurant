@@ -40,17 +40,18 @@
 }
 
 .botonPagar {
+	font-size: 20px;
 	background-color: rgba(255, 255, 255, 0);
 	border: 1px solid #bf8e3938;
 	color: whitesmoke;
 	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
 	padding: 5px 10px;
 	width: 85%;
-	
 }
 
 .botonPagar:hover {
 	/* border: 1px solid ; */
+	cursor: pointer;
   box-shadow: 0 0 0 1px #BF8D39;
   background-color: #00000000;
   color: #fff;

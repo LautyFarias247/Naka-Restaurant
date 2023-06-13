@@ -5,8 +5,6 @@ import Home from "./views/Home/Home";
 import Detail from "./components/Detail/Detail";
 import CreateDishesForm from "./components/CreateDishesForm/CreateDishesForm";
 import Menu from "./views/Menu/Menu";
-
-import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./components/LoginComponents/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./views/LoginPage/LoginPage";
@@ -20,6 +18,7 @@ import {
   getAllDishes,
 	setStoragedUser,
 	saveCart,
+	getCategories,
 } from "./redux/actions/actions";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
 import Footer from "./layout/Footer/Footer";
@@ -34,6 +33,8 @@ function App() {
 	const navigate = useNavigate()
 	useEffect(() => {
 		dispatch(getAllDishes());
+		dispatch(getCategories());
+
 		const localStorageUser = localStorage.getItem("user");
 		const parsedUser = JSON.parse(localStorageUser);
 		if (localStorageUser) {
@@ -70,12 +71,6 @@ function App() {
   return (
     <div className="App">
 			
-      {location.pathname !== "/dashboard" &&
-        location.pathname !== "/dashboard/users" &&
-        location.pathname !== "/dashboard/foods" &&
-        location.pathname !== "/dashboard/sales" &&
-        location.pathname !== "/dashboard/foods/edit/:id"}
-
       {!location.pathname.includes("dashboard") && <Nav/>}
 
       <Routes>

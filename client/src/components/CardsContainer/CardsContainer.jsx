@@ -1,11 +1,16 @@
-import style from "./Cards.module.css"
+import style from "./CardsContainer.module.css"
 import Card from "../Card/Card"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 
-const Cards = ({ dishes }) => {
+const Cards = () => {
   const cart = useSelector(state => state.cart)
-  const [aux, setAux] = useState(0)
+	const allDishes = useSelector(state => state.allDishes)
+	const displayedDishes = useSelector(state => state.displayedDishes)
+
+	let dishes = displayedDishes.length > 0 ? displayedDishes : allDishes
+  
+	const [aux, setAux] = useState(0)
   let totalPrice = 0
   cart.forEach(item => {
     totalPrice += item.price * item.quantity

@@ -98,7 +98,7 @@ const RegisterForm = () => {
 					minlength="8"
 					required={true}
         />
-				{errors && <p className={style.p}>{errors}</p>}
+				{errors && <p className={style.error}>{errors}</p>}
 				<button type="submit" className={style.boton}>Crear cuenta</button>
       </form>
         <h3 className={style.h3}>O</h3>

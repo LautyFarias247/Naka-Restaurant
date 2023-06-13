@@ -5,12 +5,10 @@ const CategoriesScheme = new mongoose.Schema(
     {
         name: {
             type: String,
+						required: true,
             unique: true
         },
-        description: {
-            type: String,
-        },
-        is_active: {
+        isActive: {
             type: Boolean,
             default: true
         }

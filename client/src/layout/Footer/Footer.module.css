@@ -2,13 +2,15 @@
 	background-color: rgb(0, 0, 0);
 	margin-bottom: 0px;
 	background-image: linear-gradient(to bottom, #000000, #1a1a1a);
-	padding-top: 20px;
+	padding: 20px 0;
+
 }
 
 .hr{
 	margin-bottom: 0px;
 }
 
-.p{
+.texto{
 	color:#b38d6e;
+	margin-top: 5px;
 }
