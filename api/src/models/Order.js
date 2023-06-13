@@ -5,28 +5,24 @@ const OrderScheme = new mongoose.Schema(
     {
         items: {
             type: Array,
-            required: true
+            // required: true
         },
         owner: {
             type: String,
-            required: true
+            // required: true
         },
         amount: {
             type: Number,
-            required: true
+            // required: true
         },
         status: {
             type: String,
             default: "pending"
-        },
-        date: {
-            type: Date,
-            default: Date.now
         }
     }, 
     {
         versionKey: false,
-        timestamps: false
+        timestamps: true
     }
 )
 module.exports = mongoose.model('order', OrderScheme);

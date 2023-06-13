@@ -4,9 +4,9 @@ const morgan = require('morgan');
 const categoriesRouter = require('./routes/categories');
 const foodsRouter = require('./routes/foodsRouter')
 const usersRouter = require('./routes/usersRouter');
-const paymentRouter = require('./routes/payment')
+const paymentRouter = require('./routes/paymentRouter')
 const notificarRouter = require('./routes/notificarRouter')
-const orderRouter = require('./routes/orderRoutes')
+const orderRouter = require('./routes/orderRouter')
 
 const cors = require('cors')
 //

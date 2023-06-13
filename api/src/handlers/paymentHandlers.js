@@ -1,59 +1,83 @@
 const mercadopago = require("mercadopago");
+const Order = require("../models/Order");
 
-const payment = async (req, res) =>{
-    const {cart, email, id} = req.body
-    // Crea un objeto de preferencia
-    console.log(email);
-    console.log(cart);
-    console.log(id);
-    let preference = {
-        items: [],
-        
-        back_urls: {
-            success: "https://el-bodegon-cliente-local.vercel.app/",
-            failure: "https://el-bodegon-cliente-local.vercel.app/",
-            pending: "https://el-bodegon-cliente-local.vercel.app/"
-        },
-        auto_return: "approved",
-      };
+const createPayment = async (req, res) => {
+	const {cart} = req.body
+	let items = []
 
-      cart.forEach(item => {
-          preference.items.push(
-              {
-                  id: item.id,
-                  title: item.name,
-                  currency_id: "ARS",
-                  picture_url: item.image,
-                  description: item.description,
-                  category_id: "art",
-                  quantity: item.quantity,
-                  unit_price: item.price
-              }
-          )
-        });
-      
-      mercadopago.preferences
-      .create(preference)
-      .then(function(response){
-          console.log(response.body.init_point)
-          console.log(response.payer)
-          res.send({response}/* `<a href="${response.body.init_point}">Ir a pagar</a>` */)
-          }).catch(function(error){
-            console.log(error);
-          });
-      }
+	cart.forEach(({name, price, quantity})=>{
+		items.push({
+			title: name,
+			unit_price: price,
+			currency_id: "ARS",
+			quantity
+		})
+	})
 
-/*       mercadopago.preferences
-        .create(preference)
-        .then((response)=>res.status(200).send({response}))
-        .catch((error)=>{console.log(error); res.status(404).send(error.message)});
-    
-    } catch (error) {
-        console.log(error);
-        res.status(404).send(error.message)
-    }
- */
+
+	mercadopago.configure({
+		access_token: "TEST-4897041401780680-061218-286e74729b6a60cdeb988f78b7dbe856-1397776654",
+  });
+	try {
+	
+	const result = await mercadopago.preferences.create({
+		items,
+		back_urls: {
+			success: "http://localhost:3001/payment/success",
+			pending: "http://localhost:3001/payment/pending",
+			failure: "http://localhost:3001/payment/failure"
+		},
+		notification_url: "https://c647-2800-810-557-2bcd-ec67-bb56-1e07-78ee.sa.ngrok.io/payment/webhook"
+	})
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(400).json("todomal");
+  }
+};
+const successfulPayment = async (req, res) => {
+  try {
+    return res.status(200).json("todobien");
+  } catch (error) {
+    return res.status(400).json("todomal");
+  }
+};
+const pendingPayment = async (req, res) => {
+  try {
+    return res.status(200).json("todobien");
+  } catch (error) {
+    return res.status(400).json("todomal");
+  }
+};
+const failedPayment = async (req, res) => {
+  try {
+    return res.status(200).json("todobien");
+  } catch (error) {
+    return res.status(400).json("todomal");
+  }
+};
+const webhook = async (req, res) => {
+	const payment = req.query
+	try {
+		if(payment.type === "payment"){
+			console.log(req.query);
+			const newOrder = new Order({status: "asdadasd"})
+			await newOrder.save()
+			const data = await mercadopago.payment.findById(payment["data.id"])
+			// console.log(data);
+			console.log(data.body.additional_info.items);
+			// console.log(data.mercadopagoResponse);
+			return res.status(200).json(data);
+		}
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
 
 module.exports = {
-    payment,
-}
+  createPayment,
+  successfulPayment,
+	pendingPayment,
+	failedPayment,
+  webhook,
+};
