@@ -5,7 +5,7 @@ const {getAllOrders, getOrdersByUser, orderDelivered} = require('../handlers/ord
 const orderRouter = Router()
 
 orderRouter.get('/', getAllOrders)
-orderRouter.get('/:id', getOrdersByUser)
+orderRouter.get('/:_id', getOrdersByUser)
 orderRouter.put('/:id', orderDelivered)
 
 module.exports = orderRouter

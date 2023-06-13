@@ -50,7 +50,7 @@ app.use('/foods', foodsRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/payment', paymentRouter)
-app.use('/order', orderRouter)
+app.use('/orders', orderRouter)
 
 
 module.exports = app
