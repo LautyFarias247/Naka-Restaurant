@@ -31,7 +31,7 @@ function App() {
   const cart = useSelector((state) => state.cart);
 	const user = useSelector((state)=> state.user)
 	const dispatch = useDispatch();
-	const navigate = useNavigate
+	const navigate = useNavigate()
 	useEffect(() => {
 		dispatch(getAllDishes());
 		const localStorageUser = localStorage.getItem("user");
@@ -45,7 +45,7 @@ function App() {
     console.log(queryParam);
 		switch (queryParam) {
 			case "approved":
-				return Swal.fire({
+				 	Swal.fire({
 					title: 'Pago exitoso',
 					text: 'Puedes seguir los detalles del pedido desde tu cuenta',
 					icon: 'success',
@@ -53,8 +53,7 @@ function App() {
 					iconColor: "#BF8D39",
 				}).then((result) => {
 					if (result.isConfirmed) {
-						// Redireccionar a la página deseada
-						navigate("/account/orders")
+						navigate('/cart');
 					}
 				})
 		}
