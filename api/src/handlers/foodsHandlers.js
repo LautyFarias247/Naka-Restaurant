@@ -58,10 +58,7 @@ const updateFood = async (req, res) => {
     try {
         const {id} = req.params;
         const {stock, price} = req.body;
-        console.log(id);
-        console.log(stock);
-        console.log(price);
-
+      
         const updatedFood = await Food.updateOne({_id: id}, { $set: {price, stock} });
         res.status(200).send(updatedFood);
     } 

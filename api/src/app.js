@@ -5,7 +5,6 @@ const categoriesRouter = require('./routes/categories');
 const foodsRouter = require('./routes/foodsRouter')
 const usersRouter = require('./routes/usersRouter');
 const paymentRouter = require('./routes/paymentRouter')
-const notificarRouter = require('./routes/notificarRouter')
 const orderRouter = require('./routes/orderRouter')
 
 const cors = require('cors')
@@ -46,12 +45,11 @@ app.use(fileUpload({
     tempFileDir: './upload'
 }))
 
-app.use('/', notificarRouter)
+
 app.use('/foods', foodsRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/payment', paymentRouter)
-app.use('/notificar', notificarRouter)
 app.use('/order', orderRouter)
 
 

@@ -1,38 +1,52 @@
 const mercadopago = require("mercadopago");
 const Order = require("../models/Order");
+const User = require("../models/User");
 
 const createPayment = async (req, res) => {
-	const {cart} = req.body
-	let items = []
-
-	cart.forEach(({name, price, quantity})=>{
-		items.push({
-			title: name,
-			unit_price: price,
-			currency_id: "ARS",
-			quantity
-		})
-	})
-
-
-	mercadopago.configure({
-		access_token: "TEST-4897041401780680-061218-286e74729b6a60cdeb988f78b7dbe856-1397776654",
-  });
-	try {
+	const { cart, userId } = req.body;
 	
-	const result = await mercadopago.preferences.create({
-		items,
-		back_urls: {
-			success: "http://localhost:3001/payment/success",
-			pending: "http://localhost:3001/payment/pending",
-			failure: "http://localhost:3001/payment/failure"
-		},
-		notification_url: "https://c647-2800-810-557-2bcd-ec67-bb56-1e07-78ee.sa.ngrok.io/payment/webhook"
-	})
+  let reference = {
+		items: [],
+		amount: 0
+	};
+
+  cart.forEach(({_id, name, price, quantity, description, image }) => {
+    reference.items.push({
+			id: _id,
+      title: name,
+			description: description,
+      unit_price: price,
+      currency_id: "ARS",
+      quantity,
+			picture_url: image
+    });
+		reference.amount += (price * quantity)
+  });
+
+  mercadopago.configure({
+    access_token:
+      "TEST-4897041401780680-061218-286e74729b6a60cdeb988f78b7dbe856-1397776654",
+  });
+  try {
+    const result = await mercadopago.preferences.create({
+      items: reference.items,
+			metadata: {
+				userId,
+				amount: reference.amount
+			},
+      back_urls: {
+        success: "http://localhost:3000",
+        pending: "http://localhost:3000",
+        failure: "http://localhost:3000",
+      },
+      notification_url:
+        "https://9c89-2800-810-557-2bcd-45b5-586f-405c-1a9a.sa.ngrok.io/payment/webhook",
+    });
 
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(400).json("todomal");
+		console.log(error);
+    return res.status(400).json(error);
   }
 };
 const successfulPayment = async (req, res) => {
@@ -56,20 +70,28 @@ const failedPayment = async (req, res) => {
     return res.status(400).json("todomal");
   }
 };
+
 const webhook = async (req, res) => {
-	const payment = req.query
-	try {
-		if(payment.type === "payment"){
-			console.log(req.query);
-			const newOrder = new Order({status: "asdadasd"})
-			await newOrder.save()
-			const data = await mercadopago.payment.findById(payment["data.id"])
-			// console.log(data);
-			console.log(data.body.additional_info.items);
-			// console.log(data.mercadopagoResponse);
-			return res.status(200).json(data);
+  const payment = req.query;
+  try {
+    if (payment.type === "payment") {
+      const { body } = await mercadopago.payment.findById(payment["data.id"]);
+			const {status, additional_info, metadata} = body
+			
+			if(status === "approved"){
+			
+				const newOrder = new Order({ status: "pending", items: additional_info.items, owner: metadata.user_id, amount: metadata.amount });
+				
+				await newOrder.save();
+				
+				await User.updateOne({ _id: metadata.user_id }, { $push: { orders: newOrder._id } })
+				await User.updateOne({ _id: metadata.user_id }, { $set: { cart: [] } })
+				
+				return res.status(200).json(body);
+			}
 		}
   } catch (error) {
+		console.log(error.message);
     return res.status(400).json(error);
   }
 };
@@ -77,7 +99,7 @@ const webhook = async (req, res) => {
 module.exports = {
   createPayment,
   successfulPayment,
-	pendingPayment,
-	failedPayment,
+  pendingPayment,
+  failedPayment,
   webhook,
 };

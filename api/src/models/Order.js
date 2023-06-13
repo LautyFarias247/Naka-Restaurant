@@ -5,15 +5,16 @@ const OrderScheme = new mongoose.Schema(
     {
         items: {
             type: Array,
-            // required: true
+            required: true
         },
         owner: {
-            type: String,
-            // required: true
+            type: mongoose.Schema.Types.ObjectId,
+						ref: 'user',
+            required: true
         },
         amount: {
             type: Number,
-            // required: true
+            required: true
         },
         status: {
             type: String,

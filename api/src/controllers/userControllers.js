@@ -7,17 +7,17 @@ const {compare, hash} = bcrypt
 
 
 const saveUser = async (username, email, password) => {
-    console.log(username, email, password)
+    
 		try {
 			const hashedPass = await hash(password, 5)
 	
 			const newUser = new User({username, email, password: hashedPass})
-			console.log(newUser);
+		
 			await newUser.save()
 			return newUser
 			
 		} catch (error) {
-			console.log(error.message);
+			
 			throw Error(error.message)
 		}
 }

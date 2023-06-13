@@ -64,9 +64,6 @@ const registerUser = async (req, res) => {
 const updateUserCart = async (req, res) => {
 	const {_id} = req.params	
 	const {cart} = req.body
-	console.log(_id);
-	console.log(cart);
-
 	try {
 		const updatedUser = await User.findByIdAndUpdate(_id, {cart}, {new: true})
 		return res.status(200).json(updatedUser)

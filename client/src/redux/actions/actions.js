@@ -43,62 +43,62 @@ export const GET_MY_ORDERS = "GET_MY_ORDERS";
 export const loginUser = (credentials) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `http://localhost:3001/users/login`,
+			const response = await axios.post(
+				`http://localhost:3001/users/login`,
         credentials
-      );
-      dispatch({
-        type: LOGIN_USER,
+				);
+				dispatch({
+					type: LOGIN_USER,
         payload: { user: response.data, cart: response.data.cart },
       });
     } catch (error) {
-      throw new Error(error.response.data);
+			throw new Error(error.response.data);
     }
   };
 };
 
 export const registerUser = (userData) => {
-  return async function (dispatch) {
-    try {
-      const res = await axios.post(
-        "http://localhost:3001/users/register",
+	return async function (dispatch) {
+		try {
+			const res = await axios.post(
+				"http://localhost:3001/users/register",
         userData
       );
       return res;
     } catch (error) {
-      throw new Error(error.response.data);
+			throw new Error(error.response.data);
     }
   };
 };
 
 export const removeSession = () => {
-  return async function (dispatch) {
-    dispatch({
-      type: REMOVE_SESSION,
+	return async function (dispatch) {
+		dispatch({
+			type: REMOVE_SESSION,
       payload: { user: {}, cart: [] },
     });
   };
 };
 
 export const compraExitosa = (data) => {
-  return async function (dispatch) {
-    try {
-      const res = await axios.post("http://localhost:3001/notificar", data);
+	return async function (dispatch) {
+		try {
+			const res = await axios.post("http://localhost:3001/notificar", data);
     } catch (error) {}
   };
 };
 
 export const setStoragedUser = (user) => {
-  return async function (dispatch) {
+	return async function (dispatch) {
 		try {
 			const response = await axios.get(`http://localhost:3001/users/${user._id}`)
 			console.log(response);
-
+			
 			dispatch({
 				type: SET_STORAGED_USER,
 				payload: { user: response.data, cart: response.data.cart },
 			});
-
+			
 		} catch (error) {
 			console.log(error);	
 		}
@@ -114,11 +114,11 @@ export const saveCart = ({userId, cart}) => {
 
 export const addFirstProduct = ({product}) => {
 	return async function (dispatch) {
-			dispatch({
-				type: ADD_FIRST_PRODUCT,
-				payload: {product}
-			})
-		} 	
+		dispatch({
+			type: ADD_FIRST_PRODUCT,
+			payload: {product}
+		})
+	} 	
 }
 
 export const addProduct = (product) => {
@@ -150,16 +150,25 @@ export function removeAllProducts(product) {
 		return dispatch({ type: REMOVE_ALL_PRODUCTS, payload: product });
 	};
 }
+
+export const createPayment = ({cart, userId}) => {
+	return async ()=>{
+		const response = await axios.post("http://localhost:3001/payment/create", {cart, userId})
+		window.location.href = response.data.body.init_point;
+	}
+	
+};
+
 export function getAllDishes() {
-  return async (dispatch) => {
-    try {
-      const response = await axios(`http://localhost:3001/foods`);
+	return async (dispatch) => {
+		try {
+			const response = await axios(`http://localhost:3001/foods`);
       return dispatch({
-        type: GET_ALLDISHES,
+				type: GET_ALLDISHES,
         payload: response.data,
       });
     } catch (error) {
-      throw Error(error);
+			throw Error(error);
     }
   };
 }
@@ -199,20 +208,6 @@ export const createDish = (payload) => {
   } catch (error) {}
 };
 
-export const createPayment = (payload) => {
-  try {
-    return async function () {
-      await axios
-        .post("http://localhost:3001/payment", payload)
-        // await axios.post('http://localhost:3001/payment', payload)
-        .then(
-          (res) => (window.location.href = res.data.response.body.init_point)
-        );
-    };
-  } catch (error) {
-    console.log(error.message);
-  }
-};
 
 export function getCategories() {
   return async (dispatch) => {

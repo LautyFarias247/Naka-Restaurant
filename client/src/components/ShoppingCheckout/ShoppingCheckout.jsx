@@ -16,7 +16,7 @@ const ShoppingCheckout = () => {
     totalPrice += item.price * item.quantity;
   });
   const dispatch = useDispatch();
-  const userLogged = useSelector((state) => state.user);
+  
 	const handlePayment = () => {
 		if(totalPrice < 5000){
 			return Swal.fire({
@@ -36,6 +36,7 @@ const ShoppingCheckout = () => {
 				iconColor: "#BF8D39",
 			})
 		}
+		dispatch(createPayment({cart, userId: user._id}))
 	}
 
   return (

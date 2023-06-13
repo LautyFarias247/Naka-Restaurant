@@ -62,6 +62,7 @@ export const ShoppingCart = () => {
 			<div>
 				{cart.map(product => {
 					return <ShoppingItem
+					key={product._id}
 					product={product}
 					image={product.image}
 					name={product.name}
