@@ -7,9 +7,8 @@ const getUserAddresses = async (req, res) => {
 	
 	try {
     const addresses = await User.findById(_id)
-      .populate("addresses") // Nombre del campo que contiene las referencias a las órdenes
-      .exec();
-
+      .populate("addresses")
+			
     res.status(200).json(addresses.addresses);
   } catch (error) {
     console.log(error);
