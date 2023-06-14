@@ -14,13 +14,15 @@ const getUserAddresses = async (req, res) => {
 };
 
 const createAddress = async (req, res) => {
-  const { _id } = req.params;
-  console.log(_id);
+  const { userId } = req.params;
   const { street, number, apartment, zipCode, neighborhood, locality, state } =
     req.body;
   try {
+		const user = await User.findById(userId)
+		console.log(user);
+		if(user.addresses.length > 2) return res.status(403).json(user.addresses)
     const newAddress = new Address({
-      owner: _id,
+      owner: userId,
       street,
       number,
       apartment,
@@ -31,7 +33,7 @@ const createAddress = async (req, res) => {
     });
     await newAddress.save();
 
-    await User.updateOne({ _id }, { $push: { addresses: newAddress._id } });
+    await User.updateOne({ _id: userId }, { $push: { addresses: newAddress._id } });
 
     return res.status(200).json(newAddress);
   } catch (error) {

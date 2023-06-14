@@ -1,5 +1,5 @@
 .container {
-	height: 100vh;
+	min-height: 100vh;
 	color: whitesmoke;
 	background-color: black;
 	padding-top: 40px;

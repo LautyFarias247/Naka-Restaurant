@@ -4,7 +4,7 @@ const { getUserAddresses, createAddress, updateAddress, deleteAddress } = requir
 
 const addressesRouter = Router();
 addressesRouter.get("/:_id", getUserAddresses)
-addressesRouter.post("/:_id", createAddress)
+addressesRouter.post("/:userId", createAddress)
 addressesRouter.put("/:_id", updateAddress)
 addressesRouter.delete("/:_id/:userId", deleteAddress)
 

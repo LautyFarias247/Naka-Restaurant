@@ -220,15 +220,23 @@ export const createAddress = (userId, addressData) => {
 				type: CREATE_ADDRESS,
 				payload: {address: data}
 			})
+			console.log(status);
 			return status
 		} catch (error) {
+			console.log(error);
 			return error.response.status
 		}
 	}
 }
 export const deleteAddress = (_id, userId) => {
 	return async () => {
-		await axios.delete(`http://localhost:3001/addresses/${_id}/${userId}`)
+		try {
+			const {status} = await axios.delete(`http://localhost:3001/addresses/${_id}/${userId}`)
+			return status
+		} catch (error) {
+			console.log(error);
+			return 400
+		}
 	}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////

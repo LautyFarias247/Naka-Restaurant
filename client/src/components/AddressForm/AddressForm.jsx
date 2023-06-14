@@ -40,6 +40,16 @@ const AddressForm = ({ displayForm, setDisplayForm }) => {
         confirmButtonText: "Ver pedidos",
         iconColor: "#BF8D39",
       });
+    };
+		if (response === 403) {
+			setDisplayForm(!displayForm)
+      return Swal.fire({
+        icon: "info",
+        title: "Máximo de 3 direcciones alcanzado",
+        text: "Borra otra dirección para agregar una nueva",
+				confirmButtonText: "Ok",
+        iconColor: "#BF8D39",
+      });
     }
     return Swal.fire({
       title: "Revisa los campos",
