@@ -2,8 +2,6 @@ import React from "react";
 import style from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { FaShoppingCart } from "react-icons/fa";
 import { removeSession } from "../../redux/actions/actions";
 
 const Navbar = () => {

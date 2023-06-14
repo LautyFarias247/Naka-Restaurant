@@ -11,10 +11,9 @@ import {
   REMOVE_CATEGORY_FILTER,
   SET_DISPLAYED_DISHES,
   //carrito
-	ADD_PRODUCT,
+  ADD_PRODUCT,
   REMOVE_PRODUCT,
   REMOVE_MANY_PRODUCTS,
-
   SET_ORDERINGS,
   GET_ALL_USERS,
   GET_ALL_ORDERS,
@@ -88,6 +87,15 @@ const reducer = (state = initialState, { type, payload }) => {
     case SET_DISPLAYED_DISHES:
       const allDishes = state.allDishes;
 
+      const categoryFilters = state.actualCategories;
+
+
+      const displayedDishes = allDishes.filter((dish) =>
+        categoryFilters.includes(dish.category)
+      );
+
+      console.log({ displayedDishes });
+      return { ...state, displayedDishes: displayedDishes };
     //carrito
     case ADD_FIRST_PRODUCT:
       const firstItem = payload.product;
