@@ -25,6 +25,7 @@ import Footer from "./layout/Footer/Footer";
 import RegisterPage from "./views/RegisterPage/RegisterPage";
 import Swal from "sweetalert2";
 import Checkout from "./views/Checkout/Checkout";
+import MyOrders from "./views/MyOrders/MyOrders";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -78,7 +79,10 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="account/login" element={<LoginPage />} />
         <Route path="account/register" element={<RegisterPage />} />
+				{/* User dashboard */}
         <Route path="myaccount" element={<Profile />} />
+				<Route path="myaccount/orders" element={<MyOrders/>}/>
+
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/dashboard" element={<Dashboard />} />

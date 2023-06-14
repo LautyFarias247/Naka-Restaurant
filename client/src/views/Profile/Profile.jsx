@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Card, Pagination } from "react-bootstrap";
 import AddressForm from "../../components/AddressForm/AddressForm";
 import AddressContainer from "../../components/AddressContainer/AddressContainer";
+import UserSidebar from "../../layout/UserSidebar/UserSidebar";
 const Profile = () => {
 	
   const [displayForm, setDisplayForm] = useState(false);
@@ -14,29 +15,10 @@ const Profile = () => {
   return (
     <main className={style.container}>
       <div className={style.headline}>
-        <h2 className={style.title}>Panel de usuario</h2>
+        <h2 className={style.title}>Panel de usuario - Mi perfil</h2>
       </div>
       <div className={style.DataContainer}>
-        <div className={style.sidebar}>
-          <ul className={style.list}>
-            <Link>
-              <li className={style.listItem}>Mi perfil</li>
-            </Link>
-            <Link>
-              <li className={style.listItem}>Pedidos</li>
-            </Link>
-            <Link>
-              <li className={style.listItem}>Actualizar información</li>
-            </Link>
-            <Link>
-              <li className={style.listItem}>Actualizar contraseña</li>
-            </Link>
-            <Link>
-              <li className={style.listItem}>Cerrar sesión</li>
-            </Link>
-          </ul>
-        </div>
-
+        <UserSidebar/>
         {!displayForm ? (
           <AddressContainer
             displayForm={displayForm}
