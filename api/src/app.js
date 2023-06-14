@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const categoriesRouter = require('./routes/categories');
-const foodsRouter = require('./routes/foodsRouter')
+const dishesRouter = require('./routes/dishesRouter')
 const usersRouter = require('./routes/usersRouter');
 const paymentRouter = require('./routes/paymentRouter')
 const orderRouter = require('./routes/orderRouter')
@@ -11,14 +11,10 @@ const cors = require('cors')
 //
 require('dotenv').config();
 // SDK de Mercado Pago
-const mercadopago = require("mercadopago");
+
 // Agrega credenciales
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-mercadopago.configure({
-  access_token: process.env.MERCADOPAGO_KEY
-});
-
 
 const app = express();
 app.use(cors({
@@ -46,7 +42,7 @@ app.use(fileUpload({
 }))
 
 
-app.use('/foods', foodsRouter);
+app.use('/dishes', dishesRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/payment', paymentRouter)

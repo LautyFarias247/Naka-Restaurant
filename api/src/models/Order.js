@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const OrderScheme = new mongoose.Schema(
+const OrderSchema = new mongoose.Schema(
     {
         items: {
             type: Array,
@@ -26,4 +26,4 @@ const OrderScheme = new mongoose.Schema(
         timestamps: true
     }
 )
-module.exports = mongoose.model('order', OrderScheme);
+module.exports = mongoose.model('order', OrderSchema);

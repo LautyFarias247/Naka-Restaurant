@@ -1,4 +1,4 @@
-const Categories = require('../models/Categories')
+const Categories = require('../models/Category')
 
 const allCategories = async () => {
     const allCategoriesBDD = await Categories.find({})

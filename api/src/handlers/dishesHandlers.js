@@ -1,15 +1,13 @@
-const Food = require('../models/Food')
+const Dish = require('../models/Dish')
 const {getFoodByName} = require('../controllers/foodsControllers')
 const { uploadImage, deleteImage } = require('../libs/cloudinary');
 const fs = require('fs-extra')
 
 
-const getFoods = async (req, res) => {
+const getDishes = async (req, res) => {
     try {
         const {name} = req.query;
-        const results = name
-        ? await getFoodByName(name)
-        : await Food.find();
+        const results = await Dish.find();
         res.status(200).send(results);
     } 
     catch (error) {
@@ -17,18 +15,18 @@ const getFoods = async (req, res) => {
     }
 }
 
-const getFoodById = async (req, res) => {
+const getDishById = async (req, res) => {
     const {id} = req.params;
     try {
-        const foodById = await Food.findById(id);
-        res.status(200).send(foodById);
+        const dishById = await Dish.findById(id);
+        res.status(200).send(dishById);
     } 
     catch (error) {
         res.status(400).send(error.message)
     }
 }
 
-const createFood = async (req, res) => {
+const createDish = async (req, res) => {
     try {
         const {name, price, description, category} = req.body;
         let image;
@@ -44,9 +42,9 @@ const createFood = async (req, res) => {
         }
 
 
-        const newFood = new Food({name, price, description, category, image });
-        await newFood.save();
-        res.status(201).send(newFood);
+        const newDish = new Dish({name, price, description, category, image });
+        await newDish.save();
+        res.status(201).send(newDish);
     } 
     catch (error) {
         console.log(error);
@@ -54,13 +52,13 @@ const createFood = async (req, res) => {
     }
 }
 
-const updateFood = async (req, res) => {
+const updateDish = async (req, res) => {
     try {
         const {id} = req.params;
         const {stock, price} = req.body;
       
-        const updatedFood = await Food.updateOne({_id: id}, { $set: {price, stock} });
-        res.status(200).send(updatedFood);
+        const updatedDish = await Dish.updateOne({_id: id}, { $set: {price, stock} });
+        res.status(200).send(updatedDish);
     } 
     catch (error) {
         console.log(error);
@@ -68,11 +66,11 @@ const updateFood = async (req, res) => {
     }
 }
 
-const deleteFood = async (req, res) => {
+const deleteDish = async (req, res) => {
     const { id } = req.params
     try {
-        const foodRemoved = await Food.findByIdAndDelete(id);
-        await deleteImage(foodRemoved.image.public_id)
+        const dishRemoved = await Dish.findByIdAndDelete(id);
+        await deleteImage(dishRemoved.image.public_id)
         res.status(200).send("se borro correctamente")
     } 
     catch (error) {
@@ -81,10 +79,10 @@ const deleteFood = async (req, res) => {
 }
 
 module.exports = {
-    getFoods,
-    getFoodById,
-    createFood,
-    updateFood,
-    deleteFood,
+    getDishes,
+    getDishById,
+    createDish,
+    updateDish,
+    deleteDish,
 		
 }

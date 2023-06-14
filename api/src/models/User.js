@@ -1,7 +1,7 @@
 const { ObjectId } = require("bson");
 const mongoose = require("mongoose");
 
-const UserScheme = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     id: {
       type: Number,
@@ -44,4 +44,4 @@ const UserScheme = new mongoose.Schema(
 );
 
 //model
-module.exports = mongoose.model("user", UserScheme);
+module.exports = mongoose.model("user", UserSchema);
