@@ -2,8 +2,13 @@ import React from 'react'
 import style from './AddressCard.module.css'
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAddress } from '../../redux/actions/actions';
 
-const AddressCard = ({street, number, apartment, zipCode, neighborhood, locality, state}) => {
+const AddressCard = ({_id, street, number, apartment, zipCode, neighborhood, locality, state}) => {
+
+	const dispatch = useDispatch()
+	const user = useSelector((state) => state.user)
 	const handleDelete = () => {
 		Swal.fire({
 			title: `Seguro que deseas eliminar la dirección "${street} ${number}" ?`,
@@ -22,6 +27,7 @@ const AddressCard = ({street, number, apartment, zipCode, neighborhood, locality
 					iconColor: "#BF8D39"
 				}).then((result) => {
 					if(!result.isDenied) {
+						dispatch(deleteAddress(_id, user._id))
 						window.location.reload()
 					}
 				})

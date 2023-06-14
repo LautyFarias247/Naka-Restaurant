@@ -32,6 +32,7 @@ const AddressContainer = ({ displayForm, setDisplayForm }) => {
           return (
             <AddressCard
               key={a._id}
+							_id={a._id}
               street={a.street}
               number={a.number}
               apartment={a.apartment}

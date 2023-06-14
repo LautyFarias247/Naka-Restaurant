@@ -19,9 +19,10 @@ export const ADD_FIRST_PRODUCT = "ADD_FIRST_PRODUCT";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_MANY_PRODUCTS = "REMOVE_MANY_PRODUCTS";
-//Crear... .204
+//CRUD Usuario... .204
 export const CREATE_PAYMENT = "CREATE_PAYMENT"
 export const CREATE_ADDRESS = "CREATE_ADDRESS"
+export const DELETE_ADDRESS = "DELETE_ADDRESS"
 ;
 export const SET_ORDERINGS = "SET_ORDERINGS";
 export const CREATE_DISH = "CREATE_DISH";
@@ -201,7 +202,7 @@ export const saveCart = ({ userId, cart }) => {
     await axios.put(`http://localhost:3001/users/cart/${userId}`, { cart });
   };
 };
-//Crear...
+//CRUD Usuario
 export const createPayment = ({ cart, userId }) => {
   return async () => {
     const response = await axios.post("http://localhost:3001/payment/create", {
@@ -225,9 +226,14 @@ export const createAddress = (userId, addressData) => {
 		}
 	}
 }
+export const deleteAddress = (_id, userId) => {
+	return async () => {
+		await axios.delete(`http://localhost:3001/addresses/${_id}/${userId}`)
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateDish = ({ id, price, stock }) => {
   return async function (dispatch) {
-    // await axios.put(`http://localhost:3001/dishes/${id}`, {price, stock})
     await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
   };
 };
