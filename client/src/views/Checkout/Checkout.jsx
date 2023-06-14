@@ -23,6 +23,7 @@ const Checkout = () => {
                 <AddressCard
                   key={a._id}
                   _id={a._id}
+									address={a}
                   street={a.street}
                   number={a.number}
                   apartment={a.apartment}

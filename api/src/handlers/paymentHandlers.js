@@ -3,7 +3,7 @@ const Order = require("../models/Order");
 const User = require("../models/User");
 
 const createPayment = async (req, res) => {
-	const { cart, userId } = req.body;
+	const { cart, userId, address } = req.body;
 	
   let reference = {
 		items: [],
@@ -32,7 +32,8 @@ const createPayment = async (req, res) => {
       items: reference.items,
 			metadata: {
 				userId,
-				amount: reference.amount
+				amount: reference.amount,
+				address
 			},
       back_urls: {
         success: "http://localhost:3000",
@@ -40,7 +41,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3000",
       },
       notification_url:
-        "https://9c89-2800-810-557-2bcd-45b5-586f-405c-1a9a.sa.ngrok.io/payment/webhook",
+        "https://7b92-2800-810-557-2bcd-4811-2f10-bfa0-cd1f.sa.ngrok.io/payment/webhook",
     });
 
     return res.status(200).json(result);
@@ -79,8 +80,8 @@ const webhook = async (req, res) => {
 			const {status, additional_info, metadata} = body
 			
 			if(status === "approved"){
-			
-				const newOrder = new Order({ status: "pending", items: additional_info.items, owner: metadata.user_id, amount: metadata.amount });
+				console.log(metadata);
+				const newOrder = new Order({ status: "pending", items: additional_info.items, owner: metadata.user_id, amount: metadata.amount, address: metadata.address });
 				
 				await newOrder.save();
 				

@@ -22,7 +22,7 @@ const Menu = () => {
       </h2>
       <div className={style.buttonContainer}>
         {categories.map(({name, _id}) => {
-          return <CategoryButton name={name} _id={_id}/>;
+          return <CategoryButton key={_id} name={name} _id={_id}/>;
         })}
       </div>
       <Cards/>

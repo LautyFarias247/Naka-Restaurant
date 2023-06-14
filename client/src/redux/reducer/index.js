@@ -11,14 +11,14 @@ import {
   REMOVE_CATEGORY_FILTER,
   SET_DISPLAYED_DISHES,
   //carrito
+  ADD_FIRST_PRODUCT,
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   REMOVE_MANY_PRODUCTS,
-  SET_ORDERINGS,
+
   GET_ALL_USERS,
   GET_ALL_ORDERS,
   SET_STORAGED_USER,
-  ADD_FIRST_PRODUCT,
   GET_USER_ADDRESSES,
 	CREATE_ADDRESS,
 } from "../actions/actions";
@@ -121,7 +121,7 @@ const reducer = (state = initialState, { type, payload }) => {
         return { ...state, cart: newCart };
       }
     case REMOVE_MANY_PRODUCTS:
-      const newCart = state.cart.filter((item) => item._id !== payload._id);
+      const newCart = state.cart.filter((item) => item._id !== payload.product._id);
       return { ...state, cart: newCart };
 		//Crear
 		case CREATE_ADDRESS:

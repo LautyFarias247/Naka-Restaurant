@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFirstProduct,
-  addTotalPrice,
-  reduceTotalPrice,
   addProduct,
   removeProduct,
   removeManyProducts,
@@ -11,7 +9,6 @@ import {
 } from "../../redux/actions/actions";
 import Swal from "sweetalert2";
 import style from "./HandlerShopping.module.css";
-import { useEffect } from "react";
 
 const HandlerShoppingItems = ({ product, refresh, setRefresh }) => {
   const [aux, setAux] = useState(1);
