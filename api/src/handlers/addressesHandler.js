@@ -8,7 +8,7 @@ const getUserAddresses = async (req, res) => {
 	try {
     const addresses = await User.findById(_id)
       .populate("addresses")
-			
+
     res.status(200).json(addresses.addresses);
   } catch (error) {
     console.log(error);
@@ -28,7 +28,7 @@ const createAddress = async (req, res) => {
 		return res.status(200).json(newAddress);
 	} catch (error) {
 		console.log(error);
-		return res.status(200).json(error)
+		return res.status(400).json(error)
 	}
 }
 
