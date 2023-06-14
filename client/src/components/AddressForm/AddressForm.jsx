@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "./AddressForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createAddress } from "../../redux/actions/actions";
+import Swal from "sweetalert2";
 
 const AddressForm = ({ displayForm, setDisplayForm }) => {
   const dispatch = useDispatch();
@@ -18,9 +19,9 @@ const AddressForm = ({ displayForm, setDisplayForm }) => {
     setDisplayForm(!displayForm);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(
+    const response = await dispatch(
       createAddress(user._id, {
         street,
         number,
@@ -31,6 +32,21 @@ const AddressForm = ({ displayForm, setDisplayForm }) => {
         state,
       })
     );
+    if (response === 200) {
+			setDisplayForm(!displayForm)
+      return Swal.fire({
+        title: "Dirección agregada",
+        icon: "success",
+        confirmButtonText: "Ver pedidos",
+        iconColor: "#BF8D39",
+      });
+    }
+    return Swal.fire({
+      title: "Revisa los campos",
+      icon: "info",
+      confirmButtonText: "Ver pedidos",
+      iconColor: "#BF8D39",
+    });
   };
 
   return (

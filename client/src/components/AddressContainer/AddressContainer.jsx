@@ -28,7 +28,7 @@ const AddressContainer = ({ displayForm, setDisplayForm }) => {
         </div>
       </div>
       <div className={style.addressContainer}>
-        {addresses.map((a) => {
+        {addresses?.map((a) => {
           return (
             <AddressCard
               key={a._id}

@@ -20,6 +20,7 @@ import {
   SET_STORAGED_USER,
   ADD_FIRST_PRODUCT,
   GET_USER_ADDRESSES,
+	CREATE_ADDRESS,
 } from "../actions/actions";
 
 const initialState = {
@@ -76,13 +77,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         actualCategories: [...state.actualCategories, payload.name],
       };
-
     case REMOVE_CATEGORY_FILTER:
       const newCategories = state.actualCategories.filter(
         (category) => category !== payload.name
       );
       return { ...state, actualCategories: newCategories };
-
     case SET_DISPLAYED_DISHES:
       const allDishes = state.allDishes;
 
@@ -99,14 +98,12 @@ const reducer = (state = initialState, { type, payload }) => {
       const firstItem = payload.product;
       firstItem.quantity = 1;
       return { ...state, cart: [...state.cart, firstItem] };
-
     case ADD_PRODUCT:
       const item = payload.product;
       const index = state.cart.findIndex((product) => product._id === item._id);
       const cart = state.cart;
       cart[index].quantity += 1;
       return { ...state, cart };
-
     case REMOVE_PRODUCT:
       const removedItem = payload.product;
       const removedIndex = state.cart.findIndex(
@@ -123,48 +120,12 @@ const reducer = (state = initialState, { type, payload }) => {
         );
         return { ...state, cart: newCart };
       }
-
-    case SET_ORDERINGS:
-      let orderedDishes;
-      if (payload === "any") {
-        orderedDishes = state.allDishes.sort((a, b) => {
-          if (a._id > b._id) {
-            return 1;
-          }
-          if (b._id > a._id) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-      if (payload === "Ascendent price") {
-        orderedDishes = state.allDishes.sort((a, b) => {
-          if (a.price > b.price) {
-            return 1;
-          }
-          if (b.price > a.price) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-      if (payload === "Descendent price") {
-        orderedDishes = state.allDishes.sort((a, b) => {
-          if (a.price < b.price) {
-            return 1;
-          }
-          if (b.price < a.price) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-      return { ...state, allDishes: orderedDishes };
-
     case REMOVE_MANY_PRODUCTS:
       const newCart = state.cart.filter((item) => item._id !== payload._id);
       return { ...state, cart: newCart };
-
+		//Crear
+		case CREATE_ADDRESS:
+			return{...state, addresses: [...state.addresses, payload.address]}
     case GET_ALL_USERS:
       return { ...state, adminData: { ...state.adminData, users: payload } };
 

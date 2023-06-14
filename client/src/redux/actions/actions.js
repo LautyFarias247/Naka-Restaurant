@@ -212,12 +212,16 @@ export const createPayment = ({ cart, userId }) => {
   };
 };
 export const createAddress = (userId, addressData) => {
-	return async () => {
+	return async (dispatch) => {
 		try {
-			const response = await axios.post(`http://localhost:3001/addresses/${userId}`, addressData)
-			console.log(response);
+			const {data, status} = await axios.post(`http://localhost:3001/addresses/${userId}`, addressData)
+			dispatch({
+				type: CREATE_ADDRESS,
+				payload: {address: data}
+			})
+			return status
 		} catch (error) {
-			console.log(error);
+			return error.response.status
 		}
 	}
 }
