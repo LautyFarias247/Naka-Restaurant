@@ -9,6 +9,7 @@ export const SET_STORAGED_USER = "SET_STORAGED_USER";
 export const GET_ALL_DISHES = "GET_ALL_DISHES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_USER_ORDERS = "GET_USER_ORDERS";
+export const GET_USER_ADDRESSES = "GET_USER_ADDRESSES"
 //Filtros 130
 export const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
 export const REMOVE_CATEGORY_FILTER = "REMOVE_CATEGORY_FILTER";
@@ -18,10 +19,12 @@ export const ADD_FIRST_PRODUCT = "ADD_FIRST_PRODUCT";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_MANY_PRODUCTS = "REMOVE_MANY_PRODUCTS";
-
+//Crear... .204
+export const CREATE_PAYMENT = "CREATE_PAYMENT"
+export const CREATE_ADDRESS = "CREATE_ADDRESS"
+;
 export const SET_ORDERINGS = "SET_ORDERINGS";
 export const CREATE_DISH = "CREATE_DISH";
-export const CREATE_PAYMENT = "CREATE_PAYMENT";
 //DASHBOARD
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
@@ -123,6 +126,21 @@ export const getUserOrders = (userId) => {
     }
   };
 };
+export const getUserAddresses = (userId) => {
+	return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/addresses/${userId}`
+      );
+      return dispatch({
+        type: GET_USER_ADDRESSES,
+        payload: { addresses: response.data },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 //filtros
 export const setCategoryFilter = (name) => {
   return async (dispatch) => {
@@ -183,6 +201,7 @@ export const saveCart = ({ userId, cart }) => {
     await axios.put(`http://localhost:3001/users/cart/${userId}`, { cart });
   };
 };
+//Crear...
 export const createPayment = ({ cart, userId }) => {
   return async () => {
     const response = await axios.post("http://localhost:3001/payment/create", {
@@ -192,7 +211,16 @@ export const createPayment = ({ cart, userId }) => {
     window.location.href = response.data.body.init_point;
   };
 };
-
+export const createAddress = (userId, addressData) => {
+	return async () => {
+		try {
+			const response = await axios.post(`http://localhost:3001/addresses/${userId}`, addressData)
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
 export const updateDish = ({ id, price, stock }) => {
   return async function (dispatch) {
     // await axios.put(`http://localhost:3001/dishes/${id}`, {price, stock})

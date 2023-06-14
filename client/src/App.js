@@ -18,6 +18,7 @@ import {
 	getUserOrders,
 	setStoragedUser,
 	saveCart,
+	getUserAddresses,
 } from "./redux/actions/actions";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
 import Footer from "./layout/Footer/Footer";
@@ -60,6 +61,7 @@ function App() {
 
 	useEffect(()=>{
 		dispatch(getUserOrders(user._id))
+		dispatch(getUserAddresses(user._id))
 	},[user])
 
 	useEffect(()=>{

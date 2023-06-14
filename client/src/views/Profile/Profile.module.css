@@ -5,6 +5,7 @@
 	padding-top: 40px;
 }
 
+
 .headline {
 	display: flex;
 	background-color: rgb(0, 0, 0);
@@ -34,43 +35,10 @@
 
 .sidebar {
 	border: 1px solid whitesmoke;
+	height: 300px;
 }
 
-.userContainer {
-	border: 1px solid whitesmoke;
-	display: flex;
-	flex-direction: column;
-	width: 800px;
-	margin-bottom: 150px;
-	padding: 20px 30px;
-}
 
-.userInfo {
-	border-bottom: 1px solid whitesmoke;
-	display: flex;
-	flex-direction: row;
-	padding-bottom: 25px;
-	
-
-}
-
-.nameContainer {
-	display: flex;
-	flex-direction: column;
-	text-align: left;
-	margin-left: 35px;
-}
-
-.userIcon {
-  border-radius: 50%;
-  background-color: black; /* Color de fondo */
-	font-size: 50px;
-	color: aliceblue;
-  /* Opcionalmente, puedes usar una imagen de fondo */
-  /* background-image: url('ruta-de-la-imagen.jpg'); */
-  /* background-size: cover; */
-  /* background-position: center; */
-}
 
 .list{
 	display: flex;
@@ -107,3 +75,4 @@
 .listItem:hover::after {
   background-color: #BF8D39;
 }
+

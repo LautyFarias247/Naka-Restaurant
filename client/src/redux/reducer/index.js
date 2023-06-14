@@ -19,18 +19,19 @@ import {
   GET_ALL_ORDERS,
   SET_STORAGED_USER,
   ADD_FIRST_PRODUCT,
+  GET_USER_ADDRESSES,
 } from "../actions/actions";
 
 const initialState = {
   allDishes: [],
   displayedDishes: [],
   loadingDishes: true,
-  detail: {},
   categories: [],
   actualCategories: [],
+  user: {},
   cart: [],
   orders: [],
-  user: {},
+  addresses: [],
   adminData: {},
 };
 
@@ -44,9 +45,14 @@ const reducer = (state = initialState, { type, payload }) => {
         user: payload.user,
         cart: payload.cart,
       };
-
     case REMOVE_SESSION:
       return { ...state, user: {}, cart: [] };
+    case SET_STORAGED_USER:
+      return {
+        ...state,
+        user: payload.user,
+        cart: payload.cart,
+      };
     //fetch
     case GET_ALL_DISHES:
       return {
@@ -55,22 +61,15 @@ const reducer = (state = initialState, { type, payload }) => {
         auxAllDishes: payload,
         loadingDishes: false,
       };
-
     case GET_CATEGORIES:
       return {
         ...state,
         categories: payload,
       };
-
     case GET_USER_ORDERS:
       return { ...state, orders: payload.orders };
-
-    case SET_STORAGED_USER:
-      return {
-        ...state,
-        user: payload.user,
-        cart: payload.cart,
-      };
+    case GET_USER_ADDRESSES:
+      return { ...state, addresses: payload.addresses };
     //filtros
     case SET_CATEGORY_FILTER:
       return {
@@ -88,7 +87,6 @@ const reducer = (state = initialState, { type, payload }) => {
       const allDishes = state.allDishes;
 
       const categoryFilters = state.actualCategories;
-
 
       const displayedDishes = allDishes.filter((dish) =>
         categoryFilters.includes(dish.category)
