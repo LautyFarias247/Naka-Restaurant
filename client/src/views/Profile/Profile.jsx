@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import style from "./Profile.module.css";
 import { useSelector } from "react-redux";
 import { FaUser } from 'react-icons/fa';
+import AddressCard from "../../components/AddressCard/AddressCard";
 const Profile = () => {
 	const user = useSelector(state => state.user)
 
@@ -29,8 +30,8 @@ const Profile = () => {
 						</div>	
 					</div>
 					<div className={style.addressContainer}>
-						{user.addresses.map((a) => {
-							return 
+						{user?.addresses?.map((a) => {
+							return <AddressCard/>
 						})}
 					</div>
 				</div>
