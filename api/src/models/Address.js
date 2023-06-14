@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const AddressSchema = new mongoose.Schema(
 	{
+		owner: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true
+		},
 		street: {
 			type: String,
 			required: true
@@ -15,7 +19,7 @@ const AddressSchema = new mongoose.Schema(
 		},
 		zipCode: {
 			type: String,
-			required
+			required: true
 		},
 		neighborhood: {
 			type: String,

@@ -1,11 +1,12 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
+const addressesRouter = require('./routes/addressesRouter')
 const categoriesRouter = require('./routes/categoriesRouter');
 const dishesRouter = require('./routes/dishesRouter')
-const usersRouter = require('./routes/usersRouter');
-const paymentRouter = require('./routes/paymentRouter')
 const orderRouter = require('./routes/orderRouter')
+const paymentRouter = require('./routes/paymentRouter')
+const usersRouter = require('./routes/usersRouter');
 
 const cors = require('cors')
 //
@@ -42,11 +43,12 @@ app.use(fileUpload({
 }))
 
 
-app.use('/dishes', dishesRouter);
-app.use('/users', usersRouter);
+app.use('/addresses', addressesRouter)
 app.use('/categories', categoriesRouter);
-app.use('/payment', paymentRouter)
+app.use('/dishes', dishesRouter);
 app.use('/orders', orderRouter)
+app.use('/payment', paymentRouter)
+app.use('/users', usersRouter);
 
 
 module.exports = app
