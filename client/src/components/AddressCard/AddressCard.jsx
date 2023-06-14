@@ -11,6 +11,7 @@ const AddressCard = ({street, number, apartment, zipCode, neighborhood, locality
 				<span>{neighborhood}, {locality}, {state}</span>
 				<span>Código postal: {zipCode}</span>
 			</div>
+			<button className={style.boton}>Eliminar</button>
 		</div>
 	)
 }
