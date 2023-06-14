@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./AddressCard.module.css";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAddress } from "../../redux/actions/actions";
+import { createPayment, deleteAddress } from "../../redux/actions/actions";
 
 const AddressCard = ({
+  address,
   _id,
   street,
   number,
@@ -14,9 +15,13 @@ const AddressCard = ({
   neighborhood,
   locality,
   state,
+  checkout,
+	setBlockScreen
 }) => {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
+  const [selected, setSelected] = useState(false);
   const handleDelete = () => {
     Swal.fire({
       title: `Seguro que deseas eliminar la dirección "${street} ${number}" ?`,
@@ -42,8 +47,8 @@ const AddressCard = ({
             })
           : Swal.fire({
               title: `Hubo un error al borrar la dirección`,
-              text: 'Intenta de nuevo mas tarde',
-							icon: "error",
+              text: "Intenta de nuevo mas tarde",
+              icon: "error",
               confirmButtonText: "Ok",
               showCancelButton: false,
               iconColor: "#BF8D39",
@@ -51,8 +56,15 @@ const AddressCard = ({
       }
     });
   };
+  const handleSelect = () => {
+    setSelected(!selected);
+  };
+  const handlePayment = () => {
+    dispatch(createPayment(cart, user._id, address));
+  };
+
   return (
-    <div className={style.container}>
+    <div className={selected ? style.selectedContainer : style.container}>
       <FaMapMarkerAlt className={style.icon} />
       <div className={style.addressInfo}>
         <span>
@@ -63,9 +75,23 @@ const AddressCard = ({
         </span>
         <span>Código postal: {zipCode}</span>
       </div>
-      <button className={style.boton} onClick={handleDelete}>
-        Eliminar
-      </button>
+      {!checkout ? (
+        <button className={style.boton} onClick={handleDelete}>
+          Eliminar
+        </button>
+      ) : (
+        <button
+          className={style.boton}
+          onClick={() => {
+            setBlockScreen(true)
+						handleSelect();
+            handlePayment();
+						
+          }}
+        >
+          {selected ? String.fromCharCode(10003) : "Seleccionar"}
+        </button>
+      )}
     </div>
   );
 };

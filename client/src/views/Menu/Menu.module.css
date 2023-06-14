@@ -1,7 +1,7 @@
 .main {
 	min-height: 100vh;
-	background-color: rgb(0, 0, 0);
 	margin-bottom: 0px;
+	background-color: rgb(0, 0, 0);
 	background-image: linear-gradient(to bottom, #000000, #1a1a1a);
 }
 

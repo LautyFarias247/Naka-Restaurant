@@ -8,7 +8,7 @@ import style from "./ShoppingCheckout.module.css";
 
 const ShoppingCheckout = () => {
   const cart = useSelector((state) => state.cart);
-	const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
   let totalPrice = 0;
 
@@ -16,28 +16,28 @@ const ShoppingCheckout = () => {
     totalPrice += item.price * item.quantity;
   });
   const dispatch = useDispatch();
-  
-	const handlePayment = () => {
-		if(totalPrice < 5000){
-			return Swal.fire({
-				title: 'Atención',
-				text: 'El monto de la compra debe superar los $5000',
-				icon: 'info',
-				confirmButtonText: 'Aceptar',
-				iconColor: "#BF8D39",
-			})
-		}
-		if(!user.isActive){
-			return Swal.fire({
-				title: 'Lo sentimos...',
-				text: 'Tu cuenta se encuentra inhabilitada para realizar pedidos',
-				icon: 'error',
-				confirmButtonText: 'Aceptar',
-				iconColor: "#BF8D39",
-			})
-		}
-		dispatch(createPayment({cart, userId: user._id}))
-	}
+
+  const handlePayment = () => {
+    if (totalPrice < 5000) {
+      return Swal.fire({
+        title: "Atención",
+        text: "El monto de la compra debe superar los $5000",
+        icon: "info",
+        confirmButtonText: "Aceptar",
+        iconColor: "#BF8D39",
+      });
+    }
+    if (!user.isActive) {
+      return Swal.fire({
+        title: "Lo sentimos...",
+        text: "Tu cuenta se encuentra inhabilitada para realizar pedidos",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+        iconColor: "#BF8D39",
+      });
+    }
+    dispatch(createPayment({ cart, userId: user._id }));
+  };
 
   return (
     <div className={style.container}>
@@ -65,14 +65,15 @@ const ShoppingCheckout = () => {
       <hr className={style.separador} />
       <div className={style.totalData}>
         <span className={style.total}>Total: </span>
-        <span className={style.total}>$ {totalPrice.toLocaleString("en-US").replace(",", ".")},00</span>
+        <span className={style.total}>
+          $ {totalPrice.toLocaleString("en-US").replace(",", ".")},00
+        </span>
       </div>
-      <button
-        className={style.botonPagar}
-        onClick={handlePayment}
-      >
-        Pagar
-      </button>
+      <Link to ="/checkout">
+        <button className={style.botonPagar}>
+          Continuar
+        </button>
+      </Link>
     </div>
   );
 };
