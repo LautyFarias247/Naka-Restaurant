@@ -6,7 +6,7 @@ export const REMOVE_SESSION = "REMOVE_SESSION";
 export const SET_GOOGLE_USER = "SET_GOOGLE_USER";
 export const SET_STORAGED_USER = "SET_STORAGED_USER";
 //Fetch data  .89
-export const GET_ALL_DISHES = "GET_ALLDISHES";
+export const GET_ALL_DISHES = "GET_ALL_DISHES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_USER_ORDERS = "GET_USER_ORDERS";
 //Filtros 130
@@ -87,7 +87,7 @@ export const setStoragedUser = (user) => {
 export const getAllDishes = () => {
   return async (dispatch) => {
     try {
-      const response = await axios(`http://localhost:3001/foods`);
+      const response = await axios(`http://localhost:3001/dishes`);
       return dispatch({
         type: GET_ALL_DISHES,
         payload: response.data,
@@ -195,15 +195,15 @@ export const createPayment = ({ cart, userId }) => {
 
 export const updateDish = ({ id, price, stock }) => {
   return async function (dispatch) {
-    // await axios.put(`http://localhost:3001/foods/${id}`, {price, stock})
-    await axios.put(`http://localhost:3001/foods/${id}`, { price, stock });
+    // await axios.put(`http://localhost:3001/dishes/${id}`, {price, stock})
+    await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
   };
 };
 
 export const createDish = (payload) => {
   try {
     return async function () {
-      await axios.post("http://localhost:3001/foods", payload, {
+      await axios.post("http://localhost:3001/dishes", payload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

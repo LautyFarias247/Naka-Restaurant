@@ -1,20 +1,20 @@
-const Categories = require('../models/Category')
+const Category = require('../models/Category')
 
 const allCategories = async () => {
-    const allCategoriesBDD = await Categories.find({})
+    const allCategoriesBDD = await Category.find({})
     return allCategoriesBDD;
 }
 const searchCategory = async (name) => {
-    const filterCategoryByName = await Categories.find({});
+    const filterCategoryByName = await Category.find({});
     return filterCategoryByName.filter(category => category.name.toLowerCase().includes(name.toLowerCase()))
 }
 
 const updateByIdCategory = async (id, body) => {
-    const updateCategory = await Categories.updateOne({ _id: id }, { $set: body })
+    const updateCategory = await Category.updateOne({ _id: id }, { $set: body })
     return updateCategory;
 }
 const categorybyId = async (id) => {
-    const filterById = await Categories.find({ _id: id })
+    const filterById = await Category.find({ _id: id })
     return filterById;
 }
 module.exports = { categorybyId, allCategories, searchCategory, updateByIdCategory }

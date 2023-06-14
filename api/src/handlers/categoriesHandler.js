@@ -1,4 +1,4 @@
-const Categories = require('../models/Category')
+const Category = require('../models/Category')
 
 const {
   allCategories,
@@ -19,7 +19,7 @@ const getCategories = async (req, res) => {
 const createCategories = async (req, res) => {
   const { name } = req.body;
   try {
-    const newCategory = new Categories({name});
+    const newCategory = new Category({name});
     await newCategory.save();
 		
     return res.status(200).json(newCategory);
@@ -27,17 +27,17 @@ const createCategories = async (req, res) => {
     res.status(400).json(error.message);
   }
 };
-const updateCategories = async (req, res) => {
-  const { description, name } = req.body;
-  const { id } = req.params;
-  const sendCategory = { description, name };
-  try {
-    const result = await updateByIdCategory(id, sendCategory);
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(200).json(error.message);
-  }
-};
+// const updateCategories = async (req, res) => {
+//   const { description, name } = req.body;
+//   const { id } = req.params;
+//   const sendCategory = { description, name };
+//   try {
+//     const result = await updateByIdCategory(id, sendCategory);
+//     res.status(200).json(result);
+//   } catch (error) {
+//     res.status(200).json(error.message);
+//   }
+// };
 const getCategoryById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -50,6 +50,6 @@ const getCategoryById = async (req, res) => {
 module.exports = {
   getCategories,
   createCategories,
-  updateCategories,
+  // updateCategories,
   getCategoryById,
 };
