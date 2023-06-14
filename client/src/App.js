@@ -2,7 +2,6 @@ import "./App.css";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Nav from "./layout/Navbar/Navbar";
 import Home from "./views/Home/Home";
-import Detail from "./components/Detail/Detail";
 import CreateDishesForm from "./components/CreateDishesForm/CreateDishesForm";
 import Menu from "./views/Menu/Menu";
 import Profile from "./views/Profile/Profile";
@@ -12,13 +11,13 @@ import { useEffect } from "react";
 import Dashboard from "./components/Dashboard/Dashboard";
 import UserTable from "./components/Dashboard/UserTable/UserTable";
 import FoodTable from "./components/Dashboard/FoodTable/FoodTable";
-import FoodUpdate from "./components/Dashboard/FoodUpdate/FoodUpdate";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllDishes,
+	getCategories,
+	getUserOrders,
 	setStoragedUser,
 	saveCart,
-	getCategories,
 } from "./redux/actions/actions";
 import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
 import Footer from "./layout/Footer/Footer";
@@ -34,7 +33,6 @@ function App() {
 	useEffect(() => {
 		dispatch(getAllDishes());
 		dispatch(getCategories());
-
 		const localStorageUser = localStorage.getItem("user");
 		const parsedUser = JSON.parse(localStorageUser);
 		if (localStorageUser) {
@@ -61,6 +59,10 @@ function App() {
 	}, []);
 
 	useEffect(()=>{
+		dispatch(getUserOrders(user._id))
+	},[user])
+
+	useEffect(()=>{
 		dispatch(saveCart({cart, userId: user._id}))
 	},[cart])
 
@@ -74,7 +76,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="account/login" element={<LoginPage />}/>
         <Route path="account/register" element={<RegisterPage />}/>
@@ -85,7 +86,6 @@ function App() {
         <Route path="/dashboard/users" element={<UserTable />} />
         <Route path="/dashboard/foods" element={<FoodTable />} />
         <Route path="/dashboard/sales" element={<VentasTable />} />
-        <Route path="/dashboard/foods/edit/:id" element={<FoodUpdate />} />
         <Route path="/dashboard/foods/create" element={<CreateDishesForm />} />
       </Routes>
       {!location.pathname.includes("dashboard") && <Footer />}

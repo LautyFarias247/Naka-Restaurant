@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 import HandlerShoppingItems from "../HandlerShoppingItems/HandlerShoppingItems";
-import Model from "../Detail/ModelDetail/modelDetail";
 import { useState } from "react";
 
 const Card = ({ image, name, price, item, description }) => {

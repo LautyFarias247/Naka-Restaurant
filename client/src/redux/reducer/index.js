@@ -1,29 +1,31 @@
 import {
+  //login
+  LOGIN_USER,
+  REMOVE_SESSION,
+  //fetch
   GET_ALL_DISHES,
   GET_CATEGORIES,
-  SET_ORDERINGS,
-  GET_DISHES_BY_NAME,
+  GET_USER_ORDERS,
+  //filtros
   SET_CATEGORY_FILTER,
   REMOVE_CATEGORY_FILTER,
-	SET_DISPLAYED_DISHES,
-  ADD_PRODUCT,
-  GET_DISH_BY_ID,
+  SET_DISPLAYED_DISHES,
+  //carrito
+	ADD_PRODUCT,
   REMOVE_PRODUCT,
-  REMOVE_ALL_PRODUCTS,
   REMOVE_MANY_PRODUCTS,
+
+  SET_ORDERINGS,
   GET_ALL_USERS,
-  LOGIN_USER,
-  GET_MY_ORDERS,
   GET_ALL_ORDERS,
   SET_STORAGED_USER,
-  REMOVE_SESSION,
   ADD_FIRST_PRODUCT,
 } from "../actions/actions";
 
 const initialState = {
   allDishes: [],
   displayedDishes: [],
-	loadingDishes: true,
+  loadingDishes: true,
   detail: {},
   categories: [],
   actualCategories: [],
@@ -34,22 +36,8 @@ const initialState = {
 };
 
 const reducer = (state = initialState, { type, payload }) => {
-
   switch (type) {
-    case GET_ALL_DISHES:
-      return {
-        ...state,
-        allDishes: payload,
-        auxAllDishes: payload,
-				loadingDishes: false
-      };
-
-    case GET_MY_ORDERS:
-      return { ...state, orders: payload };
-
-    case GET_ALL_ORDERS:
-      return { ...state, adminData: { ...state.adminData, orders: payload } };
-
+    //login
     case LOGIN_USER:
       localStorage.setItem("user", JSON.stringify(payload.user));
       return {
@@ -59,7 +47,24 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case REMOVE_SESSION:
-      return { ...state, user: payload.user, cart: payload.cart };
+      return { ...state, user: {}, cart: [] };
+    //fetch
+    case GET_ALL_DISHES:
+      return {
+        ...state,
+        allDishes: payload,
+        auxAllDishes: payload,
+        loadingDishes: false,
+      };
+
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: payload,
+      };
+
+    case GET_USER_ORDERS:
+      return { ...state, orders: payload.orders };
 
     case SET_STORAGED_USER:
       return {
@@ -67,7 +72,23 @@ const reducer = (state = initialState, { type, payload }) => {
         user: payload.user,
         cart: payload.cart,
       };
-    //CARRITO
+    //filtros
+    case SET_CATEGORY_FILTER:
+      return {
+        ...state,
+        actualCategories: [...state.actualCategories, payload.name],
+      };
+
+    case REMOVE_CATEGORY_FILTER:
+      const newCategories = state.actualCategories.filter(
+        (category) => category !== payload.name
+      );
+      return { ...state, actualCategories: newCategories };
+
+    case SET_DISPLAYED_DISHES:
+      const allDishes = state.allDishes;
+
+    //carrito
     case ADD_FIRST_PRODUCT:
       const firstItem = payload.product;
       firstItem.quantity = 1;
@@ -96,55 +117,6 @@ const reducer = (state = initialState, { type, payload }) => {
         );
         return { ...state, cart: newCart };
       }
-
-    case REMOVE_MANY_PRODUCTS:
-      const removedItems = payload.product;
-      const remainingItems = state.cart.filter(
-        (item) => item._id !== removedItems._id
-      );
-      return { ...state, cart: remainingItems };
-
-    case GET_DISHES_BY_NAME:
-      return {
-        ...state,
-        allDishes: payload,
-      };
-    case GET_DISH_BY_ID:
-      return { ...state, detail: payload };
-
-    case GET_CATEGORIES:
-      return {
-        ...state,
-        categories: payload,
-      };
-    
-		//filters
-		case SET_CATEGORY_FILTER:
-      return {
-        ...state,
-        actualCategories: [...state.actualCategories, payload.name],
-      };
-
-    case REMOVE_CATEGORY_FILTER:
-      const newCategories = state.actualCategories.filter(
-        (category) => category !== payload.name
-      );
-      return { ...state, actualCategories: newCategories };
-		
-		case SET_DISPLAYED_DISHES:
-			const allDishes = state.allDishes
-
-			const categoryFilters = state.actualCategories
-			console.log({allDishes});
-			console.log({categoryFilters});
-			
-			const displayedDishes = allDishes.filter((dish) =>
-				categoryFilters.includes(dish.category)
-			
-			)
-
-			console.log({displayedDishes});
-			return {...state, displayedDishes: displayedDishes}
 
     case SET_ORDERINGS:
       let orderedDishes;
@@ -183,13 +155,9 @@ const reducer = (state = initialState, { type, payload }) => {
       }
       return { ...state, allDishes: orderedDishes };
 
-    case REMOVE_ALL_PRODUCTS:
-      return { ...state, cart: []};
-
     case REMOVE_MANY_PRODUCTS:
-  
       const newCart = state.cart.filter((item) => item._id !== payload._id);
-      return { ...state, cart: newCart};
+      return { ...state, cart: newCart };
 
     case GET_ALL_USERS:
       return { ...state, adminData: { ...state.adminData, users: payload } };
