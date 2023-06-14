@@ -5,6 +5,7 @@ import AddressCard from "../../components/AddressCard/AddressCard";
 import { useState } from "react";
 import { createPayment } from "../../redux/actions/actions";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 const Checkout = () => {
   const dispatch = useDispatch();
   const addresses = useSelector((state) => state.addresses);
@@ -37,7 +38,14 @@ const Checkout = () => {
           </div>
         </>
       ) : (
-        <>no hay direcc</>
+        <>
+					<h3 className={style.title}>No tienes ninguna dirección registrada</h3>
+					<Link to="/myaccount">
+						<button className={style.linkPanel}>
+							Ir al panel de usuario
+						</button>
+					</Link>
+				</>
       )}
     </main>
   );

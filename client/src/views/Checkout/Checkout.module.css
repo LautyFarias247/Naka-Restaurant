@@ -28,19 +28,19 @@
   width: 50%;
 }
 
-.botonPagar {
+.linkPanel {
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0);
   border: 1px solid #bf8e3938;
   color: whitesmoke;
   transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
   padding: 5px 10px;
-  width: 85%;
+  width: 300px;
+	margin-top: 40px;
 }
 
-.botonPagar:hover {
-  /* border: 1px solid ; */
-  cursor: pointer;
+.linkPanel:hover {
+	cursor: pointer;
   box-shadow: 0 0 0 1px #bf8d39;
   background-color: #00000000;
   color: #fff;
