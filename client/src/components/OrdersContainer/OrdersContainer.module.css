@@ -1,0 +1,8 @@
+.ordersContainer {
+	height: 400px;
+	width: 800px;
+	max-height: 400px;
+	overflow-x: auto;
+  white-space: nowrap;
+	padding: 0;
+}

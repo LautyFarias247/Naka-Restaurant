@@ -6,7 +6,7 @@ import AddressCard from "../../components/AddressCard/AddressCard";
 import { useState } from "react";
 import { Card, Pagination } from "react-bootstrap";
 import AddressForm from "../../components/AddressForm/AddressForm";
-import AddressContainer from "../../components/AddressContainer/AddressContainer";
+import AddressContainer from "../../components/AddressesContainer/AddressContainer";
 import UserSidebar from "../../layout/UserSidebar/UserSidebar";
 const Profile = () => {
 	
@@ -17,7 +17,7 @@ const Profile = () => {
       <div className={style.headline}>
         <h2 className={style.title}>Panel de usuario - Mi perfil</h2>
       </div>
-      <div className={style.DataContainer}>
+      <div className={style.dataContainer}>
         <UserSidebar/>
         {!displayForm ? (
           <AddressContainer

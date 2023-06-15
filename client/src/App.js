@@ -8,7 +8,7 @@ import Profile from "./views/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./views/LoginPage/LoginPage";
 import { useEffect } from "react";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import UserTable from "./components/Dashboard/UserTable/UserTable";
 import FoodTable from "./components/Dashboard/FoodTable/FoodTable";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +25,7 @@ import Footer from "./layout/Footer/Footer";
 import RegisterPage from "./views/RegisterPage/RegisterPage";
 import Swal from "sweetalert2";
 import Checkout from "./views/Checkout/Checkout";
-import MyOrders from "./views/MyOrders/MyOrders";
+import OrdersPage from "./views/OrdersPage/OrdersPage";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -81,7 +81,7 @@ function App() {
         <Route path="account/register" element={<RegisterPage />} />
 				{/* User dashboard */}
         <Route path="myaccount" element={<Profile />} />
-				<Route path="myaccount/orders" element={<MyOrders/>}/>
+				<Route path="myaccount/orders" element={<OrdersPage/>}/>
 
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/checkout" element={<Checkout />} />

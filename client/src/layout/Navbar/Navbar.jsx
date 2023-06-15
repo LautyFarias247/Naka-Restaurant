@@ -6,12 +6,12 @@ import { removeSession } from "../../redux/actions/actions";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-	const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-	const handleLogOut = () => {
-		localStorage.removeItem("user")
-		dispatch(removeSession())
-	}
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    dispatch(removeSession());
+  };
 
   return (
     <nav className={style.navbar}>
@@ -26,18 +26,28 @@ const Navbar = () => {
         <Link to="/menu">
           <li className={style.list}>Menú</li>
         </Link>
+        {user?.admin ? (
+          <Link to="/dashboard">
+            <li className={style.list}>Dashboard</li>
+          </Link>
+        ) : (
+          <></>
+        )}
       </ul>
       {user.username ? (
         <ul className={style.login}>
           <li className={style.welcome}>
-            Bienvenido! <Link to="myaccount" className={style.list}>{user.username}</Link>
+            Bienvenido/a{" "}
+            <Link to="myaccount" className={style.list}>
+              {user.username}!
+            </Link>
           </li>
-          <Link to="/cart" >
+          <Link to="/cart">
             <li className={style.list}>Carrito</li>
           </Link>
-					<Link to="/" onClick={handleLogOut}>
-					<li className={style.list}>Cerrar Sesión</li>
-					</Link>
+          <Link to="/" onClick={handleLogOut}>
+            <li className={style.list}>Cerrar Sesión</li>
+          </Link>
         </ul>
       ) : (
         <ul className={style.login}>

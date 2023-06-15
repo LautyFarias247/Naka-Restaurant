@@ -23,12 +23,15 @@
 }
 
 .userContainer {
-	border: 1px solid whitesmoke;
+	/* border: 1px solid whitesmoke; */
 	display: flex;
 	flex-direction: column;
 	width: 800px;
 	margin-bottom: 150px;
-	padding: 20px 30px;
+	padding: 0 30px;
+	max-height: 400px;
+	overflow-x: auto;
+  white-space: nowrap;
 }
 
 .userInfo {
