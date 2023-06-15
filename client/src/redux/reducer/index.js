@@ -15,12 +15,11 @@ import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   REMOVE_MANY_PRODUCTS,
-
   GET_ALL_USERS,
   GET_ALL_ORDERS,
   SET_STORAGED_USER,
   GET_USER_ADDRESSES,
-	CREATE_ADDRESS,
+  CREATE_ADDRESS,
 } from "../actions/actions";
 
 const initialState = {
@@ -121,13 +120,19 @@ const reducer = (state = initialState, { type, payload }) => {
         return { ...state, cart: newCart };
       }
     case REMOVE_MANY_PRODUCTS:
-      const newCart = state.cart.filter((item) => item._id !== payload.product._id);
+      const newCart = state.cart.filter(
+        (item) => item._id !== payload.product._id
+      );
       return { ...state, cart: newCart };
-		//Crear
-		case CREATE_ADDRESS:
-			return{...state, addresses: [...state.addresses, payload.address]}
-    case GET_ALL_USERS:
-      return { ...state, adminData: { ...state.adminData, users: payload } };
+    //Crear
+    case CREATE_ADDRESS:
+      return { ...state, addresses: [...state.addresses, payload.address] };
+    //DASHBOARD ADMIN
+		
+			case GET_ALL_ORDERS:
+				return {...state, adminData:{...state.adminData, orders: payload.orders}}
+			case GET_ALL_USERS:
+      return { ...state, adminData: { ...state.adminData, users: payload.users } };
 
     default:
       return { ...state };

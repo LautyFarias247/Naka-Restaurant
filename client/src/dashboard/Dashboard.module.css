@@ -92,8 +92,22 @@
 .mainSection {
   background-color: rgba(0, 255, 34, 0.151);
   width: 60%;
+	text-align: left;
 }
 
+.dashboardTitle {
+	font-size: 60px;
+}
+.cardsContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+.card{
+	width: 30%;
+	height: 200px;
+	background-color: aqua;
+}
 /* NEWORDERS */
 
 .newOrders {

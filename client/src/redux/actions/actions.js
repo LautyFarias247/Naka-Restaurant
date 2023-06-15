@@ -24,11 +24,11 @@ export const CREATE_PAYMENT = "CREATE_PAYMENT"
 export const CREATE_ADDRESS = "CREATE_ADDRESS"
 export const DELETE_ADDRESS = "DELETE_ADDRESS"
 ;
-export const SET_ORDERINGS = "SET_ORDERINGS";
-export const CREATE_DISH = "CREATE_DISH";
 //DASHBOARD
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
+export const SET_ORDERINGS = "SET_ORDERINGS";
+export const CREATE_DISH = "CREATE_DISH";
 
 // Login / logout / register
 export const loginUser = (credentials) => {
@@ -240,60 +240,54 @@ export const deleteAddress = (_id, userId) => {
 		}
 	}
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////
-export const updateDish = ({ id, price, stock }) => {
-  return async function (dispatch) {
-    await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
-  };
-};
-
-export const createDish = (payload) => {
-  try {
-    return async function () {
-      await axios.post("http://localhost:3001/dishes", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    };
-  } catch (error) {}
-};
-
-export function setOrderings(order) {
-  return async (dispatch) => {
-    return dispatch({ type: SET_ORDERINGS, payload: order });
-  };
-}
+// DASHBOARD ADMIN
 
 export function getAllUsers() {
-  return async (dispatch) => {
-    try {
-      const users = await axios.get(`http://localhost:3001/users`);
-      return dispatch({ type: GET_ALL_USERS, payload: users.data });
+	return async (dispatch) => {
+		try {
+			const users = await axios.get(`http://localhost:3001/users`);
+      return dispatch({ type: GET_ALL_USERS, payload: {users: users.data} });
     } catch (error) {
-      console.log(error);
+			console.log(error);
     }
   };
 }
 
 export function getAllOrders() {
-  return async (dispatch) => {
-    try {
-      const allOrders = await axios.get(`http://localhost:3001/order`);
-      return dispatch({ type: GET_ALL_ORDERS, payload: allOrders.data });
+	return async (dispatch) => {
+		try {
+			const orders = await axios.get(`http://localhost:3001/orders`);
+      return dispatch({ type: GET_ALL_ORDERS, payload: {orders: orders.data } });
     } catch (error) {
-      console.log(error);
+			console.log(error);
     }
   };
 }
 
 export const orderDelivered = (id) => {
-  return async (dispatch) => {
-    try {
-      const res = await axios.put(`http://localhost:3001/order/${id}`);
+	return async (dispatch) => {
+		try {
+			const res = await axios.put(`http://localhost:3001/order/${id}`);
       console.log(res);
     } catch (error) {
-      console.log(error);
+			console.log(error);
     }
   };
+};
+
+export const updateDish = ({ id, price, stock }) => {
+	return async function (dispatch) {
+		await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
+	};
+};
+export const createDish = (payload) => {
+	try {
+		return async function () {
+			await axios.post("http://localhost:3001/dishes", payload, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+		};
+	} catch (error) {}
 };
