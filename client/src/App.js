@@ -8,9 +8,7 @@ import Profile from "./views/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./views/LoginPage/LoginPage";
 import { useEffect } from "react";
-import Dashboard from "./dashboard/Dashboard";
-import UserTable from "./components/Dashboard/UserTable/UserTable";
-import FoodTable from "./components/Dashboard/FoodTable/FoodTable";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllDishes,
@@ -20,12 +18,13 @@ import {
   saveCart,
   getUserAddresses,
 } from "./redux/actions/actions";
-import VentasTable from "./components/Dashboard/VentasTotales/VentasTable/VentasTable";
 import Footer from "./layout/Footer/Footer";
 import RegisterPage from "./views/RegisterPage/RegisterPage";
 import Swal from "sweetalert2";
 import Checkout from "./views/Checkout/Checkout";
 import OrdersPage from "./views/OrdersPage/OrdersPage";
+import Dashboard from "./dashboardViews/Dashboard";
+import OrdersTable from "./dashboardViews/OrdersTable/OrdersTable";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -54,7 +53,7 @@ function App() {
           iconColor: "#BF8D39",
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate("/cart");
+            navigate("/myaccount/orders");
           }
         });
     }
@@ -86,9 +85,9 @@ function App() {
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/users" element={<UserTable />} />
-        <Route path="/dashboard/foods" element={<FoodTable />} />
-        <Route path="/dashboard/sales" element={<VentasTable />} />
+        <Route path="/dashboard/orders" element={<OrdersTable />} />
+        {/* <Route path="/dashboard/users" element={<UserTable />} /> */}
+        {/* <Route path="/dashboard/foods" element={<FoodTable />} /> */}
         <Route path="/dashboard/foods/create" element={<CreateDishesForm />} />
       </Routes>
       {!location.pathname.includes("dashboard") && <Footer />}

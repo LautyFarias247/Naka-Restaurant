@@ -203,12 +203,13 @@ export const saveCart = ({ userId, cart }) => {
   };
 };
 //CRUD Usuario
-export const createPayment = (cart, userId, address ) => {
+export const createPayment = (cart, userId, address, username ) => {
   return async () => {
     const response = await axios.post("http://localhost:3001/payment/create", {
       cart,
       userId,
-			address
+			address,
+			username
     });
     window.location.href = response.data.body.init_point;
   };

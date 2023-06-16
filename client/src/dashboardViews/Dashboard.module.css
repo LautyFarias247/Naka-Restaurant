@@ -16,78 +16,7 @@
 }
 
 /* SIDEBAR */
-.sidebar {
-  background-color: rgba(255, 0, 234, 0);
-  padding: 15px 0;
-  width: 15%;
-}
-.naka {
-  font-family: "TheSeason";
-  color: #bf8d39;
-  font-size: 50px;
-  height: 10%;
-}
-.list {
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: flex-start;
-}
-.listItem {
-  display: flex;
-  align-items: center;
-  font-size: 25px;
-  list-style: none;
-  text-decoration: none;
-  color: black;
-  width: 100%;
-  padding: 0 20px;
-  height: 50px;
-}
-.activeListItem{
-	display: flex;
-  align-items: center;
-  font-size: 25px;
-  list-style: none;
-  text-decoration: none;
-  width: 100%;
-  padding: 0 20px;
-  height: 50px;
-	background-color: rgba(167, 73, 255, 0.925);
-	border-top-right-radius: 15px; 
-  border-bottom-right-radius: 15px; 
-}
-.activeListItem:hover {
-  transition: all 0.3s;
-  background-color: rgba(172, 48, 255, 0.596);
-  cursor: pointer;
-}
-.activeLinkListItem{
-	display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  color: rgb(255, 255, 255);
-  width: 100%;
-  height: 100%;
-}
-.linkListItem {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  color: black;
-  width: 100%;
-  height: 100%;
-}
-.listItem:hover {
-	border-top-right-radius: 15px; 
-  border-bottom-right-radius: 15px; 
-  transition: all 0.3s;
-  background-color: rgba(172, 48, 255, 0.39);
-  cursor: pointer;
-}
+
 /* MAINSECTION */
 .mainSection {
   width: 60%;
@@ -225,4 +154,43 @@ button:hover{
 	/* border: 2px solid rgb(190, 38, 250); */
 	background-color: #ffffff;
 	border-radius: 5px;
+}
+
+
+
+.completedOrders {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.completedOrders th, .completedOrders td {
+  padding: 8px;
+  text-align: left;
+}
+
+.completedOrders th {
+  background-color: #f2f2f2;
+}
+
+.completedOrders tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.completedOrders tbody tr:hover {
+  background-color: rgba(172, 48, 255, 0.39);
+	transition: all .3s;
+}
+
+.completedOrders th:first-child,
+.completedOrders td:first-child {
+  min-width: 100px;
+}
+
+.completedOrders th:last-child,
+.completedOrders td:last-child {
+  min-width: 80px;
+}
+
+.completedOrdersTitle {
+	margin-top: 20px;
 }

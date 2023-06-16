@@ -1,13 +1,10 @@
 import React from "react";
 import style from "./Checkout.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AddressCard from "../../components/AddressCard/AddressCard";
 import { useState } from "react";
-import { createPayment } from "../../redux/actions/actions";
-import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 const Checkout = () => {
-  const dispatch = useDispatch();
   const addresses = useSelector((state) => state.addresses);
 	const [blockScreen, setBlockScreen] = useState(false)
 

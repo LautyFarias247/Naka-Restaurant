@@ -2,12 +2,13 @@ import { createPayment } from "../../redux/actions/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import style from "./ShoppingCheckout.module.css";
 
 const ShoppingCheckout = () => {
-  const cart = useSelector((state) => state.cart);
+  const navigate = useNavigate()
+	const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
 
   let totalPrice = 0;
@@ -36,7 +37,7 @@ const ShoppingCheckout = () => {
         iconColor: "#BF8D39",
       });
     }
-    dispatch(createPayment({ cart, userId: user._id }));
+		navigate("/checkout")
   };
 
   return (
@@ -69,11 +70,11 @@ const ShoppingCheckout = () => {
           $ {totalPrice.toLocaleString("en-US").replace(",", ".")},00
         </span>
       </div>
-      <Link to ="/checkout">
-        <button className={style.botonPagar}>
+    
+        <button className={style.botonPagar} onClick={handlePayment}>
           Continuar
         </button>
-      </Link>
+      
     </div>
   );
 };

@@ -60,7 +60,7 @@ const AddressCard = ({
     setSelected(!selected);
   };
   const handlePayment = () => {
-    dispatch(createPayment(cart, user._id, address));
+    dispatch(createPayment(cart, user._id, address, user.username));
   };
 
   return (

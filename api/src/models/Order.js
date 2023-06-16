@@ -7,9 +7,13 @@ const OrderSchema = new mongoose.Schema(
             type: Array,
             required: true
         },
-        owner: {
+        ownerId: {
             type: mongoose.Schema.Types.ObjectId,
 						ref: 'user',
+            required: true
+        },
+        owner: {
+            type: String,
             required: true
         },
         amount: {
