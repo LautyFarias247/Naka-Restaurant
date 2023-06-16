@@ -22,13 +22,13 @@ const getOrdersByUser = async (req, res) => {
 };
 
 
-const orderDelivered = async (req, res) => {
-  const { id } = req.params;
+const updateOrderStatus = async (req, res) => {
+  const { _id } = req.params;
+	const {status} = req.body
+	console.log(_id);
+	console.log(status);
   try {
-    const orderDelivered = await Order.updateOne(
-      { _id: id },
-      { $set: { status: "entregado" } }
-    );
+    const orderDelivered = await Order.findByIdAndUpdate(_id, {status}, {new: true});
     res.status(200).json(orderDelivered);
   } catch (error) {
     console.log(error);
@@ -38,6 +38,5 @@ const orderDelivered = async (req, res) => {
 module.exports = {
   getAllOrders,
   getOrdersByUser,
-  // postOrder,
-  orderDelivered,
+  updateOrderStatus,
 };

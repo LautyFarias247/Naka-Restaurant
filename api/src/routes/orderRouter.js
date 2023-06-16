@@ -1,11 +1,11 @@
 const {Router} = require('express')
 
-const {getAllOrders, getOrdersByUser, orderDelivered} = require('../handlers/orderHandler')
+const {getAllOrders, getOrdersByUser, updateOrderStatus} = require('../handlers/orderHandler')
 
 const orderRouter = Router()
 
 orderRouter.get('/', getAllOrders)
 orderRouter.get('/:_id', getOrdersByUser)
-orderRouter.put('/:id', orderDelivered)
+orderRouter.put('/:_id', updateOrderStatus)
 
 module.exports = orderRouter

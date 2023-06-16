@@ -266,8 +266,8 @@ export const updateOrderStatus = (_id, status) => {
 	return async () => {
 		console.log(_id, status);
 		try {
-			// const res = await axios.put(`http://localhost:3001/order/${_id}`, status);
-      // console.log(res);
+			const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
+      console.log(res);
     } catch (error) {
 			console.log(error);
     }
