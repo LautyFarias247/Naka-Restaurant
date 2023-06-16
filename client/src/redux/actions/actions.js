@@ -252,7 +252,6 @@ export function getAllUsers() {
     }
   };
 }
-
 export function getAllOrders() {
 	return async (dispatch) => {
 		try {
@@ -263,12 +262,12 @@ export function getAllOrders() {
     }
   };
 }
-
-export const orderDelivered = (id) => {
-	return async (dispatch) => {
+export const updateOrderStatus = (_id, status) => {
+	return async () => {
+		console.log(_id, status);
 		try {
-			const res = await axios.put(`http://localhost:3001/order/${id}`);
-      console.log(res);
+			// const res = await axios.put(`http://localhost:3001/order/${_id}`, status);
+      // console.log(res);
     } catch (error) {
 			console.log(error);
     }

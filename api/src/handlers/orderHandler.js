@@ -13,9 +13,7 @@ const getAllOrders = async (req, res) => {
 const getOrdersByUser = async (req, res) => {
   try {
     const { _id } = req.params;
-    const orders = await User.findById(_id)
-      .populate("orders") 
-      .exec();
+    const orders = await User.findById(_id).populate("orders").exec();
 	
     res.status(200).json(orders.orders);
   } catch (error) {
