@@ -36,10 +36,8 @@ export const CREATE_DISH = "CREATE_DISH";
 export const loginUser = (credentials) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `http://localhost:3001/users/login`,
-        credentials
-      );
+      // const response = await axios.post(`http://localhost:3001/users/login`,credentials);
+      const response = await axios.post(`https://naka-restaurant-api.vercel.app//users/login`,credentials);
       dispatch({
         type: LOGIN_USER,
         payload: { user: response.data, cart: response.data.cart },
@@ -52,8 +50,12 @@ export const loginUser = (credentials) => {
 export const registerUser = (userData) => {
   return async function (dispatch) {
     try {
+      // const res = await axios.post(
+      //   "http://localhost:3001/users/register",
+      //   userData
+      // );
       const res = await axios.post(
-        "http://localhost:3001/users/register",
+        "https://naka-restaurant-api.vercel.app//users/register",
         userData
       );
       return res;
@@ -76,8 +78,11 @@ export const removeSession = () => {
 export const setStoragedUser = (user) => {
   return async function (dispatch) {
     try {
+      // const response = await axios.get(
+      //   `http://localhost:3001/users/${user._id}`
+      // );
       const response = await axios.get(
-        `http://localhost:3001/users/${user._id}`
+        `https://naka-restaurant-api.vercel.app//users/${user._id}`
       );
 
       dispatch({
@@ -93,7 +98,8 @@ export const setStoragedUser = (user) => {
 export const getAllDishes = () => {
   return async (dispatch) => {
     try {
-      const response = await axios(`http://localhost:3001/dishes`);
+      // const response = await axios(`http://localhost:3001/dishes`);
+      const response = await axios(`https://naka-restaurant-api.vercel.app/dishes`);
       return dispatch({
         type: GET_ALL_DISHES,
         payload: response.data,
@@ -106,7 +112,8 @@ export const getAllDishes = () => {
 export const getCategories = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`http://localhost:3001/categories`);
+      // const response = await axios.get(`http://localhost:3001/categories`);
+      const response = await axios.get(`https://naka-restaurant-api.vercel.app/categories`);
       const categories = response.data.map((category) => category);
       return dispatch({ type: GET_CATEGORIES, payload: categories });
     } catch (error) {
@@ -279,7 +286,8 @@ export const updateOrderStatus = (_id, status) => {
 	return async () => {
 		console.log(_id, status);
 		try {
-			const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
+			// const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
+			const res = await axios.put(`naka-restaurant-api.vercel.app/orders/${_id}`, {status});
       console.log(res);
     } catch (error) {
 			console.log(error);
@@ -291,7 +299,8 @@ export const updateUserStatus = (_id, status) => {
 		try {
 			console.log(_id);
 			console.log(status);
-			const response = await axios.put(`http://localhost:3001/users/status/${_id}`, {status})
+			// const response = await axios.put(`http://localhost:3001/users/status/${_id}`, {status})
+			const response = await axios.put(`naka-restaurant-api.vercel.app/users/status/${_id}`, {status})
 			console.log(response);
 		} catch (error) {
 			console.log(error);

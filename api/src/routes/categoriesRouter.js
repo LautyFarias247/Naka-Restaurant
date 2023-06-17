@@ -5,7 +5,6 @@ const { getCategories, createCategories, getCategoryById } = require("../handler
 const categoriesRouter = Router();
 categoriesRouter.get("/", getCategories)
 categoriesRouter.post("/", createCategories)
-// categoriesRouter.put("/:id", updateCategories)
 categoriesRouter.get("/:id", getCategoryById)
 
 module.exports = categoriesRouter;
