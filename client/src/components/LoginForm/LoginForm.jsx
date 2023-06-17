@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./LoginForm.module.css";
-import {gapi} from 'gapi-script'
-import GoogleLogin from 'react-google-login'
+
+
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/actions";
@@ -34,14 +34,7 @@ const LoginForm = () => {
   const onFailure = (response) => {
 
 	}
-	useEffect(()=>{
-		const start = () => {
-			gapi.auth2.init({
-				clientId: clientID,
-			})
-		}
-		gapi.load("client:auth2", start)
-	},[])
+
 
 	return (
     <section className={style.container}>
@@ -66,11 +59,7 @@ const LoginForm = () => {
 			<span className={style.error}>{error}</span>
         <h3 className={style.h3}>O</h3>
 
-        <GoogleLogin clientId={clientID}
-					onSuccess={onSuccess}
-					onFailure={onFailure}
-					cookiePolicy={"single_host_policy"}
-				/>
+    
     </section>
   );
 };
