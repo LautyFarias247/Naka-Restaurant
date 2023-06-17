@@ -1,4 +1,6 @@
 import axios from "axios";
+const URL = "https://naka-restaurant-e4eq.vercel.app"
+// const URL = "http://localhost:3001"
 // Login / logout / register .30
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
@@ -37,7 +39,7 @@ export const loginUser = (credentials) => {
   return async function (dispatch) {
     try {
       // const response = await axios.post(`http://localhost:3001/users/login`,credentials);
-      const response = await axios.post(`https://naka-restaurant-e4eq.vercel.app/users/login`,credentials);
+      const response = await axios.post(`${URL}/users/login`,credentials);
       dispatch({
         type: LOGIN_USER,
         payload: { user: response.data, cart: response.data.cart },
@@ -55,7 +57,7 @@ export const registerUser = (userData) => {
       //   userData
       // );
       const res = await axios.post(
-        "https://naka-restaurant-e4eq.vercel.app/users/register",
+        `${URL}/users/register`,
         userData
       );
       return res;
@@ -82,7 +84,7 @@ export const setStoragedUser = (user) => {
       //   `http://localhost:3001/users/${user._id}`
       // );
       const response = await axios.get(
-        `https://naka-restaurant-e4eq.vercel.app/users/${user._id}`
+        `${URL}/users/${user._id}`
       );
 
       dispatch({
@@ -99,7 +101,7 @@ export const getAllDishes = () => {
   return async (dispatch) => {
     try {
       // const response = await axios(`http://localhost:3001/dishes`);
-      const response = await axios(`https://naka-restaurant-e4eq.vercel.app/dishes`);
+      const response = await axios(`${URL}/dishes`);
       return dispatch({
         type: GET_ALL_DISHES,
         payload: response.data,
@@ -113,7 +115,7 @@ export const getCategories = () => {
   return async (dispatch) => {
     try {
       // const response = await axios.get(`http://localhost:3001/categories`);
-      const response = await axios.get(`https://naka-restaurant-e4eq.vercel.app/categories`);
+      const response = await axios.get(`${URL}/categories`);
       const categories = response.data.map((category) => category);
       return dispatch({ type: GET_CATEGORIES, payload: categories });
     } catch (error) {
@@ -128,7 +130,7 @@ export const getUserOrders = (userId) => {
       //   `http://localhost:3001/orders/${userId}`
       // );
       const response = await axios.get(
-        `https://naka-restaurant-e4eq.vercel.app/orders/${userId}`
+        `${URL}/orders/${userId}`
       );
       return dispatch({
         type: GET_USER_ORDERS,
@@ -146,7 +148,7 @@ export const getUserAddresses = (userId) => {
       //   `http://localhost:3001/addresses/${userId}`
       // );
       const response = await axios.get(
-        `https://naka-restaurant-e4eq.vercel.app/addresses/${userId}`
+        `${URL}/addresses/${userId}`
       );
       return dispatch({
         type: GET_USER_ADDRESSES,
@@ -215,19 +217,13 @@ export function removeManyProducts(product) {
 export const saveCart = ({ userId, cart }) => {
   return async function () {
     // await axios.put(`http://localhost:3001/users/cart/${userId}`, { cart });
-    await axios.put(`https://naka-restaurant-e4eq.vercel.app/users/cart/${userId}`, { cart });
+    await axios.put(`${URL}/users/cart/${userId}`, { cart });
   };
 };
 //CRUD Usuario
 export const createPayment = (cart, userId, address, username ) => {
   return async () => {
-    // const response = await axios.post("http://localhost:3001/payment/create", {
-    //   cart,
-    //   userId,
-		// 	address,
-		// 	username
-    // });
-    const response = await axios.post("https://naka-restaurant-e4eq.vercel.app/payment/create", {
+    const response = await axios.post(`${URL}/payment/create`, {
       cart,
       userId,
 			address,
@@ -240,7 +236,7 @@ export const createAddress = (userId, addressData) => {
 	return async (dispatch) => {
 		try {
 			// const {data, status} = await axios.post(`http://localhost:3001/addresses/${userId}`, addressData)
-			const {data, status} = await axios.post(`https://naka-restaurant-e4eq.vercel.app/addresses/${userId}`, addressData)
+			const {data, status} = await axios.post(`${URL}/addresses/${userId}`, addressData)
 			dispatch({
 				type: CREATE_ADDRESS,
 				payload: {address: data}
@@ -257,7 +253,7 @@ export const deleteAddress = (_id, userId) => {
 	return async () => {
 		try {
 			// const {status} = await axios.delete(`http://localhost:3001/addresses/${_id}/${userId}`)
-			const {status} = await axios.delete(`https://naka-restaurant-e4eq.vercel.app/addresses/${_id}/${userId}`)
+			const {status} = await axios.delete(`${URL}/addresses/${_id}/${userId}`)
 			return status
 		} catch (error) {
 			console.log(error);
@@ -271,7 +267,7 @@ export function getAllUsers() {
 	return async (dispatch) => {
 		try {
 			// const users = await axios.get(`http://localhost:3001/users`);
-			const users = await axios.get(`https://naka-restaurant-e4eq.vercel.app/users`);
+			const users = await axios.get(`${URL}/users`);
       return dispatch({ type: GET_ALL_USERS, payload: {users: users.data} });
     } catch (error) {
 			console.log(error);
@@ -282,7 +278,7 @@ export function getAllOrders() {
 	return async (dispatch) => {
 		try {
 			// const orders = await axios.get(`http://localhost:3001/orders`);
-			const orders = await axios.get(`https://naka-restaurant-e4eq.vercel.app/orders`);
+			const orders = await axios.get(`${URL}/orders`);
       return dispatch({ type: GET_ALL_ORDERS, payload: {orders: orders.data } });
     } catch (error) {
 			console.log(error);
@@ -292,7 +288,7 @@ export function getAllOrders() {
 export const getUserOrdersById = (userId) => {
 	return async (dispatch) => {
 		try {
-			const orders = await axios.get(`http://localhost:3001/orders/${userId}`)
+			const orders = await axios.get(`${URL}/orders/${userId}`)
 			return dispatch({type: GET_USER_ORDERS_BY_ID, payload: {orders: orders.data}})
 		} catch (error) {
 			console.log(error);
@@ -304,7 +300,7 @@ export const updateOrderStatus = (_id, status) => {
 		console.log(_id, status);
 		try {
 			// const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
-			const res = await axios.put(`https://naka-restaurant-e4eq.vercel.app/orders/${_id}`, {status});
+			const res = await axios.put(`${URL}/orders/${_id}`, {status});
       console.log(res);
     } catch (error) {
 			console.log(error);
@@ -317,7 +313,7 @@ export const updateUserStatus = (_id, status) => {
 			console.log(_id);
 			console.log(status);
 			// const response = await axios.put(`http://localhost:3001/users/status/${_id}`, {status})
-			const response = await axios.put(`https://naka-restaurant-e4eq.vercel.app/users/status/${_id}`, {status})
+			const response = await axios.put(`${URL}/users/status/${_id}`, {status})
 			console.log(response);
 		} catch (error) {
 			console.log(error);
@@ -328,7 +324,7 @@ export const updateUserStatus = (_id, status) => {
 export const updateDish = ({ id, price, stock }) => {
 	return async function (dispatch) {
 		// await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
-		await axios.put(`https://naka-restaurant-e4eq.vercel.app/dishes/${id}`, { price, stock });
+		await axios.put(`${URL}/dishes/${id}`, { price, stock });
 	};
 };
 export const createDish = (payload) => {
@@ -339,7 +335,7 @@ export const createDish = (payload) => {
 			// 		"Content-Type": "multipart/form-data",
 			// 	},
 			// });
-			await axios.post("https://naka-restaurant-e4eq.vercel.app/dishes", payload, {
+			await axios.post(`${URL}/dishes`, payload, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},
