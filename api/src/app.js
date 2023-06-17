@@ -8,6 +8,7 @@ const dishesRouter = require('./routes/dishesRouter')
 const orderRouter = require('./routes/orderRouter')
 const paymentRouter = require('./routes/paymentRouter')
 const usersRouter = require('./routes/usersRouter');
+const mercadopago = require("mercadopago");
 
 const cors = require('cors')
 mercadopago.configure({

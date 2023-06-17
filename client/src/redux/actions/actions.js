@@ -299,6 +299,7 @@ export const updateOrderStatus = (_id, status) => {
 	return async () => {
 		console.log(_id, status);
 		try {
+			if(!_id){return}
 			// const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
 			const res = await axios.put(`${URL}/orders/${_id}`, {status});
       console.log(res);
@@ -310,8 +311,7 @@ export const updateOrderStatus = (_id, status) => {
 export const updateUserStatus = (_id, status) => {
 	return async () => {
 		try {
-			console.log(_id);
-			console.log(status);
+			if(!_id){return}
 			// const response = await axios.put(`http://localhost:3001/users/status/${_id}`, {status})
 			const response = await axios.put(`${URL}/users/status/${_id}`, {status})
 			console.log(response);
