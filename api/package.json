@@ -1,5 +1,5 @@
 {
-  "name": "el-bodegon-api",
+  "name": "naka-restaurant",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jkisner24/El-bodegon-Api.git"
+    "url": "git+https://github.com/LautyFarias247/Naka-Restaurant.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jkisner24/El-bodegon-Api/issues"
+    "url": "https://github.com/LautyFarias247/Naka-Restaurant/issues"
   },
-  "homepage": "https://github.com/Jkisner24/El-bodegon-Api#readme",
+  "homepage": "+https://github.com/LautyFarias247/Naka-Restaurant.git",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
