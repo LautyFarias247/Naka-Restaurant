@@ -15,7 +15,7 @@ const AddressContainer = ({ displayForm, setDisplayForm }) => {
     <div className={style.userContainer}>
       <div className={style.userInfo}>
         {user.picture ? (
-          <img src={user.picture} alt="" />
+          <img src={user.picture} alt="" className={style.userPicture}/>
         ) : (
           <FaUser className={style.userIcon} />
         )}
