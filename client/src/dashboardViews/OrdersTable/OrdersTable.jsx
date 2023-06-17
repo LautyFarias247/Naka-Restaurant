@@ -28,9 +28,9 @@ const OrdersTable = () => {
 						</thead>
 						<tbody>
 							{orders?.map((o)=>{
-								return <tr>
+								return <tr key={o._id}>
 									<td>{o.owner}</td>
-									<td>#{o._id.slice(-15)}</td>
+									<td>#{o._id.slice(0,15)}</td>
 									<td>{o.createdAt.slice(0,10)}</td>
 									<td>$ {o.amount.toLocaleString("en-US")
                     .replace(",", ".")},00</td>

@@ -27,6 +27,7 @@ export const DELETE_ADDRESS = "DELETE_ADDRESS"
 //DASHBOARD
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_USER_ORDERS_BY_ID = "GET_USER_ORDERS_BY_ID"
 export const SET_ORDERINGS = "SET_ORDERINGS";
 export const CREATE_DISH = "CREATE_DISH";
 
@@ -263,6 +264,16 @@ export function getAllOrders() {
     }
   };
 }
+export const getUserOrdersById = (userId) => {
+	return async (dispatch) => {
+		try {
+			const orders = await axios.get(`http://localhost:3001/orders/${userId}`)
+			return dispatch({type: GET_USER_ORDERS_BY_ID, payload: {orders: orders.data}})
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
 export const updateOrderStatus = (_id, status) => {
 	return async () => {
 		console.log(_id, status);
@@ -274,6 +285,9 @@ export const updateOrderStatus = (_id, status) => {
     }
   };
 };
+export const updateUserStatus = () => {
+	
+}
 
 export const updateDish = ({ id, price, stock }) => {
 	return async function (dispatch) {

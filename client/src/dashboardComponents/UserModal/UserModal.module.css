@@ -1,0 +1,16 @@
+.userInfo{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 10px;
+}
+.userInfo h5{
+	margin: 0;
+}
+.userImage{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-right: 5px;
+	object-fit: cover;
+}

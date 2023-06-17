@@ -42,7 +42,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3000",
       },
       notification_url:
-        "https://6bb9-2800-810-557-2bcd-5009-28b8-e586-8db.sa.ngrok.io/payment/webhook",
+        "https://a66a-2800-810-557-2bcd-5009-28b8-e586-8db.sa.ngrok.io/payment/webhook",
     });
 
     return res.status(200).json(result);

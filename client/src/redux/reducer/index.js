@@ -20,6 +20,7 @@ import {
   SET_STORAGED_USER,
   GET_USER_ADDRESSES,
   CREATE_ADDRESS,
+	GET_USER_ORDERS_BY_ID,
 } from "../actions/actions";
 
 const initialState = {
@@ -128,12 +129,19 @@ const reducer = (state = initialState, { type, payload }) => {
     case CREATE_ADDRESS:
       return { ...state, addresses: [...state.addresses, payload.address] };
     //DASHBOARD ADMIN
-		
-			case GET_ALL_ORDERS:
-				return {...state, adminData:{...state.adminData, orders: payload.orders}}
-			case GET_ALL_USERS:
-      return { ...state, adminData: { ...state.adminData, users: payload.users } };
 
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        adminData: { ...state.adminData, orders: payload.orders },
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        adminData: { ...state.adminData, users: payload.users },
+      };
+		case GET_USER_ORDERS_BY_ID:
+			return {...state, adminData:{...state.adminData, userOrders: payload.orders}}
     default:
       return { ...state };
   }

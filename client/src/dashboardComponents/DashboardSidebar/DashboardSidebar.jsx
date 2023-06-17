@@ -12,7 +12,7 @@ const DashboardSidebar = () => {
 	return (
 	
     <aside className={style.sidebar}>
-      <Link to="/">
+      <Link to="/" className={style.nakaLink}>
         <h2 className={style.naka}>NAKA</h2>
       </Link>
       <ul className={style.list}>
@@ -67,7 +67,7 @@ const DashboardSidebar = () => {
               : style.listItem
           }
         >
-          <Link className={location.pathname === "/dashboard/users"
+          <Link className={location.pathname === "/dashboard/products"
                 ? style.activeLinkListItem
                 : style.linkListItem} to="/dashboard/products">
             <BiDish /> Productos

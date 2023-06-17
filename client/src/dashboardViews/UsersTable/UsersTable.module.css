@@ -1,0 +1,59 @@
+.background {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  padding: 25px;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.096);
+  /* height: 100%; */
+  width: 100%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.mainSection {
+  width: 85%;
+	text-align: left;
+	padding: 20px;
+}
+
+
+.allUsers {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.allUsers th, .allUsers td {
+  padding: 8px;
+  text-align: left;
+}
+
+.allUsers th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.allUsers tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.allUsers tbody tr:hover {
+  background-color: rgba(172, 48, 255, 0.39);
+  transition: all .3s;
+}
+
+.allUsers th:first-child,
+.allUsers td:first-child {
+  min-width: 100px;
+}
+
+.allUsers th:last-child,
+.allUsers td:last-child {
+  min-width: 80px;
+}
+

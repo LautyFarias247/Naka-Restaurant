@@ -25,7 +25,9 @@ import Checkout from "./views/Checkout/Checkout";
 import OrdersPage from "./views/OrdersPage/OrdersPage";
 import Dashboard from "./dashboardViews/Dashboard";
 import OrdersTable from "./dashboardViews/OrdersTable/OrdersTable";
-
+import UsersTable from "./dashboardViews/UsersTable/UsersTable";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
 function App() {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
@@ -86,7 +88,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/orders" element={<OrdersTable />} />
-        {/* <Route path="/dashboard/users" element={<UserTable />} /> */}
+        <Route path="/dashboard/users" element={<UsersTable />} />
         {/* <Route path="/dashboard/foods" element={<FoodTable />} /> */}
         <Route path="/dashboard/foods/create" element={<CreateDishesForm />} />
       </Routes>

@@ -124,7 +124,7 @@ const Dashboard = () => {
                     return (
                       <tr>
                         <td>{order.owner}</td>
-                        <td>#{order._id.slice(-15)}</td>
+                        <td>#{order._id.slice(0,15)}</td>
                         <td>{order.createdAt.slice(0, 10)}</td>
                         <td>
                           <button
