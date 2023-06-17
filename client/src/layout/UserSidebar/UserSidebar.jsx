@@ -12,12 +12,6 @@ const UserSidebar = () => {
         <Link to="/myaccount/orders">
           <li className={style.listItem}>Pedidos</li>
         </Link>
-        <Link to="myaccount/update">
-          <li className={style.listItem}>Actualizar información</li>
-        </Link>
-        <Link to="myaccount/update/password">
-          <li className={style.listItem}>Actualizar contraseña</li>
-        </Link>
         <Link to="/">
           <li className={style.listItem}>Cerrar sesión</li>
         </Link>
