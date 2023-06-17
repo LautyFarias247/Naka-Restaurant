@@ -37,9 +37,9 @@ const createPayment = async (req, res) => {
 				username
 			},
       back_urls: {
-        success: "http://localhost:3000",
-        pending: "http://localhost:3000",
-        failure: "http://localhost:3000",
+        success: "https://naka-restaurant.vercel.app",
+        pending: "https://naka-restaurant.vercel.app",
+        failure: "https://naka-restaurant.vercel.app",
       },
       notification_url:
         "https://naka-restaurant-e4eq.vercel.app/payment/webhook",
