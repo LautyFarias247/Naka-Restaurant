@@ -4,13 +4,27 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { updateUserStatus } from "../../redux/actions/actions";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 function UserModal({ show, handleCloseDetail, user }) {
 	const dispatch = useDispatch()
+	const [status, setStatus] = useState(user.isActive)
+	
 
 	const handleUserStatus = () => {
-		dispatch(updateUserStatus(user._id, !user.isActive))
+		Swal.fire({
+			icon:"question",
+			title:`¿Seguro quieres ${status ? "Banear" : "Desbanear"} al usuario ${user.username}?`,
+			confirmButtonText:`${status ? "Banear": "Desbanear"}`
+		}).then(({isConfirmed})=>{
+			if(isConfirmed){
+				setStatus(!status)
+				dispatch(updateUserStatus(user._id, !status))		
+			}
+		})
 	}
+	
   return (
     <Modal show={show} onHide={handleCloseDetail}>
       <Modal.Header closeButton>
@@ -32,11 +46,11 @@ function UserModal({ show, handleCloseDetail, user }) {
           </div>
           <p>Pedidos: {user.orders.length}</p>
           <p>Email: {user.email}</p>
-          <p>Estado: {user.isActive ? "Activo" : "Baneado"}</p>
+          <p>Estado: {status ? "Activo" : "Baneado"}</p>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        {!user.status ? (
+        {status ? (
           <Button variant="danger" onClick={handleUserStatus}>
             Banear Usuario
           </Button>

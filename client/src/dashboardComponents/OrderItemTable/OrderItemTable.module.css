@@ -1,0 +1,14 @@
+.detailButton{
+	border: none;
+	width: 120px;
+	height: 40px;
+	transition: all .3s;
+	font-size: 15px;
+	border-radius: 10px;
+}
+.detailButton:hover{
+	transition: all .3s;
+
+	background-color: rgba(167, 73, 255, 0.925);
+	color: #f2f2f2;
+}

@@ -28,6 +28,7 @@ export const DELETE_ADDRESS = "DELETE_ADDRESS"
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER_ORDERS_BY_ID = "GET_USER_ORDERS_BY_ID"
+export const UPDATE_USER_STATUS = "UPDATE_USER_STATUS"
 export const SET_ORDERINGS = "SET_ORDERINGS";
 export const CREATE_DISH = "CREATE_DISH";
 
@@ -285,8 +286,17 @@ export const updateOrderStatus = (_id, status) => {
     }
   };
 };
-export const updateUserStatus = () => {
-	
+export const updateUserStatus = (_id, status) => {
+	return async () => {
+		try {
+			console.log(_id);
+			console.log(status);
+			const response = await axios.put(`http://localhost:3001/users/status/${_id}`, {status})
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 export const updateDish = ({ id, price, stock }) => {

@@ -9,11 +9,10 @@ import UserItemTable from "../../dashboardComponents/UserItemTable/UserItemTable
 const UsersTable = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.adminData.users);
-  
-	useEffect(() => {
+
+  useEffect(() => {
     dispatch(getAllUsers());
   }, []);
-
 
   return (
     <>
@@ -27,24 +26,19 @@ const UsersTable = () => {
                   <th>Cliente</th>
                   <th>Email</th>
                   <th>Pedidos</th>
-                  <th style={{textAlign:"center"}}>Miembro desde:</th>
+                  <th style={{ textAlign: "center" }}>Miembro desde:</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {users?.map((user) => {
-                  return (
-                    <UserItemTable 
-											user={user}
-										/>
-                  );
+                  return <UserItemTable key={user._id} user={user} />;
                 })}
               </tbody>
             </table>
           </section>
         </div>
       </main>
-      
     </>
   );
 };

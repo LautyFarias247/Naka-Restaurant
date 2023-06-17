@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import style from './UserOrdersModal.module.css'
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserOrdersById } from '../../redux/actions/actions';
@@ -24,12 +25,21 @@ const UserOrdersModal = ({show, handleCloseOrders, user }) => {
             <h5>Dirección de entrega: {o.address.street} {o.address.number}, {o.address.neighborhood} </h5>
             <h5>Monto total: ${o.amount.toLocaleString("en-US").replace(",", ".")},00</h5>
             <h6>Items:</h6>
-            {o.items.map((item) => (
-              <div key={item._id}>
-                <p>{item.title} x {item.quantity}</p>
-                
-                <p>Precio unitario: ${Number(item.unit_price).toLocaleString("en-US").replace(",", ".")},00</p>
-              </div>
+            {o.items.map((i) => (
+              
+					<div className={style.item}>
+					<img src={i.picture_url} alt={i.title} className={style.image} />
+					<div className={style.itemData}>
+						<span>{i.title}</span>
+						<span className={style.itemQuantity}>
+							x {i.quantity}u. | ${" "}
+							{(i.quantity * i.unit_price)
+								.toLocaleString("en-US")
+								.replace(",", ".")}
+							,00
+						</span>
+					</div>
+				</div>
             ))}
           </div>
         ))}

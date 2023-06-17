@@ -3,9 +3,14 @@ import style from "./OrdersTable.module.css";
 import DashboardSidebar from "../../dashboardComponents/DashboardSidebar/DashboardSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../../redux/actions/actions";
+import OrderModal from "../../dashboardComponents/OrderModal/OrderlModal";
+import OrderItemTable from "../../dashboardComponents/OrderItemTable/OrderItemTable";
 const OrdersTable = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
+
+
+
   useEffect(() => {
     dispatch(getAllOrders());
   }, []);
@@ -28,21 +33,14 @@ const OrdersTable = () => {
 						</thead>
 						<tbody>
 							{orders?.map((o)=>{
-								return <tr key={o._id}>
-									<td>{o.owner}</td>
-									<td>#{o._id.slice(0,15)}</td>
-									<td>{o.createdAt.slice(0,10)}</td>
-									<td>$ {o.amount.toLocaleString("en-US")
-                    .replace(",", ".")},00</td>
-									<td>{o.status}</td>
-									<td><button className={style.detailButton}>Detalle</button></td>
-								</tr>
+								return <OrderItemTable o={o}/>
 							})}
 						</tbody>
 					</table>
 				</section>
       </div>
     </main>
+		
   );
 };
 

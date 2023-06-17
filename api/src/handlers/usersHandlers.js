@@ -21,28 +21,28 @@ const getUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-	const {_id} = req.params 
-	try {
-		const user = await User.findById(_id)
-		res.status(200).json(user)
-	} catch (error) {
-		res.status(400).json(error)
-	}
-}
+  const { _id } = req.params;
+  try {
+    const user = await User.findById(_id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-	try {
-		const user = await User.findOne({ email });
-		const comparison = await compare(password, user.password);
-		if (comparison) {
-			return res.status(200).json(user);
-		} else {
-			return res.status(403).json("email o contraseña incorrectos")
-		}
-	} catch (error) {
-		return res.status(400).json(error.message);
-	}
+  try {
+    const user = await User.findOne({ email });
+    const comparison = await compare(password, user.password);
+    if (comparison) {
+      return res.status(200).json(user);
+    } else {
+      return res.status(403).json("email o contraseña incorrectos");
+    }
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
 };
 
 const registerUser = async (req, res) => {
@@ -62,20 +62,42 @@ const registerUser = async (req, res) => {
 };
 
 const updateUserCart = async (req, res) => {
-	const {_id} = req.params	
-	const {cart} = req.body
+  const { _id } = req.params;
+  const { cart } = req.body;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      { cart },
+      { new: true }
+    );
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const updateUserStatus = async (req, res) => {
+  const { _id } = req.params;
+  const { status } = req.body;
+
+	console.log(_id);
+	console.log(status);
 	try {
-		const updatedUser = await User.findByIdAndUpdate(_id, {cart}, {new: true})
+		console.log(_id);
+		console.log(status);
+		const updatedUser = await User.findByIdAndUpdate(_id, {isActive: status}, {new: true})
+		console.log(updatedUser);
 		return res.status(200).json(updatedUser)
 	} catch (error) {
-		console.log(error.message);
+		console.log(error);
 	}
-}
+};
 
 module.exports = {
   getUsers,
-	getUserById,
+  getUserById,
   loginUser,
   registerUser,
   updateUserCart,
+  updateUserStatus,
 };

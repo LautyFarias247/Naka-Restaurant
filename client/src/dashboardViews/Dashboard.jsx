@@ -122,7 +122,7 @@ const Dashboard = () => {
                   const status = order.status;
                   if (status === "Entregado" || status === "Cancelado") {
                     return (
-                      <tr>
+                      <tr key={order._id}>
                         <td>{order.owner}</td>
                         <td>#{order._id.slice(0,15)}</td>
                         <td>{order.createdAt.slice(0, 10)}</td>
