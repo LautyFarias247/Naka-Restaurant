@@ -32,14 +32,16 @@ const Dashboard = () => {
     dispatch(getAllOrders());
   }, []);
 
-  const handleButtonClick = (event) => {
+  const handleButtonClick = async (event) => {
     console.log(event.target);
 
     const value = event.target.innerText;
     const _id = event.target.dataset._id;
-    dispatch(updateOrderStatus(_id, value));
-    window.location.reload();
-    Swal.close(); // Cierra la alerta
+    const response = await dispatch(updateOrderStatus(_id, value));
+    if(response.status === 200){
+			window.location.reload();
+			Swal.close(); // Cierra la alerta
+		}
   };
   const handleOrderStatus = (_id) => {
     Swal.fire({

@@ -92,8 +92,6 @@ const reducer = (state = initialState, { type, payload }) => {
       const displayedDishes = allDishes.filter((dish) =>
         categoryFilters.includes(dish.category)
       );
-
-      console.log({ displayedDishes });
       return { ...state, displayedDishes: displayedDishes };
     //carrito
     case ADD_FIRST_PRODUCT:

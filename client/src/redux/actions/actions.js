@@ -129,6 +129,7 @@ export const getUserOrders = (userId) => {
       // const response = await axios.get(
       //   `http://localhost:3001/orders/${userId}`
       // );
+			if(!userId)return
       const response = await axios.get(
         `${URL}/orders/${userId}`
       );
@@ -147,6 +148,7 @@ export const getUserAddresses = (userId) => {
       // const response = await axios.get(
       //   `http://localhost:3001/addresses/${userId}`
       // );
+			if(!userId)return
       const response = await axios.get(
         `${URL}/addresses/${userId}`
       );
@@ -216,6 +218,7 @@ export function removeManyProducts(product) {
 }
 export const saveCart = ({ userId, cart }) => {
   return async function () {
+		if(!userId)return
     // await axios.put(`http://localhost:3001/users/cart/${userId}`, { cart });
     await axios.put(`${URL}/users/cart/${userId}`, { cart });
   };
@@ -236,6 +239,7 @@ export const createAddress = (userId, addressData) => {
 	return async (dispatch) => {
 		try {
 			// const {data, status} = await axios.post(`http://localhost:3001/addresses/${userId}`, addressData)
+			if(!userId)return
 			const {data, status} = await axios.post(`${URL}/addresses/${userId}`, addressData)
 			dispatch({
 				type: CREATE_ADDRESS,
@@ -253,6 +257,7 @@ export const deleteAddress = (_id, userId) => {
 	return async () => {
 		try {
 			// const {status} = await axios.delete(`http://localhost:3001/addresses/${_id}/${userId}`)
+			if(!_id)return
 			const {status} = await axios.delete(`${URL}/addresses/${_id}/${userId}`)
 			return status
 		} catch (error) {
@@ -288,6 +293,7 @@ export function getAllOrders() {
 export const getUserOrdersById = (userId) => {
 	return async (dispatch) => {
 		try {
+			if(!userId)return
 			const orders = await axios.get(`${URL}/orders/${userId}`)
 			return dispatch({type: GET_USER_ORDERS_BY_ID, payload: {orders: orders.data}})
 		} catch (error) {
@@ -300,9 +306,12 @@ export const updateOrderStatus = (_id, status) => {
 		console.log(_id, status);
 		try {
 			if(!_id){return}
+			console.log(_id);
+			console.log(status)
 			// const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
 			const res = await axios.put(`${URL}/orders/${_id}`, {status});
-      console.log(res);
+  
+			return res
     } catch (error) {
 			console.log(error);
     }
