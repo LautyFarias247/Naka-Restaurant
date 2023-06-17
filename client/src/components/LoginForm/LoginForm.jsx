@@ -11,7 +11,6 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 	const [error, setError] = useState(null)
-	const clientID = "930486100118-lfea2s1su033rmu1bbn63k5kndthooot.apps.googleusercontent.com"
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	
