@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
@@ -9,11 +10,10 @@ const paymentRouter = require('./routes/paymentRouter')
 const usersRouter = require('./routes/usersRouter');
 
 const cors = require('cors')
-//
-require('dotenv').config();
-// SDK de Mercado Pago
+mercadopago.configure({
+	access_token: process.env.ACCESS_TOKEN_MP,
+});
 
-// Agrega credenciales
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 

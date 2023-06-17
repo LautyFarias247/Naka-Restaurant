@@ -23,10 +23,7 @@ const createPayment = async (req, res) => {
 		reference.amount += (price * quantity)
   });
 
-  mercadopago.configure({
-    access_token:
-      "TEST-4897041401780680-061218-286e74729b6a60cdeb988f78b7dbe856-1397776654",
-  });
+  
   try {
     const result = await mercadopago.preferences.create({
       items: reference.items,
@@ -76,6 +73,7 @@ const failedPayment = async (req, res) => {
 const webhook = async (req, res) => {
   const payment = req.query;
   try {
+		console.log(payment);
     if (payment.type === "payment") {
       const { body } = await mercadopago.payment.findById(payment["data.id"]);
 			const {status, additional_info, metadata} = body
