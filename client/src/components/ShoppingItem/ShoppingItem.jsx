@@ -11,7 +11,7 @@ const ShoppingItem = ({product, image, price, name,description, refresh, setRefr
 			
 			return (
 				<div className={style.container}>
-				<img src={image} className={style.image}/>
+				<img src={image ? image.url ? image.url : image : ""} className={style.image}/>
 				<div className={style.info}>
 					<span className={style.name}>{name}</span>
 					<span className={style.data}>{description}</span>

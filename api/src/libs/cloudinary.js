@@ -1,16 +1,16 @@
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2
-const { CLOUD_NAME, API_KEY, API_SECRET} = process.env
+const { CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET} = process.env
 
 cloudinary.config({
     cloud_name: CLOUD_NAME,
-    api_key: API_KEY,
-    api_secret: API_SECRET
+    api_key: CLOUDINARY_API_KEY,
+    api_secret: CLOUDINARY_API_SECRET
 })
 
 const uploadImage = async (imagePath) => {
     return await cloudinary.uploader.upload(imagePath, {
-        folder: 'El_Bodegon_de_Tony'
+        folder: 'NAKA'
     })
 }
 

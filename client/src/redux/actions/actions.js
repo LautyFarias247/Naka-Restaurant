@@ -1,6 +1,6 @@
 import axios from "axios";
-const URL = "https://naka-restaurant-e4eq.vercel.app"
-// const URL = "http://localhost:3001"
+// const URL = "https://naka-restaurant-e4eq.vercel.app"
+const URL = "http://localhost:3001";
 // Login / logout / register .30
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
@@ -11,7 +11,7 @@ export const SET_STORAGED_USER = "SET_STORAGED_USER";
 export const GET_ALL_DISHES = "GET_ALL_DISHES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_USER_ORDERS = "GET_USER_ORDERS";
-export const GET_USER_ADDRESSES = "GET_USER_ADDRESSES"
+export const GET_USER_ADDRESSES = "GET_USER_ADDRESSES";
 //Filtros 130
 export const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
 export const REMOVE_CATEGORY_FILTER = "REMOVE_CATEGORY_FILTER";
@@ -22,15 +22,14 @@ export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const REMOVE_MANY_PRODUCTS = "REMOVE_MANY_PRODUCTS";
 //CRUD Usuario... .204
-export const CREATE_PAYMENT = "CREATE_PAYMENT"
-export const CREATE_ADDRESS = "CREATE_ADDRESS"
-export const DELETE_ADDRESS = "DELETE_ADDRESS"
-;
+export const CREATE_PAYMENT = "CREATE_PAYMENT";
+export const CREATE_ADDRESS = "CREATE_ADDRESS";
+export const DELETE_ADDRESS = "DELETE_ADDRESS";
 //DASHBOARD
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_ALL_USERS = "GET_ALL_USERS";
-export const GET_USER_ORDERS_BY_ID = "GET_USER_ORDERS_BY_ID"
-export const UPDATE_USER_STATUS = "UPDATE_USER_STATUS"
+export const GET_USER_ORDERS_BY_ID = "GET_USER_ORDERS_BY_ID";
+export const UPDATE_USER_STATUS = "UPDATE_USER_STATUS";
 export const SET_ORDERINGS = "SET_ORDERINGS";
 export const CREATE_DISH = "CREATE_DISH";
 
@@ -39,7 +38,7 @@ export const loginUser = (credentials) => {
   return async function (dispatch) {
     try {
       // const response = await axios.post(`http://localhost:3001/users/login`,credentials);
-      const response = await axios.post(`${URL}/users/login`,credentials);
+      const response = await axios.post(`${URL}/users/login`, credentials);
       dispatch({
         type: LOGIN_USER,
         payload: { user: response.data, cart: response.data.cart },
@@ -56,10 +55,7 @@ export const registerUser = (userData) => {
       //   "http://localhost:3001/users/register",
       //   userData
       // );
-      const res = await axios.post(
-        `${URL}/users/register`,
-        userData
-      );
+      const res = await axios.post(`${URL}/users/register`, userData);
       return res;
     } catch (error) {
       throw new Error(error.response.data);
@@ -83,9 +79,7 @@ export const setStoragedUser = (user) => {
       // const response = await axios.get(
       //   `http://localhost:3001/users/${user._id}`
       // );
-      const response = await axios.get(
-        `${URL}/users/${user._id}`
-      );
+      const response = await axios.get(`${URL}/users/${user._id}`);
 
       dispatch({
         type: SET_STORAGED_USER,
@@ -129,10 +123,8 @@ export const getUserOrders = (userId) => {
       // const response = await axios.get(
       //   `http://localhost:3001/orders/${userId}`
       // );
-			if(!userId)return
-      const response = await axios.get(
-        `${URL}/orders/${userId}`
-      );
+      if (!userId) return;
+      const response = await axios.get(`${URL}/orders/${userId}`);
       return dispatch({
         type: GET_USER_ORDERS,
         payload: { orders: response.data },
@@ -143,15 +135,13 @@ export const getUserOrders = (userId) => {
   };
 };
 export const getUserAddresses = (userId) => {
-	return async function (dispatch) {
+  return async function (dispatch) {
     try {
       // const response = await axios.get(
       //   `http://localhost:3001/addresses/${userId}`
       // );
-			if(!userId)return
-      const response = await axios.get(
-        `${URL}/addresses/${userId}`
-      );
+      if (!userId) return;
+      const response = await axios.get(`${URL}/addresses/${userId}`);
       return dispatch({
         type: GET_USER_ADDRESSES,
         payload: { addresses: response.data },
@@ -160,7 +150,7 @@ export const getUserAddresses = (userId) => {
       console.log(error);
     }
   };
-}
+};
 //filtros
 export const setCategoryFilter = (name) => {
   return async (dispatch) => {
@@ -218,137 +208,160 @@ export function removeManyProducts(product) {
 }
 export const saveCart = ({ userId, cart }) => {
   return async function () {
-		if(!userId)return
+    if (!userId) return;
     // await axios.put(`http://localhost:3001/users/cart/${userId}`, { cart });
     await axios.put(`${URL}/users/cart/${userId}`, { cart });
   };
 };
 //CRUD Usuario
-export const createPayment = (cart, userId, address, username ) => {
+export const createPayment = (cart, userId, address, username) => {
   return async () => {
     const response = await axios.post(`${URL}/payment/create`, {
       cart,
       userId,
-			address,
-			username
+      address,
+      username,
     });
     window.location.href = response.data.body.init_point;
   };
 };
 export const createAddress = (userId, addressData) => {
-	return async (dispatch) => {
-		try {
-			// const {data, status} = await axios.post(`http://localhost:3001/addresses/${userId}`, addressData)
-			if(!userId)return
-			const {data, status} = await axios.post(`${URL}/addresses/${userId}`, addressData)
-			dispatch({
-				type: CREATE_ADDRESS,
-				payload: {address: data}
-			})
-			console.log(status);
-			return status
-		} catch (error) {
-			console.log(error);
-			return error.response.status
-		}
-	}
-}
+  return async (dispatch) => {
+    try {
+      // const {data, status} = await axios.post(`http://localhost:3001/addresses/${userId}`, addressData)
+      if (!userId) return;
+      const { data, status } = await axios.post(
+        `${URL}/addresses/${userId}`,
+        addressData
+      );
+      dispatch({
+        type: CREATE_ADDRESS,
+        payload: { address: data },
+      });
+      console.log(status);
+      return status;
+    } catch (error) {
+      console.log(error);
+      return error.response.status;
+    }
+  };
+};
 export const deleteAddress = (_id, userId) => {
-	return async () => {
-		try {
-			// const {status} = await axios.delete(`http://localhost:3001/addresses/${_id}/${userId}`)
-			if(!_id)return
-			const {status} = await axios.delete(`${URL}/addresses/${_id}/${userId}`)
-			return status
-		} catch (error) {
-			console.log(error);
-			return 400
-		}
-	}
-}
+  return async () => {
+    try {
+      // const {status} = await axios.delete(`http://localhost:3001/addresses/${_id}/${userId}`)
+      if (!_id) return;
+      const { status } = await axios.delete(
+        `${URL}/addresses/${_id}/${userId}`
+      );
+      return status;
+    } catch (error) {
+      console.log(error);
+      return 400;
+    }
+  };
+};
 // DASHBOARD ADMIN
 
 export function getAllUsers() {
-	return async (dispatch) => {
-		try {
-			// const users = await axios.get(`http://localhost:3001/users`);
-			const users = await axios.get(`${URL}/users`);
-      return dispatch({ type: GET_ALL_USERS, payload: {users: users.data} });
+  return async (dispatch) => {
+    try {
+      // const users = await axios.get(`http://localhost:3001/users`);
+      const users = await axios.get(`${URL}/users`);
+      return dispatch({ type: GET_ALL_USERS, payload: { users: users.data } });
     } catch (error) {
-			console.log(error);
+      console.log(error);
     }
   };
 }
 export function getAllOrders() {
-	return async (dispatch) => {
-		try {
-			// const orders = await axios.get(`http://localhost:3001/orders`);
-			const orders = await axios.get(`${URL}/orders`);
-      return dispatch({ type: GET_ALL_ORDERS, payload: {orders: orders.data } });
+  return async (dispatch) => {
+    try {
+      // const orders = await axios.get(`http://localhost:3001/orders`);
+      const orders = await axios.get(`${URL}/orders`);
+      return dispatch({
+        type: GET_ALL_ORDERS,
+        payload: { orders: orders.data },
+      });
     } catch (error) {
-			console.log(error);
+      console.log(error);
     }
   };
 }
 export const getUserOrdersById = (userId) => {
-	return async (dispatch) => {
-		try {
-			if(!userId)return
-			const orders = await axios.get(`${URL}/orders/${userId}`)
-			return dispatch({type: GET_USER_ORDERS_BY_ID, payload: {orders: orders.data}})
-		} catch (error) {
-			console.log(error);
-		}
-	}
-}
-export const updateOrderStatus = (_id, status) => {
-	return async () => {
-		console.log(_id, status);
-		try {
-			if(!_id){return}
-			console.log(_id);
-			console.log(status)
-			// const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
-			const res = await axios.put(`${URL}/orders/${_id}`, {status});
-  
-			return res
+  return async (dispatch) => {
+    try {
+      if (!userId) return;
+      const orders = await axios.get(`${URL}/orders/${userId}`);
+      return dispatch({
+        type: GET_USER_ORDERS_BY_ID,
+        payload: { orders: orders.data },
+      });
     } catch (error) {
-			console.log(error);
+      console.log(error);
+    }
+  };
+};
+export const updateOrderStatus = (_id, status) => {
+  return async () => {
+    console.log(_id, status);
+    try {
+      if (!_id) {
+        return;
+      }
+      console.log(_id);
+      console.log(status);
+      // const res = await axios.put(`http://localhost:3001/orders/${_id}`, {status});
+      const res = await axios.put(`${URL}/orders/${_id}`, { status });
+
+      return res;
+    } catch (error) {
+      console.log(error);
     }
   };
 };
 export const updateUserStatus = (_id, status) => {
-	return async () => {
-		try {
-			if(!_id){return}
-			// const response = await axios.put(`http://localhost:3001/users/status/${_id}`, {status})
-			const response = await axios.put(`${URL}/users/status/${_id}`, {status})
-			console.log(response);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-}
+  return async () => {
+    try {
+      if (!_id) {
+        return;
+      }
+      // const response = await axios.put(`http://localhost:3001/users/status/${_id}`, {status})
+      const response = await axios.put(`${URL}/users/status/${_id}`, {
+        status,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const updateDish = ({ id, price, stock }) => {
-	return async function (dispatch) {
-		// await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
-		await axios.put(`${URL}/dishes/${id}`, { price, stock });
-	};
+  return async function (dispatch) {
+    // await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
+    await axios.put(`${URL}/dishes/${id}`, { price, stock });
+  };
 };
 export const createDish = (payload) => {
-	try {
-		return async function () {
-			// await axios.post("http://localhost:3001/dishes", payload, {
-			// 	headers: {
-			// 		"Content-Type": "multipart/form-data",
-			// 	},
-			// });
-			await axios.post(`${URL}/dishes`, payload, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
-		};
-	} catch (error) {}
+  try {
+    return async function () {
+      const form = new FormData();
+
+      for (const key in payload) {
+        form.append(key, payload[key]);
+      }
+      console.log(form);
+      
+			const response = await axios.post(`${URL}/dishes`, form, {
+      	headers: {
+      		"Content-Type": "multipart/form-data",
+      	},
+      });
+			console.log(response);
+    };
+    // eslint-disable-next-line
+  } catch (error) {
+    console.log(error);
+  }
 };
