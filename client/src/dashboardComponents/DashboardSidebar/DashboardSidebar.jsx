@@ -1,16 +1,15 @@
 import React from "react";
-import style from './DashboardSidebar.module.css'
+import style from "./DashboardSidebar.module.css";
 
 import { MdDashboard } from "react-icons/md";
 import { LuClipboardList } from "react-icons/lu";
 import { FiUsers } from "react-icons/fi";
 import { BsArrowBarLeft } from "react-icons/bs";
-import {BiDish} from 'react-icons/bi'
+import { BiDish } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 const DashboardSidebar = () => {
-  const location = useLocation()
-	return (
-	
+  const location = useLocation();
+  return (
     <aside className={style.sidebar}>
       <Link to="/" className={style.nakaLink}>
         <h2 className={style.naka}>NAKA</h2>
@@ -41,9 +40,14 @@ const DashboardSidebar = () => {
               : style.listItem
           }
         >
-          <Link className={location.pathname === "/dashboard/orders"
+          <Link
+            className={
+              location.pathname === "/dashboard/orders"
                 ? style.activeLinkListItem
-                : style.linkListItem} to="/dashboard/orders">
+                : style.linkListItem
+            }
+            to="/dashboard/orders"
+          >
             <LuClipboardList /> Pedidos
           </Link>
         </li>
@@ -54,32 +58,36 @@ const DashboardSidebar = () => {
               : style.listItem
           }
         >
-          <Link className={location.pathname === "/dashboard/users"
+          <Link
+            className={
+              location.pathname === "/dashboard/users"
                 ? style.activeLinkListItem
-                : style.linkListItem} to="/dashboard/users">
+                : style.linkListItem
+            }
+            to="/dashboard/users"
+          >
             <FiUsers /> Usuarios
           </Link>
         </li>
         <li
           className={
             location.pathname === "/dashboard/products"
-              ? style.activeLink
+              ? style.activeListItem
               : style.listItem
           }
         >
-          <Link className={location.pathname === "/dashboard/products"
+          <Link
+            className={
+              location.pathname === "/dashboard/products"
                 ? style.activeLinkListItem
-                : style.linkListItem} to="/dashboard/products">
+                : style.linkListItem
+            }
+            to="/dashboard/products"
+          >
             <BiDish /> Productos
           </Link>
         </li>
-        <li
-          className={
-            location.pathname === "/dashboard/products"
-              ? style.activeLink
-              : style.listItem
-          }
-        >
+        <li className={style.listItem}>
           <Link className={style.linkListItem} to="/">
             <BsArrowBarLeft /> Volver
           </Link>

@@ -7,7 +7,7 @@ import OrderModal from "../../dashboardComponents/OrderModal/OrderlModal";
 import OrderItemTable from "../../dashboardComponents/OrderItemTable/OrderItemTable";
 const OrdersTable = () => {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.adminData.orders);
 
 
 

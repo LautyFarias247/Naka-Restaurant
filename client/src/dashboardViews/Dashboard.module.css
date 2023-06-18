@@ -1,7 +1,7 @@
 .background {
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  /* height: 100vh; */
   padding: 25px;
 }
 
@@ -164,10 +164,13 @@ button:hover{
 }
 
 
-
+.tableContainer{
+	overflow-y: auto;
+	height: 288px;
+}
 .completedOrders {
   width: 100%;
-  border-collapse: collapse;
+	height: 400px;
 }
 
 .completedOrders th, .completedOrders td {

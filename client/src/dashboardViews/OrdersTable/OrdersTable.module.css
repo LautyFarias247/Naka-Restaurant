@@ -1,7 +1,7 @@
 .background {
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  height: 100vh;
   padding: 25px;
 }
 
@@ -19,6 +19,7 @@
   width: 85%;
 	text-align: left;
 	padding: 20px;
+	overflow-y: auto;
 }
 .allOrders {
   width: 100%;
