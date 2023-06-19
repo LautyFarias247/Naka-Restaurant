@@ -7,7 +7,7 @@ import Menu from "./views/Menu/Menu";
 import Profile from "./views/Profile/Profile";
 import { ShoppingCart } from "./views/ShoppingCart/ShoppingCart";
 import LoginPage from "./views/LoginPage/LoginPage";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,12 +29,17 @@ import UsersTable from "./dashboardViews/UsersTable/UsersTable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import ProductsTable from "./dashboardViews/ProductsTable/ProductsTable";
+
+
 function App() {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
+		console.log(process.env);
+		console.log(process.env.REACT_APP_ID_CLIENTE_GOOGLE);
+		console.log(process.env.SECRET_CLIENT);
     dispatch(getAllDishes());
     dispatch(getCategories());
     const localStorageUser = localStorage.getItem("user");

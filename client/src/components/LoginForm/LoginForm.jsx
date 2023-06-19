@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./LoginForm.module.css";
-
+import { GoogleLogin } from '@react-oauth/google';
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -58,7 +58,15 @@ const LoginForm = () => {
 			<span className={style.error}>{error}</span>
         <h3 className={style.h3}>O</h3>
 
-    
+    <GoogleLogin
+		onSuccess={credentialResponse => {
+			console.log(credentialResponse);
+		}}
+		onError={() => {
+			console.log('Login Failed');
+		}}
+	/>
+	
     </section>
   );
 };
