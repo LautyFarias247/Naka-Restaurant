@@ -37,7 +37,7 @@ const AddressForm = ({ displayForm, setDisplayForm }) => {
       return Swal.fire({
         title: "Dirección agregada",
         icon: "success",
-        confirmButtonText: "Ver pedidos",
+        confirmButtonText: "Ok",
         iconColor: "#BF8D39",
       });
     };
