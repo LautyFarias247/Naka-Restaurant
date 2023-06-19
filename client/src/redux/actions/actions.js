@@ -1,6 +1,6 @@
 import axios from "axios";
-// const URL = "https://naka-restaurant-e4eq.vercel.app"
-const URL = "http://localhost:3001";
+const URL = "https://naka-restaurant-e4eq.vercel.app"
+// const URL = "http://localhost:3001";
 // Login / logout / register .30
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
