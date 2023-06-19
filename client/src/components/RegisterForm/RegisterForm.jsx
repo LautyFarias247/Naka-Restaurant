@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import style from './RegisterForm.module.css'
 
 import { useDispatch } from 'react-redux'
-import { registerUser } from '../../redux/actions/actions'
+import { registerUser, setGoogleUser } from '../../redux/actions/actions'
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { useNavigate } from 'react-router-dom'
+import { GoogleLogin } from '@react-oauth/google';
+import jwtDecode from 'jwt-decode';
 
 
 
@@ -34,7 +36,6 @@ const RegisterForm = () => {
 				iconColor: "#BF8D39"
 			}).then((result) => {
 				if (result.isConfirmed) {
-					// Redireccionar a la página deseada
 					navigate("/account/login")
 				}
 			});
@@ -43,7 +44,25 @@ const RegisterForm = () => {
 		}
 		
 	}
-
+	const onSuccess = async (credentialResponse) => {
+    const { name, given_name, email, sub, picture } = await jwtDecode(
+      credentialResponse.credential
+    );
+		console.log(credentialResponse);
+		console.log(sub);
+    const user = {
+			username: name,
+      given_name,
+      email,
+      password: sub,
+      picture,
+    };
+		console.log(user);
+    const status = await dispatch(setGoogleUser(user));
+		if(status === 200){
+			navigate("/menu")
+		}
+	};
 	return (
 		<section className={style.container}>
       <h2 className={style.titulo}>Registrarse</h2>
@@ -87,7 +106,12 @@ const RegisterForm = () => {
 				<button type="submit" className={style.boton}>Crear cuenta</button>
       </form>
         <h3 className={style.h3}>O</h3>
-    
+				<GoogleLogin
+        onSuccess={onSuccess}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
     </section>
 	)
 }

@@ -4,14 +4,25 @@ import DashboardSidebar from "../../dashboardComponents/DashboardSidebar/Dashboa
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/actions/actions";
 import UserItemTable from "../../dashboardComponents/TableItems/UserItemTable/UserItemTable";
+import { useNavigate } from "react-router-dom";
+import { protectRoute } from "../../helpers/protectRoute";
 
 
 const UsersTable = () => {
+	
+	const navigate = useNavigate()
   const dispatch = useDispatch();
+	const admin = useSelector((state) => state.user);
   const users = useSelector((state) => state.adminData.users);
-
+	
   useEffect(() => {
-    dispatch(getAllUsers());
+
+		const isAdmin = protectRoute(admin.admin);
+    if(isAdmin){
+			dispatch(getAllUsers());
+			return
+		}
+		navigate("/")
   }, []);
 
   return (

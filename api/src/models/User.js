@@ -8,7 +8,11 @@ const UserSchema = new mongoose.Schema(
     },
     username: {
       type: String,
+			required: true
     },
+		given_name:{
+			type: String
+		},
     email: {
       type: String,
       unique: true,
@@ -30,12 +34,12 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    addresses: [{ type: ObjectId, ref: "address" }],
+    addresses: [{ type: mongoose.Schema.Types.ObjectId, ref: "address" }],
     cart: {
       type: Array,
       default: [],
     },
-    orders: [{ type: ObjectId, ref: "order" }],
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "order" }],
   },
   {
     versionKey: false,

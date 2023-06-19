@@ -23,6 +23,7 @@ import {
   GET_ALL_ORDERS,
   GET_ALL_USERS,
 	GET_USER_ORDERS_BY_ID,
+	SET_GOOGLE_USER,
 } from "../actions/actions";
 
 const initialState = {
@@ -50,7 +51,10 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     case REMOVE_SESSION:
       return { ...state, user: {}, cart: [] };
-    case SET_STORAGED_USER:
+		case SET_GOOGLE_USER:
+			localStorage.setItem("user", JSON.stringify(payload.user))
+			return {...state, user: payload.user}
+			case SET_STORAGED_USER:
       return {
         ...state,
         user: payload.user,

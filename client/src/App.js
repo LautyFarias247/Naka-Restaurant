@@ -37,9 +37,6 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-		console.log(process.env);
-		console.log(process.env.REACT_APP_ID_CLIENTE_GOOGLE);
-		console.log(process.env.SECRET_CLIENT);
     dispatch(getAllDishes());
     dispatch(getCategories());
     const localStorageUser = localStorage.getItem("user");

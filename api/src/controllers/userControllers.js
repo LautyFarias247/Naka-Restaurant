@@ -6,11 +6,16 @@ const User = require('../models/User');
 const {compare, hash} = bcrypt
 
 
-const saveUser = async (username, email, password) => {
-    
+const saveUser = async (username, email, password, given_name, picture) => {
+    console.log({username, email, password, given_name, picture});
 		try {
 			const hashedPass = await hash(password, 5)
-	
+			if(given_name){
+				const newUser = new User({username, email, password: hashedPass, given_name, picture})
+				console.log(newUser);
+				await newUser.save()
+				return newUser
+			}
 			const newUser = new User({username, email, password: hashedPass})
 		
 			await newUser.save()

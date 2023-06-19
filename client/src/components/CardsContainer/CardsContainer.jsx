@@ -12,7 +12,7 @@ const Cards = () => {
   
 	const [aux, setAux] = useState(0)
   let totalPrice = 0
-  cart.forEach(item => {
+  cart?.forEach(item => {
     totalPrice += item.price * item.quantity
   });
 

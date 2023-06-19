@@ -60,7 +60,21 @@ const registerUser = async (req, res) => {
     console.log(error.message);
   }
 };
+const googleLogin = async (req, res) => {
+	const {username, given_name, email, password, picture} = req.body
+	try {
+	
+		const registeredUser = await User.findOne({email})
 
+		if (registeredUser) {
+			return res.status(200).json(registeredUser)
+		}
+		const savedUser = await saveUser(username, email, password, given_name, picture)
+		return res.status(200).json(savedUser)
+	} catch (error) {
+		
+	}
+}
 const updateUserCart = async (req, res) => {
   const { _id } = req.params;
   const { cart } = req.body;
@@ -98,6 +112,7 @@ module.exports = {
   getUserById,
   loginUser,
   registerUser,
+	googleLogin,
   updateUserCart,
   updateUserStatus,
 };

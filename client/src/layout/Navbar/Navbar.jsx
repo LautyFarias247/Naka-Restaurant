@@ -8,9 +8,10 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     localStorage.removeItem("user");
-    dispatch(removeSession());
+    await dispatch(removeSession());
+		window.location.reload()
   };
 
   return (
@@ -39,7 +40,7 @@ const Navbar = () => {
           <li className={style.welcome}>
             Bienvenido/a{" "}
             <Link to="myaccount" className={style.list}>
-              {user.username}!
+              {user.given_name || user.username}!
             </Link>
           </li>
           <Link to="/cart">

@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Dashboard.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiUsers } from "react-icons/fi";
 import { BiSushi, BiMoneyWithdraw } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,11 @@ import {
 } from "../redux/actions/actions";
 import Swal from "sweetalert2";
 import DashboardSidebar from "../dashboardComponents/DashboardSidebar/DashboardSidebar";
+import { protectRoute } from "../helpers/protectRoute";
 const Dashboard = () => {
   const dispatch = useDispatch();
-
+	const navigate = useNavigate()
+  const admin = useSelector((state) => state.user);
   const orders = useSelector((state) => state.adminData.orders);
   const users = useSelector((state) => state.adminData.users);
   const dishes = useSelector((state) => state.allDishes);
@@ -28,8 +30,13 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    dispatch(getAllUsers());
-    dispatch(getAllOrders());
+    const isAdmin = protectRoute(admin.admin);
+		if (isAdmin) {
+			dispatch(getAllUsers());
+			dispatch(getAllOrders());
+			return
+		}
+		navigate("/")
   }, []);
 
   const handleButtonClick = async (event) => {
@@ -61,7 +68,7 @@ const Dashboard = () => {
         const buttons = document.querySelectorAll(
           `.${style.buttonContainer} button`
         ); // Utiliza la clase del CSS Module
-        buttons.forEach((button) => {
+        buttons?.forEach((button) => {
           button.addEventListener("click", handleButtonClick);
         });
       },

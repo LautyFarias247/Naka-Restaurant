@@ -70,9 +70,18 @@ export const removeSession = () => {
     });
   };
 };
-// export const setGoogleUser = async () => {
-// 	const res = await axios.get("http://localhost:3001/users")
-// }
+export const setGoogleUser = (user) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.post("http://localhost:3001/users/googlelogin", user)
+		
+			dispatch({type: SET_GOOGLE_USER, 	payload: {user: res.data}})
+			return res.status
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
 export const setStoragedUser = (user) => {
   return async function (dispatch) {
     try {
