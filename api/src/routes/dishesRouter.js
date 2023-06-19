@@ -7,7 +7,7 @@ const dishesRouter = Router();
 dishesRouter.get("/", getDishes )
 dishesRouter.get("/:id", getDishById)
 dishesRouter.post("/", createDish)
-dishesRouter.put("/:id", updateDish)
-dishesRouter.delete("/:id", deleteDish)
+dishesRouter.put("/:_id", updateDish)
+dishesRouter.delete("/:_id", deleteDish)
 
 module.exports = dishesRouter

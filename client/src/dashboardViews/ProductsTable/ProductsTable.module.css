@@ -19,41 +19,58 @@
   width: 85%;
 	text-align: left;
 	padding: 20px;
+	overflow-y: auto;
 }
-
-
-.allUsers {
+.headline {
+	display: flex;
+	justify-content: space-between;
+}
+.allDishes {
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
 }
 
-.allUsers th, .allUsers td {
+.allDishes th, .allDishes td {
   padding: 8px;
   text-align: left;
 }
 
-.allUsers th {
+.allDishes th {
   background-color: #f2f2f2;
   font-weight: bold;
 }
 
-.allUsers tbody tr:nth-child(even) {
+.allDishes tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.allUsers tbody tr:hover {
+.allDishes tbody tr:hover {
   background-color: rgba(172, 48, 255, 0.39);
   transition: all .3s;
 }
 
-.allUsers th:first-child,
-.allUsers td:first-child {
+.allDishes th:first-child,
+.allDishes td:first-child {
   min-width: 100px;
 }
 
-.allUsers th:last-child,
-.allUsers td:last-child {
+.allDishes th:last-child,
+.allDishes td:last-child {
   min-width: 80px;
 }
 
+.headline button{
+	border: none;
+	width: 160px;
+	height: 60px;
+	transition: all .3s;
+	font-size: 15px;
+	border-radius: 10px;
+}
+.headline button:hover{
+	transition: all .3s;
+
+	background-color: rgba(167, 73, 255, 0.925);
+	color: #f2f2f2;
+}

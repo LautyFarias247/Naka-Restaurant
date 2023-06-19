@@ -3,8 +3,7 @@ import style from "./OrdersTable.module.css";
 import DashboardSidebar from "../../dashboardComponents/DashboardSidebar/DashboardSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../../redux/actions/actions";
-import OrderModal from "../../dashboardComponents/OrderModal/OrderlModal";
-import OrderItemTable from "../../dashboardComponents/OrderItemTable/OrderItemTable";
+import OrderItemTable from '../../dashboardComponents/TableItems/OrderItemTable/OrderItemTable'
 const OrdersTable = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.adminData.orders);

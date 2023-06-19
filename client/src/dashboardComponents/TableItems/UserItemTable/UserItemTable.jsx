@@ -1,8 +1,8 @@
 import React from "react";
-import UserModal from "../UserModal/UserModal";
 import style from "./UserItemTable.module.css";
 import { useState } from "react";
-import UserOrdersModal from "../UserOrdersModal/UserOrdersModal";
+import UserOrdersModal from "../../Modals/UserOrdersModal/UserOrdersModal";
+import UserModal from "../../Modals/UserModal/UserModal";
 
 const UserItemTable = ({ user }) => {
   const [showDetail, setShowDetail] = useState(false)

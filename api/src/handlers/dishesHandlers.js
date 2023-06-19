@@ -25,11 +25,8 @@ const getDishById = async (req, res) => {
 
 const createDish = async (req, res) => {
   try {
-    console.log(req.body);
-    console.log(req.files);
-		const {name, category, price, stock, description} = req.body
 		let image
-		if(req.files.image){
+		if(req.files?.image){
 			const result = await uploadImage(req.files.image.tempFilePath)
 			image = {
 				url: result.secure_url,
@@ -48,13 +45,15 @@ const createDish = async (req, res) => {
 
 const updateDish = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { stock, price } = req.body;
-
-    const updatedDish = await Dish.updateOne(
-      { _id: id },
-      { $set: { price, stock } }
-    );
+    const { _id } = req.params;
+    const { name, description, stock, price } = req.body;
+		console.log(_id);
+		console.log(req.body);
+		const updatedDish = await Dish.findByIdAndUpdate(_id, req.body)
+    // const updatedDish = await Dish.updateOne(
+    //   { _id: id },
+    //   { $set: { price, stock } }
+    // );
     res.status(200).send(updatedDish);
   } catch (error) {
     console.log(error);
@@ -63,10 +62,11 @@ const updateDish = async (req, res) => {
 };
 
 const deleteDish = async (req, res) => {
-  const { id } = req.params;
+  const { _id } = req.params;
   try {
-    const dishRemoved = await Dish.findByIdAndDelete(id);
-    await deleteImage(dishRemoved.image.public_id);
+    const dishRemoved = await Dish.findByIdAndDelete(_id);
+
+    // await deleteImage(dishRemoved.image.public_id);
     res.status(200).send("se borro correctamente");
   } catch (error) {
     res.status(404).send(error.message);

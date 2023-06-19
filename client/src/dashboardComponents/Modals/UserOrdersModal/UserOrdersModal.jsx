@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import style from './UserOrdersModal.module.css'
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserOrdersById } from '../../redux/actions/actions';
+import { getUserOrdersById } from '../../../redux/actions/actions';
 import { useEffect } from 'react';
 
 const UserOrdersModal = ({show, handleCloseOrders, user }) => {

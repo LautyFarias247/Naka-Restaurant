@@ -3,7 +3,7 @@ import style from "./UserModal.module.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
-import { updateUserStatus } from "../../redux/actions/actions";
+import { updateUserStatus } from "../../../redux/actions/actions";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 

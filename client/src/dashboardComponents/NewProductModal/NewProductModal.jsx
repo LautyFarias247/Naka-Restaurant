@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createDish } from "../../redux/actions/actions";
+import Swal from "sweetalert2";
 
 const NewProductModal = ({ show, handleClose }) => {
   const dispatch = useDispatch()
@@ -15,9 +16,19 @@ const NewProductModal = ({ show, handleClose }) => {
   const handleFile = (e) => {
     setInitialValues({ ...initialValues, image: e.target.files[0] });
   };
-  const handleSubmit = (e) => {
-		dispatch(createDish(initialValues))
-    e.preventDefault();
+  const handleSubmit = async(e) => {
+		e.preventDefault();
+		const {status} = await dispatch(createDish(initialValues))
+    if (status === 200) {
+			Swal.fire({
+        title: `Plato creado correctamente`,
+        icon: "success",
+        confirmButtonText: "Ok",
+        iconColor: "#BF8D39",
+      }).then(()=>{
+				window.location.reload();
+			});
+		}
     ;
   };
 
@@ -98,17 +109,14 @@ const NewProductModal = ({ show, handleClose }) => {
               onChange={handleOnChange}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+        <Button variant="secondary" onClick={handleClose}>
+          Cerrar
+        </Button>
+          <Button variant="primary" type="submit" style={{marginLeft: "10px"}}>
             Enviar
           </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Cerrar
-        </Button>
-
-      </Modal.Footer>
     </Modal>
   );
 };

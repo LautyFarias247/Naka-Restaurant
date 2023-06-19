@@ -3,8 +3,8 @@ import style from "./UsersTable.module.css";
 import DashboardSidebar from "../../dashboardComponents/DashboardSidebar/DashboardSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../redux/actions/actions";
+import UserItemTable from "../../dashboardComponents/TableItems/UserItemTable/UserItemTable";
 
-import UserItemTable from "../../dashboardComponents/UserItemTable/UserItemTable";
 
 const UsersTable = () => {
   const dispatch = useDispatch();

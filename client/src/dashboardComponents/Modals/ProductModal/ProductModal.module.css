@@ -1,0 +1,17 @@
+.image {
+	width: 100px;
+	height: 100px;
+	border-radius: 20%;
+}
+
+.cardContainer{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.data{
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+}

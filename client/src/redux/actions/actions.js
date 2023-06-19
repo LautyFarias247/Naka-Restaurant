@@ -337,11 +337,11 @@ export const updateUserStatus = (_id, status) => {
   };
 };
 
-export const updateDish = ({ id, price, stock }) => {
+export const updateDish = (_id, newDish) => {
   return async function (dispatch) {
-    // await axios.put(`http://localhost:3001/dishes/${id}`, { price, stock });
-    await axios.put(`${URL}/dishes/${id}`, { price, stock });
-  };
+   const response = await axios.put(`${URL}/dishes/${_id}`, newDish);
+		return response.status
+	};
 };
 export const createDish = (payload) => {
   try {
@@ -358,10 +358,20 @@ export const createDish = (payload) => {
       		"Content-Type": "multipart/form-data",
       	},
       });
-			console.log(response);
+			return response
     };
     // eslint-disable-next-line
   } catch (error) {
     console.log(error);
   }
 };
+export const deleteDish = (_id) => {
+	return async () => {
+		try {
+			const {status} = await axios.delete(`${URL}/dishes/${_id}`);
+			return status
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
