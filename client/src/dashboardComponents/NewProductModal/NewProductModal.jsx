@@ -27,6 +27,7 @@ const NewProductModal = ({ show, handleClose }) => {
         iconColor: "#BF8D39",
       }).then(()=>{
 				dispatch(getAllDishes())
+				setInitialValues({})
 				handleClose()
 			});
 		}

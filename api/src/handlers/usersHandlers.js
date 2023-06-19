@@ -5,7 +5,6 @@ const {
   updateById,
 } = require("../controllers/userControllers");
 const User = require("../models/User");
-const { sendMail } = require("../libs/nodemailer");
 const bcrypt = require("bcrypt");
 
 const { compare } = bcrypt;

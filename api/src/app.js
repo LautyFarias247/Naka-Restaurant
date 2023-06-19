@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
+const path = require('path')
 const addressesRouter = require('./routes/addressesRouter')
 const categoriesRouter = require('./routes/categoriesRouter');
 const dishesRouter = require('./routes/dishesRouter')
@@ -40,7 +41,7 @@ app.use(morgan('dev'));
 
 app.use(fileUpload({
     useTempFiles: true,
-    tempFileDir: './src/upload'
+    tempFileDir: path.join(__dirname, 'upload')
 }))
 
 
