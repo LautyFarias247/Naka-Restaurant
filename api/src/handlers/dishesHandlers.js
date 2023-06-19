@@ -32,7 +32,7 @@ const createDish = async (req, res) => {
 				url: result.secure_url,
 				public_id: result.public_id
 			}
-			await fs.remove(req.files.image.tempFilePath)
+			// await fs.remove(req.files.image.tempFilePath)
 		}
 		const newDish =  new Dish({...req.body, image})
 		await newDish.save()
