@@ -44,7 +44,7 @@ const Navbar = () => {
             </Link>
           </li>
           <Link to="/cart">
-            <li className={style.list}>Carrito</li>
+            <li className={style.list}>Canasta</li>
           </Link>
           <Link to="/" onClick={handleLogOut}>
             <li className={style.list}>Cerrar Sesión</li>

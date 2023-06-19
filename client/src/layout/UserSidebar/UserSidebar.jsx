@@ -10,7 +10,7 @@ const UserSidebar = () => {
           <li className={style.listItem}>Mi perfil</li>
         </Link>
         <Link to="/myaccount/orders">
-          <li className={style.listItem}>Pedidos</li>
+          <li className={style.listItem}>Mis pedidos</li>
         </Link>
         <Link to="/">
           <li className={style.listItem}>Cerrar sesión</li>

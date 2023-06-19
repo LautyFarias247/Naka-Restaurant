@@ -6,8 +6,7 @@ const OrderCard = ({ _id, items, amount, address, status, date }) => {
   return (
     <article className={style.container}>
       <h4 className={style.title}>
-        ID del pedido: #{_id.slice(0,15)} | Estado:{" "}
-        {status === "pending" ? "En preparación" : "Entregado"}
+        ID del pedido: #{_id.slice(0,15)} | Estado:{status}
       </h4>
       <h5 className={style.info}>Fecha: {date.slice(0, 10)}</h5>
       <h5 className={style.info}>

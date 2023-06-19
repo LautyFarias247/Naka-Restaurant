@@ -34,10 +34,11 @@ const Dashboard = () => {
 		if (isAdmin) {
 			dispatch(getAllUsers());
 			dispatch(getAllOrders());
-			return
+
+		} else {
+			navigate("/")
 		}
-		navigate("/")
-  }, []);
+  }, [admin]);
 
   const handleButtonClick = async (event) => {
     console.log(event.target);
@@ -46,8 +47,8 @@ const Dashboard = () => {
     const _id = event.target.dataset._id;
     const response = await dispatch(updateOrderStatus(_id, value));
     if (response.status === 200) {
-      window.location.reload();
-      Swal.close(); // Cierra la alerta
+      dispatch(getAllOrders())
+      Swal.close();
     }
   };
   const handleOrderStatus = (_id) => {
@@ -89,7 +90,7 @@ const Dashboard = () => {
               </div>
               <div className={style.cardInfo}>
                 <BiSushi className={style.cardIcon} />
-                <span>+ {12} nuevos platos</span>
+                <span>+ {dishes.length} nuevos platos</span>
                 <span>Este mes</span>
               </div>
             </Link>
@@ -118,7 +119,7 @@ const Dashboard = () => {
           <div>
             <h3 className={style.completedOrdersTitle}>Pedidos Finalizados</h3>
             <section className={style.tableContainer}>
-              <table className={style.completedOrders}>
+              {/* <table className={style.completedOrders}>
                 <thead>
                   <tr>
                     <th>Cliente</th>
@@ -132,7 +133,7 @@ const Dashboard = () => {
                     const status = order.status;
                     if (status === "Entregado" || status === "Cancelado") {
                       return (
-                        <tr key={order._id}>
+                        <tr key={order._id} className={style.item}>
                           <td>{order.owner}</td>
                           <td>#{order._id.slice(0, 15)}</td>
                           <td>{order.createdAt.slice(0, 10)}</td>
@@ -151,7 +152,44 @@ const Dashboard = () => {
                     }
                   })}
                 </tbody>
-              </table>
+              </table> */}
+							<table className={style.completedOrders}>
+						<thead>
+							<tr>
+
+							<th>Cliente</th>
+							<th>ID del pedido</th>
+							<th>Fecha</th>
+				
+							<th>Estado</th>
+					
+							</tr>
+						</thead>
+						<tbody>
+						{orders?.map((order) => {
+                    const status = order.status;
+                    if (status === "Entregado" || status === "Cancelado") {
+                      return (
+                        <tr key={order._id} className={style.item}>
+                          <td>{order.owner}</td>
+                          <td>#{order._id.slice(0, 15)}</td>
+                          <td>{order.createdAt.slice(0, 10)}</td>
+													<td>
+                            <button
+                              onClick={() => {
+                                handleOrderStatus(order._id);
+                              }}
+                              className={style.handleStatusButton}
+                            >
+                              {order.status}
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  })}
+						</tbody>
+					</table>
             </section>
           </div>
         </section>

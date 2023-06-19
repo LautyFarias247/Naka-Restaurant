@@ -17,7 +17,7 @@
 	transition: box-shadow 0.5s, background-color 0.5s, color 0.5s;
 	padding: 5px 10px;
 	width: 250px;
-	margin-top: 20px;
+	margin: 20px 0px
 }
 
 .newAddressButton:hover {

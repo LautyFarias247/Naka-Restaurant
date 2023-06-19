@@ -168,9 +168,9 @@ button:hover{
 	overflow-y: auto;
 	height: 288px;
 }
-.completedOrders {
+/* .completedOrders {
   width: 100%;
-	height: 400px;
+	height: auto;
 }
 
 .completedOrders th, .completedOrders td {
@@ -187,10 +187,16 @@ button:hover{
 }
 
 .completedOrders tbody tr:hover {
-  background-color: rgba(172, 48, 255, 0.39);
+	background-color: rgba(172, 48, 255, 0.39);
 	transition: all .3s;
 }
-
+.completedOrders tbody tr{
+	background-color: #f9f9f9;
+	height: 50px;
+}
+.item {
+	height: 60px;
+}
 .completedOrders th:first-child,
 .completedOrders td:first-child {
   min-width: 100px;
@@ -203,4 +209,40 @@ button:hover{
 
 .completedOrdersTitle {
 	margin-top: 20px;
+} */
+
+
+.completedOrders {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.completedOrders th, .completedOrders td {
+  padding: 8px;
+  text-align: left;
+}
+
+.completedOrders th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.completedOrders tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.completedOrders tbody tr:hover {
+  background-color: rgba(172, 48, 255, 0.39);
+  transition: all .3s;
+}
+
+.completedOrders th:first-child,
+.completedOrders td:first-child {
+  min-width: 100px;
+}
+
+.completedOrders th:last-child,
+.completedOrders td:last-child {
+  min-width: 80px;
 }

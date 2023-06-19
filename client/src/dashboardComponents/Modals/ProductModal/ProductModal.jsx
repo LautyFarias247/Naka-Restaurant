@@ -2,7 +2,7 @@ import React from "react";
 import style from "./ProductModal.module.css";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { deleteDish } from "../../../redux/actions/actions";
+import { deleteDish, getAllDishes } from "../../../redux/actions/actions";
 import Swal from "sweetalert2";
 
 const ProductModal = ({ show, handleClose, product }) => {
@@ -16,7 +16,7 @@ const ProductModal = ({ show, handleClose, product }) => {
         confirmButtonText: "Ok",
         iconColor: "#BF8D39",
       }).then((a)=>{
-				window.location.reload()
+				dispatch(getAllDishes())
 			});
     }
   };
