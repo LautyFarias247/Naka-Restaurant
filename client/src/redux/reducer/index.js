@@ -53,7 +53,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state, user: {}, cart: [] };
 		case SET_GOOGLE_USER:
 			localStorage.setItem("user", JSON.stringify(payload.user))
-			return {...state, user: payload.user}
+			return {...state, user: payload.user,  cart: payload.user.cart}
 			case SET_STORAGED_USER:
       return {
         ...state,
