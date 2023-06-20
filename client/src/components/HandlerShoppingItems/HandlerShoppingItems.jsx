@@ -24,7 +24,7 @@ const HandlerShoppingItems = ({ product, refresh, setRefresh }) => {
     if (!user.username) {
       return Swal.fire({
         title: "Iniciar sesión",
-        text: "Debes iniciar sesión para agregar productos a tus canasta",
+        text: "Debes iniciar sesión para agregar productos a tu canasta",
         icon: "info",
         confirmButtonText: "Aceptar",
         iconColor: "#BF8D39",
