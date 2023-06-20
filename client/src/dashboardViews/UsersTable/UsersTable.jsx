@@ -24,9 +24,10 @@ const UsersTable = () => {
 		}
 		navigate("/")
   }, []);
+	if(admin.admin){
 
-  return (
-    <>
+		return (
+			<>
       <main className={style.background}>
         <div className={style.container}>
           <DashboardSidebar />
@@ -43,7 +44,7 @@ const UsersTable = () => {
               </thead>
               <tbody>
                 {users?.map((user) => {
-                  return <UserItemTable key={user._id} user={user} />;
+									return <UserItemTable key={user._id} user={user} />;
                 })}
               </tbody>
             </table>
@@ -52,6 +53,9 @@ const UsersTable = () => {
       </main>
     </>
   );
+} else {
+	return <></>
+}
 };
 
 export default UsersTable;

@@ -23,8 +23,11 @@ const ProductsTable = () => {
       return;
     }
   }, []);
-  return (
-    <>
+
+	if(admin.admin){
+
+		return (
+			<>
       <main className={style.background}>
         <div className={style.container}>
           <DashboardSidebar />
@@ -45,10 +48,10 @@ const ProductsTable = () => {
               </thead>
               <tbody>
                 {products?.map((product) => {
-                  return (
-                    <ProductItemTable key={product._id} product={product} />
-                  );
-                })}
+									return (
+										<ProductItemTable key={product._id} product={product} />
+										);
+									})}
               </tbody>
             </table>
           </section>
@@ -57,6 +60,7 @@ const ProductsTable = () => {
       <NewProductModal show={show} handleClose={handleClose} />
     </>
   );
+}return <></>
 };
 
 export default ProductsTable;
