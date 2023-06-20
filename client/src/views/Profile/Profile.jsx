@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom";
+
 import style from "./Profile.module.css";
-import { useSelector } from "react-redux";
-import { FaUser } from "react-icons/fa";
-import AddressCard from "../../components/AddressCard/AddressCard";
 import { useState } from "react";
-import { Card, Pagination } from "react-bootstrap";
 import AddressForm from "../../components/AddressForm/AddressForm";
 import AddressContainer from "../../components/AddressesContainer/AddressContainer";
 import UserSidebar from "../../layout/UserSidebar/UserSidebar";
+
 const Profile = () => {
 	
   const [displayForm, setDisplayForm] = useState(false);

@@ -54,7 +54,7 @@ const AddressForm = ({ displayForm, setDisplayForm }) => {
     return Swal.fire({
       title: "Revisa los campos",
       icon: "info",
-      confirmButtonText: "Ver pedidos",
+      confirmButtonText: "Ok",
       iconColor: "#BF8D39",
     });
   };
