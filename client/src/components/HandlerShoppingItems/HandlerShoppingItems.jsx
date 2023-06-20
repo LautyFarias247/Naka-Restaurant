@@ -23,7 +23,7 @@ const HandlerShoppingItems = ({ product, refresh, setRefresh }) => {
   const handleAddFirstProduct = async () => {
     if (!user.username) {
       return Swal.fire({
-        title: "Iniciar sesiónn",
+        title: "Iniciar sesión",
         text: "Debes iniciar sesión para agregar productos a tus canasta",
         icon: "info",
         confirmButtonText: "Aceptar",
